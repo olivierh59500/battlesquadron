@@ -8,6 +8,7 @@ import (
 	"image/color"
 	_ "image/png"
 	"io/fs"
+	"strconv"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -156,6 +157,41 @@ func (a *artwork) drawSprite(dst *ebiten.Image, id string, x, y int, frame int) 
 	frame = max(0, frame) % (columns * rows)
 	rect := image.Rect((frame%columns)*s.width, (frame/columns)*s.height, (frame%columns+1)*s.width, (frame/columns+1)*s.height)
 	if !rect.In(bounds) {
+		return false
+	}
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(float64(x), float64(y))
+	dst.DrawImage(s.image.SubImage(rect).(*ebiten.Image), op)
+	return true
+}
+
+// Boss controllers name a source frame; the assets store its contiguous atlas.
+func (a *artwork) drawIndexedSprite(dst *ebiten.Image, id string, x, y, frame int) bool {
+	if _, ok := a.sprites[id]; ok {
+		return a.drawSprite(dst, id, x, y, frame)
+	}
+	if split := strings.LastIndex(id, "_"); split >= 0 {
+		if index, err := strconv.Atoi(id[split+1:]); err == nil {
+			return a.drawSprite(dst, id[:split], x, y, index)
+		}
+	}
+	return false
+}
+
+func (a *artwork) drawGrowingSprite(dst *ebiten.Image, id string, x, y, frame, height int) bool {
+	s, ok := a.sprites[id]
+	if !ok {
+		return false
+	}
+	height = max(0, min(height, s.height))
+	if height == 0 {
+		return true
+	}
+	columns := max(1, s.image.Bounds().Dx()/s.width)
+	row := max(0, frame) / columns
+	column := max(0, frame) % columns
+	rect := image.Rect(column*s.width, row*s.height, (column+1)*s.width, row*s.height+height)
+	if !rect.In(s.image.Bounds()) {
 		return false
 	}
 	op := &ebiten.DrawImageOptions{}

@@ -15,6 +15,15 @@ func (e *Engine) moveNativeEnemy(enemy *Enemy) bool {
 	}
 	switch enemy.Definition.NativeKind {
 	case 1:
+		state := &enemy.native
+		shotCount := len(e.EnemyShots)
+		if !state.entered && enemy.Y >= 0 {
+			state.entered = true
+			e.fireNativeAimed(enemy, 11, 32)
+		} else if !state.turned && enemy.Y >= 120 {
+			state.turned = true
+			e.fireNativeAimed(enemy, 11, 32)
+		}
 		// The original homing object accelerates on X and scrolls at a fixed Y rate.
 		cave := len(e.Data.Stages) > e.Stage && e.Data.Stages[e.Stage].Mode != 0
 		maximum, delta, vertical := 131072, 8192, 2
@@ -27,10 +36,10 @@ func (e *Engine) moveNativeEnemy(enemy *Enemy) bool {
 				continue
 			}
 			candidate := abs(player.X - enemy.X)
-			if candidate < distance {
+			if candidate <= distance {
 				target, distance = index, candidate
 			}
-			passed = passed && enemy.Y-30 > player.Y
+			passed = passed && enemy.Y-30 >= player.Y
 		}
 		if passed || target < 0 {
 			if enemy.VX < 0 {
@@ -43,10 +52,31 @@ func (e *Engine) moveNativeEnemy(enemy *Enemy) bool {
 		} else {
 			enemy.VX = min(maximum, enemy.VX+delta)
 		}
+		thresholds := [4]int{-98304, -32768, 32768, 98304}
+		if cave {
+			thresholds = [4]int{-131072, -65536, 65536, 131072}
+		}
+		enemy.Frame = 0
+		for _, threshold := range thresholds {
+			if enemy.VX < threshold {
+				break
+			}
+			enemy.Frame++
+		}
+		if state.hit != 0 {
+			state.hit--
+			if state.hit&2 == 0 {
+				enemy.Frame += 5
+			}
+		}
 		enemy.fixedX += enemy.VX
 		enemy.X = enemy.fixedX >> 16
 		enemy.Y += vertical
 		enemy.fixedY = enemy.Y << 16
+		if enemy.Y >= 208 {
+			enemy.Health = -1
+			e.EnemyShots = e.EnemyShots[:shotCount]
+		}
 		return true
 	case 7:
 		// Kind seven is anchored to one terrain-scroll pixel per game update.
@@ -59,7 +89,7 @@ func (e *Engine) moveNativeEnemy(enemy *Enemy) bool {
 	case 8:
 		return e.moveNativeTracker(enemy)
 	case 12:
-		// The source adds one scroll pixel and an extra pixel on odd game frames.
+		// The source adds another pixel whenever clock bit one is clear.
 		enemy.Y++
 		if e.nativeClock()&2 == 0 {
 			enemy.Y++

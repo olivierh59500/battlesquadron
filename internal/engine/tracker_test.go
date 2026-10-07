@@ -29,7 +29,7 @@ func TestTrackingMovementAgainstOriginal68000(t *testing.T) {
 			Health: 10, Definition: Definition{NativeKind: 8, FlyingPool: true, TrackingFrames: 200}}
 		var trajectory []byte
 		for tick := 0; tick < reference.Ticks; tick++ {
-			e.Frame = tick + 1
+			e.Frame = 2 * (tick + 1)
 			if !e.moveNativeTracker(&enemy) || enemy.Health < 0 {
 				t.Fatalf("kind-eight stage%d (%d,%d) exited at frame%d before the original", reference.Stage, reference.X, reference.Y, tick)
 			}

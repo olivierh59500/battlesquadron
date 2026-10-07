@@ -70,6 +70,7 @@ func DecodeDefinition(loader []byte, base, address uint32) (Definition, error) {
 		Address: address, GraphicAddress: binary.BigEndian.Uint32(record[12:]),
 		Kind: kind, Graphic: kind, Frame: frame,
 		Width: widthWords * 16, Height: height, Health: int(record[28]), Score: DecodeBCDScore(binary.BigEndian.Uint16(record[44:])),
+		HitSound: int(record[46]), KillSound: 29,
 		PlaneStride: widthWords * 2 * height, FrameStride: widthWords * 2 * height * 5,
 		Frames: max(1, int(record[33])-frame+1), Ground: true,
 		Sprite: fmt.Sprintf("object_%d_%d", kind, frame),
@@ -86,7 +87,7 @@ func (e *Engine) advanceStage() {
 		return
 	}
 	stage := &e.Data.Stages[e.Stage]
-	if e.Scroll < stage.Height {
+	if e.Scroll < stage.Height && !e.NativeBossBlocksScroll() {
 		e.Scroll++
 		if e.Scroll%16 == 0 {
 			e.exposeMapRow(*stage)
@@ -121,6 +122,11 @@ func (e *Engine) advanceStage() {
 	if len(e.Campaign.Gates) > 0 {
 		if e.Stage > 0 && e.Campaign.ActiveCave == e.Stage {
 			if scroll, err := e.Campaign.ExitCave(); err == nil {
+				if e.Campaign.Completed() {
+					if err := e.StartFinalBattle(); err == nil {
+						return
+					}
+				}
 				e.SelectStage(0, scroll)
 				return
 			}
@@ -129,7 +135,7 @@ func (e *Engine) advanceStage() {
 			e.SelectStage(0, 160)
 			return
 		}
-		if e.Stage == 0 && e.Campaign.Completed() {
+		if e.Stage == 0 && e.Campaign.Completed() && !e.FinalBattle() {
 			e.Mode, e.modeFrames = Ending, 0
 			e.Events = append(e.Events, Event{Kind: "ending"})
 			return
@@ -154,6 +160,7 @@ func (e *Engine) SelectStage(stage, scroll int) {
 		return
 	}
 	e.Stage, e.Scroll, e.nextEvent, e.bossSpawned = stage, scroll, 0, false
+	e.NovaRays, e.NovaFrames, e.novaIndex = nil, 0, 0
 	e.Enemies, e.PlayerShots, e.EnemyShots, e.Pickups, e.Explosions = nil, nil, nil, nil, nil
 	for e.nextEvent < len(e.Data.Stages[stage].Events) && e.Data.Stages[stage].Events[e.nextEvent].Progress <= scroll {
 		e.nextEvent++

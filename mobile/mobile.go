@@ -20,12 +20,14 @@ const (
 
 // Android callbacks only publish requests; the update thread owns game state.
 type host struct {
-	game      *game.Game
-	directory atomic.Pointer[string]
-	commands  atomic.Uint32
-	atTitle   atomic.Bool
-	verify    atomic.Bool
-	snapshot  atomic.Pointer[string]
+	game                *game.Game
+	directory           atomic.Pointer[string]
+	commands            atomic.Uint32
+	atTitle             atomic.Bool
+	verify              atomic.Bool
+	snapshot            atomic.Pointer[string]
+	fired, sampledFrame int
+	scene               atomic.Int32
 }
 
 var gameHost host
@@ -55,6 +57,13 @@ func IsAtTitle() bool { return gameHost.atTitle.Load() }
 
 // SetVerificationEnabled enables snapshots for the generated emulator checks.
 func SetVerificationEnabled(enabled bool) { gameHost.verify.Store(enabled) }
+
+// SetVerificationScene queues a fixture only while emulator diagnostics are enabled.
+func SetVerificationScene(scene int) {
+	if gameHost.verify.Load() && scene >= 1 && scene <= 3 {
+		gameHost.scene.Store(int32(scene))
+	}
+}
 
 // VerificationState returns a snapshot published by the Go update thread.
 func VerificationState() string {
@@ -94,15 +103,38 @@ func (h *host) Update() error {
 	if commands&backCommand != 0 {
 		h.game.Back()
 	}
+	if scene := h.scene.Swap(0); scene != 0 && h.verify.Load() {
+		core := h.game.Core
+		core.Start(1)
+		core.Options.Invulnerable = true
+		core.Players[0].X, core.Players[0].Y, core.Players[0].Respawn = 128, 176, 0
+		core.Frame = 1024
+		if scene == 3 {
+			if err := core.StartFinalBattle(); err != nil {
+				return err
+			}
+			core.Scroll = 240
+		} else {
+			core.Stage, core.Scroll = int(scene), 2601
+		}
+	}
 	if err := h.game.Update(); err != nil {
 		return err
 	}
 	h.atTitle.Store(h.game.AtTitle())
 	if h.verify.Load() {
 		core := h.game.Core
+		if core.Frame != h.sampledFrame {
+			for _, event := range core.Events {
+				if event.Kind == "shot" && event.Player == 0 {
+					h.fired++
+				}
+			}
+			h.sampledFrame = core.Frame
+		}
 		data, err := json.Marshal(struct {
-			Frame, Stage, Scroll, X, Y, Shots, Mode, Respawn int
-		}{core.Frame, core.Stage, core.Scroll, core.Players[0].X, core.Players[0].Y, len(core.PlayerShots), int(core.Mode), core.Players[0].Respawn})
+			Frame, Stage, Scroll, X, Y, Shots, Fired, Mode, Respawn, NovaFrames, Nova int
+		}{core.Frame, core.Stage, core.Scroll, core.Players[0].X, core.Players[0].Y, len(core.PlayerShots), h.fired, int(core.Mode), core.Players[0].Respawn, core.NovaFrames, core.Players[0].Nova})
 		if err != nil {
 			return err
 		}

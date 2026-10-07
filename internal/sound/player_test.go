@@ -235,3 +235,59 @@ func TestInvalidSoundInputs(t *testing.T) {
 		t.Fatal("invalid output rate was accepted")
 	}
 }
+
+func TestSoundControlsAgainstOriginal68000(t *testing.T) {
+	assets := originalAssets(t)
+	p, err := NewWithAssets(assets, 48000)
+	if err != nil {
+		t.Fatal(err)
+	}
+	encoded, err := os.ReadFile("control_oracle_test.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var references []reference
+	if err = json.Unmarshal(encoded, &references); err != nil {
+		t.Fatal(err)
+	}
+	for tick := 0; tick <= 4096; tick++ {
+		for _, r := range references {
+			if r.Tick == tick {
+				hash := fmt.Sprintf("%x", sha256.Sum256(stateBytes(p)))
+				if hash != r.Hash {
+					t.Fatalf("soundcontrols tick%d native=%s original=%s", tick, hash, r.Hash)
+				}
+				waveforms := append([]byte(nil), p.data...)
+				clear(waveforms[0x251f6-0x246f0 : 0x25204-0x246f0])
+				clear(waveforms[0x252a4-0x246f0 : 0x2539c-0x246f0])
+				clear(waveforms[0x24e34-0x246f0 : 0x24f34-0x246f0])
+				hash = fmt.Sprintf("%x", sha256.Sum256(waveforms))
+				if hash != r.DataHash {
+					t.Fatalf("soundcontrol waveform tick%d native=%s original=%s", tick, hash, r.DataHash)
+				}
+			}
+		}
+		switch tick {
+		case 42:
+			p.PlayEffect(17)
+		case 100:
+			p.SetMusicEnabled(false)
+		case 200:
+			p.SetMusicEnabled(true)
+		case 160:
+			p.PlayEffect(28)
+		case 300:
+			p.SetEffectsEnabled(false)
+		case 400:
+			p.SetEffectsEnabled(true)
+		case 320:
+			p.PlayEffect(28)
+		case 560:
+			p.PlayEffect(57)
+		}
+		p.tick()
+		if p.err != nil {
+			t.Fatal(p.err)
+		}
+	}
+}

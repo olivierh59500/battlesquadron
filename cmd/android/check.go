@@ -42,7 +42,7 @@ func (c *configuration) checkEmulator(apk string) error {
 	if err := os.MkdirAll(captures, 0755); err != nil {
 		return err
 	}
-	for _, name := range []string{"android-title.png", "android-touch.png", "android-paused.png", "android-check.json"} {
+	for _, name := range []string{"android-title.png", "android-touch.png", "android-paused.png", "android-nova.png", "android-cave.png", "android-final.png", "android-check.json"} {
 		path := filepath.Join(captures, name)
 		file, err := os.Create(path)
 		if err != nil {
@@ -122,7 +122,7 @@ public final class TouchRunner extends Instrumentation {
             JSONObject together = state();
             require(together.getInt("X") > before.getInt("X") + 10,
                 "simultaneous stick movement did not reach the Go game");
-            require(together.getInt("Shots") > 0,
+            require(together.getInt("Fired") > before.getInt("Fired"),
                 "simultaneous fire did not reach the Go game");
             screenshot("android-touch.png");
             touch(MotionEvent.ACTION_POINTER_UP | (1 << MotionEvent.ACTION_POINTER_INDEX_SHIFT),
@@ -148,12 +148,27 @@ public final class TouchRunner extends Instrumentation {
             require(resumed.getInt("Frame") > held.getInt("Frame"),
                 "touch resume did not continue gameplay");
 
+            int charges = resumed.getInt("Nova");
+            tap(440, 126);
+            SystemClock.sleep(150);
+            JSONObject nova = state();
+            require(nova.getInt("Nova") < charges, "the Nova touch did not consume its original charge");
+            screenshot("android-nova.png");
+
+            Mobile.setVerificationScene(1);
+            SystemClock.sleep(8000);
+            screenshot("android-cave.png");
+            Mobile.setVerificationScene(3);
+            SystemClock.sleep(3000);
+            screenshot("android-final.png");
+
             JSONObject report = new JSONObject();
             report.put("before", before);
             report.put("simultaneous_touch", together);
             report.put("paused", paused);
             report.put("held_after_resume", held);
             report.put("resumed", resumed);
+            report.put("nova", nova);
             report.put("success", true);
             write("android-check.json", report.toString(2).getBytes(StandardCharsets.UTF_8));
             result.putString("success", "true");

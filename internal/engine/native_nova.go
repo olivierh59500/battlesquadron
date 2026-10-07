@@ -71,11 +71,6 @@ func (e *Engine) updateNova() {
 		v := e.Data.Nova.Vectors[(e.Frame&7)+ray*8]
 		x, y := int(v[0])/divisor+p.X+8, -int(v[1])/divisor+p.Y-16
 		e.NovaRays = append(e.NovaRays, NovaRay{x, y, uint8(84 + (e.Frame+ray)&3)})
-		for index, enemy := range e.Enemies {
-			if enemy.Health >= 0 && enemy.Definition.Kind != 39 && overlap(box{x, y, x + 16, y + 16}, enemyBox(enemy)) {
-				e.damageEnemy(index, 2, e.NovaOwner)
-			}
-		}
 	}
 	if e.NovaFrames >= 176 && e.NovaFrames&15 == 14 {
 		kept := e.PlayerShots[:0]

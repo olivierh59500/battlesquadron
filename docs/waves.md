@@ -15,7 +15,9 @@ loader operands and validated against the recovered data.
 
 All 674 records are decoded, including four flying-pool clear events. A clear
 preserves scenery and hostile shots: the original clears only its twelve flying
-records. The engine also preserves the separate eighteen-record scenery pool.
+records, including their capsules and unfinished explosions. Those effects retain
+their original slot until expiry or collection. The engine also preserves the
+separate eighteen-record scenery pool.
 Stage-one movement pointers receive the same eight verified address relocations
 as the cracked loader. The original ADF's SPIK unpacking does not use BOND's
 stage-data reversal.
@@ -50,15 +52,16 @@ Native adaptive movement translates the actual recovered handlers:
 
 | Kind | Original handler | Native behavior |
 | ---: | --- | --- |
-| 1 | `$9538` | Horizontal homing and source vertical speed |
-| 4 | `$8AA8` | Initial weaving, player-relative dive, source acceleration and sixteen-direction animation |
-| 6 | `$886C` | Alternating random steering and three-quarter-pixel vertical movement |
+| 1 | `$9538` | Horizontal homing, source vertical speed, direction/hit frames and two original aimed-fire triggers |
+| 4 | `$8AA8` | Initial weaving, player-relative dive, source acceleration, direction/hit frames and original firing triggers |
+| 6 | `$886C` | Alternating random steering, three-quarter-pixel vertical movement, original firing countdown and weapon-carrier reward |
 | 8 | `$85C4` | Two-axis tracking, original 200-update tracking window and retreat |
 | 12 | `$7C50` | One scroll pixel plus another pixel on odd updates |
 
 Kinds four and six also preserve the original surviving-hit frame counters.
 Kind four flashes through the second bank of sixteen frames according to bit
 one of its eight-update counter; kind six uses the four original impact frames.
+Kind one uses its original six-update counter and five additional impact frames.
 The source's packed decimal score words are decoded as decimal digits. For
 example, `$5000` awards 5,000 points.
 
@@ -66,9 +69,35 @@ Only kind five is a collectable capsule. Kind three is an armed enemy, not a
 pickup. Original collection at `$3600` grants one Nova for subtype ten, capped at
 eight; other subtypes select `subtype >> 1` as the weapon family and increment
 the current level, capped at five. Changing weapon family does not reset the
-level. The source plays original song five for a Nova pickup and song six for a
-weapon pickup. The last exploding kind-zero ship changes into a Nova capsule;
-that delayed formation-reward path is a separate campaign integration boundary.
+level. The source plays original song six for a Nova pickup and song seven for a
+weapon pickup. The last exploding kind-zero ship changes into a Nova capsule.
+A destroyed kind-six carrier displays its original death frames five through ten
+and then becomes a weapon capsule using `random & 6` as its subtype. Both source
+transformations immediately update the new capsule in the same object pass.
+
+The original aimed shot uses an odd `DIVU` divisor and an eight-bit shift on its
+shorter velocity axis. It is not a floating-point normalized vector. The 60-case
+aim oracle checks all five original speed choices and both signs of each axis.
+
+## Physical clock and camera
+
+An independent pair of FS-UAE save states spans exactly 215 PAL frames. The
+original display clock advances by 214 and terrain progress by 108. The native
+host therefore uses 50 display updates per second, with terrain and ordinary
+object behavior at 25 updates per second. The original clock value is passed to
+each handler at its demonstrated raster phase. Player movement, primary/hostile
+projectile movement and the Nova ray emitter run at 50 updates per second.
+
+The camera helper follows the original canonical-ship formula at `$9BC2`,
+including dying ships and ignoring respawning/disabled ships. It moves one pixel
+towards that target on each terrain update. World enemies, hostile shots and
+non-player explosions shift with that camera; primary shots and capsule drift
+retain their viewport coordinates. Original schedule X values at or above 800
+use the absolute-world branch and subtract the camera exactly once.
+
+Initial entry at `$1298` uses 360 invulnerability updates, an entry countdown of
+130 and Y 208. A ship returning after destruction uses 300, 145 and Y 256 instead.
+These are distinct source transitions, not one shared respawn preset.
 
 ## Independent comparisons
 
@@ -81,19 +110,31 @@ cd tools/sound-oracle
 go run . -waves -out ../../internal/engine/wave_oracle_test.json
 go run . -controllers -out ../../internal/engine/controller_oracle_test.json
 go run . -trackers -out ../../internal/engine/tracker_oracle_test.json
+go run . -aim -out ../../internal/engine/aim_oracle_test.json
+go run . -pickups -out ../../internal/engine/pickup_oracle_test.json
+go run . -rewards -out ../../internal/engine/reward_oracle_test.json
+go run . -carriers -out ../../internal/engine/carrier_oracle_test.json
+go run . -nova -out ../../internal/engine/nova_oracle_test.json
+go run . -camera -out ../../internal/engine/camera_oracle_test.json
 cd ../..
 go test ./internal/engine
 ```
 
 The directed-flight test compares all 56 actual kind-zero formations with the
 original 68000 handler, through termination or 512 updates. Fixed-point X/Y and
-displayed frames match. The adaptive-controller test compares 32 scenarios for
-kinds four and six: two stage modes, four initial positions and runs with/without
-a surviving hit. It compares positions, velocities, direction frames, internal
-steering state and random cursor. Kind-eight tracking has eight additional
+displayed frames match. The adaptive-controller test compares 96 scenarios for
+kinds one, four and six: two stage modes, four initial positions, runs with/without
+a surviving hit and two source-clock selections. It compares positions,
+velocities, direction/hit frames, steering state, random cursor and original shot
+triggers, origins and fixed-point velocities. Kind-eight tracking has eight additional
 original comparisons through 240 updates, including its tracking-window expiry.
+Additional independent comparisons cover 20 capsule trajectories, 24 delayed
+Nova rewards, 72 weapon-carrier rewards and 120 camera cases. The Nova emitter
+matches 1,212 original checkpoints across both owners, three positions and two
+clock phases, covering every ray box, burst counter, twelve-shot rewrite and
+final clear through a complete activation.
 
 These comparisons establish the tested movement boundaries. They do not establish
-complete campaign equivalence: multi-part boss state machines, all original firing
-patterns, cave entry/return transitions, delayed formation rewards and the
-variable-width mask rendering still require their own original-state comparisons.
+complete campaign equivalence. Boss, cave and portal comparisons are documented
+separately. Variable-width mask rendering, full-game state composition and the
+analog audio output still require their own comparison boundaries.

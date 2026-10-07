@@ -1,5 +1,869 @@
 [
   {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "bdb7b00f91927b29e059d32a891a94fb40960d629925ca271372942b848dd583",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 68,
+        "Y": 32,
+        "VX": 45568,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 122,
+        "Y": 152,
+        "VX": 6144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "bdb7b00f91927b29e059d32a891a94fb40960d629925ca271372942b848dd583",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 68,
+        "Y": 32,
+        "VX": 45568,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 122,
+        "Y": 152,
+        "VX": 6144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "8fe832e670baa1dcaf6e55f77f9935edf77a82314ff69ac57be1cfb1f1a4acb1",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 68,
+        "Y": 32,
+        "VX": 45568,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 122,
+        "Y": 152,
+        "VX": 6144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "8fe832e670baa1dcaf6e55f77f9935edf77a82314ff69ac57be1cfb1f1a4acb1",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 68,
+        "Y": 32,
+        "VX": 45568,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 122,
+        "Y": 152,
+        "VX": 6144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "83cca3719fd9e5229014ce796c2364eb2d2173f554c925de8e70992ac66e5abc",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 171,
+        "Y": 32,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 171,
+        "Y": 152,
+        "VX": 3072,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "83cca3719fd9e5229014ce796c2364eb2d2173f554c925de8e70992ac66e5abc",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 171,
+        "Y": 32,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 171,
+        "Y": 152,
+        "VX": 3072,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "3f342b4f9c073cde42a2e8a123b1a962ce166e161479753c88d655323fc71e58",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 171,
+        "Y": 32,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 171,
+        "Y": 152,
+        "VX": 3072,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 119,
+    "Hash": "3f342b4f9c073cde42a2e8a123b1a962ce166e161479753c88d655323fc71e58",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 16,
+        "X": 171,
+        "Y": 32,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 171,
+        "Y": 152,
+        "VX": 3072,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 103,
+    "Hash": "32e659a3391dcddb85c76e0c6c499a1bf3da6ba7a105cb2c81ce7bcd58035bda",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 60,
+        "X": 112,
+        "Y": 152,
+        "VX": 38144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 103,
+    "Hash": "32e659a3391dcddb85c76e0c6c499a1bf3da6ba7a105cb2c81ce7bcd58035bda",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 60,
+        "X": 112,
+        "Y": 152,
+        "VX": 38144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 103,
+    "Hash": "92430c136b5d66b03391213c26bd5c6b2341eccffc91591f243b07741bf2e11a",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 60,
+        "X": 112,
+        "Y": 152,
+        "VX": 38144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 103,
+    "Hash": "92430c136b5d66b03391213c26bd5c6b2341eccffc91591f243b07741bf2e11a",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 60,
+        "X": 112,
+        "Y": 152,
+        "VX": 38144,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 43,
+    "Hash": "b5ce04f109e1f6179310c53595442655a5b8ca87e1441156d1ec120622c49a2a",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 154,
+        "VX": -127488,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 43,
+    "Hash": "b5ce04f109e1f6179310c53595442655a5b8ca87e1441156d1ec120622c49a2a",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 154,
+        "VX": -127488,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 43,
+    "Hash": "7cc59faff3d0fa5722ce959d49d7e1980b1ed67e0128a0a52f301f9a1c26e0a2",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 154,
+        "VX": -127488,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 43,
+    "Hash": "7cc59faff3d0fa5722ce959d49d7e1980b1ed67e0128a0a52f301f9a1c26e0a2",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 154,
+        "VX": -127488,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "5853a916772bd17a990cd0c69e483e96e5f1781436ddbbab6004e13600e18046",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 63,
+        "Y": 33,
+        "VX": 50176,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 149,
+        "Y": 153,
+        "VX": 77056,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "5853a916772bd17a990cd0c69e483e96e5f1781436ddbbab6004e13600e18046",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 63,
+        "Y": 33,
+        "VX": 50176,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 149,
+        "Y": 153,
+        "VX": 77056,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "56f761c51d0b06a987e9ed9bab62265e7ab16d0df7b11bebe584d521aae00617",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 63,
+        "Y": 33,
+        "VX": 50176,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 149,
+        "Y": 153,
+        "VX": 77056,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "56f761c51d0b06a987e9ed9bab62265e7ab16d0df7b11bebe584d521aae00617",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 63,
+        "Y": 33,
+        "VX": 50176,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 149,
+        "Y": 153,
+        "VX": 77056,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "7a17b569eb07b828a532a878b5c15920949a3b977342bf0f2587251eb3ab9c2e",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 171,
+        "Y": 33,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 172,
+        "Y": 153,
+        "VX": 0,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "7a17b569eb07b828a532a878b5c15920949a3b977342bf0f2587251eb3ab9c2e",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 171,
+        "Y": 33,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 172,
+        "Y": 153,
+        "VX": 0,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "fe5b6351d1085287febf29522e7dfc924b0c9150bb4e629fbf5877e03a3fa4e5",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 171,
+        "Y": 33,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 172,
+        "Y": 153,
+        "VX": 0,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 79,
+    "Hash": "fe5b6351d1085287febf29522e7dfc924b0c9150bb4e629fbf5877e03a3fa4e5",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 171,
+        "Y": 33,
+        "VX": 768,
+        "VY": 131072
+      },
+      {
+        "Tick": 51,
+        "X": 172,
+        "Y": 153,
+        "VX": 0,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 69,
+    "Hash": "930f90dfe3ac130db863160dbf2c3d6d8faebefb74b6ec83b05d272264e79014",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 116,
+        "Y": 152,
+        "VX": 25344,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 69,
+    "Hash": "930f90dfe3ac130db863160dbf2c3d6d8faebefb74b6ec83b05d272264e79014",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 116,
+        "Y": 152,
+        "VX": 25344,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 69,
+    "Hash": "b42089317ecfea29d42f2a25234e5ae7bbfb11fd8945fb5e0c5afc7130865bc4",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 116,
+        "Y": 152,
+        "VX": 25344,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 69,
+    "Hash": "b42089317ecfea29d42f2a25234e5ae7bbfb11fd8945fb5e0c5afc7130865bc4",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 116,
+        "Y": 152,
+        "VX": 25344,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 29,
+    "Hash": "05d1aad3c6a4144af07fc5444a80c23b3533d8c03ed80a439ed8cc14ce52577a",
+    "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 155,
+        "VX": -131072,
+        "VY": 124160
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 29,
+    "Hash": "05d1aad3c6a4144af07fc5444a80c23b3533d8c03ed80a439ed8cc14ce52577a",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 155,
+        "VX": -131072,
+        "VY": 124160
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 29,
+    "Hash": "05d1aad3c6a4144af07fc5444a80c23b3533d8c03ed80a439ed8cc14ce52577a",
+    "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 155,
+        "VX": -131072,
+        "VY": 124160
+      }
+    ]
+  },
+  {
+    "Kind": 1,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 29,
+    "Hash": "05d1aad3c6a4144af07fc5444a80c23b3533d8c03ed80a439ed8cc14ce52577a",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 1,
+        "X": 210,
+        "Y": 155,
+        "VX": -131072,
+        "VY": 124160
+      }
+    ]
+  },
+  {
     "Kind": 4,
     "Stage": 0,
     "X": 40,
@@ -7,6 +871,35 @@
     "Ticks": 144,
     "Hash": "b1e4efabff505e06f0f576c863da0d5c82a89e8da6de1c81110a23d62ee12886",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 55,
+        "Y": 33,
+        "VX": 56832,
+        "VY": 131072
+      },
+      {
+        "Tick": 85,
+        "X": 142,
+        "Y": 185,
+        "VX": -131072,
+        "VY": 48128
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 144,
+    "Hash": "b1e4efabff505e06f0f576c863da0d5c82a89e8da6de1c81110a23d62ee12886",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 11,
@@ -32,6 +925,35 @@
     "Ticks": 144,
     "Hash": "7c6f5edbcb4accba6d12d85b2586994f7bdcc83a6c7bfe939eb787d79a4c121b",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 55,
+        "Y": 33,
+        "VX": 56832,
+        "VY": 131072
+      },
+      {
+        "Tick": 85,
+        "X": 142,
+        "Y": 185,
+        "VX": -131072,
+        "VY": 48128
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 144,
+    "Hash": "7c6f5edbcb4accba6d12d85b2586994f7bdcc83a6c7bfe939eb787d79a4c121b",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 11,
@@ -57,6 +979,35 @@
     "Ticks": 141,
     "Hash": "18a284c198fa53cf093180004dd1632ab629686458979441d6c93827afa8ec9b",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 175,
+        "Y": 33,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 87,
+        "X": 120,
+        "Y": 186,
+        "VX": 74752,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 141,
+    "Hash": "18a284c198fa53cf093180004dd1632ab629686458979441d6c93827afa8ec9b",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 11,
@@ -82,6 +1033,35 @@
     "Ticks": 141,
     "Hash": "047df0862d5aff409ef5077d8245992df954f0b0beda8d4cd6502ec7481730cb",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 11,
+        "X": 175,
+        "Y": 33,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 87,
+        "X": 120,
+        "Y": 186,
+        "VX": 74752,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 141,
+    "Hash": "047df0862d5aff409ef5077d8245992df954f0b0beda8d4cd6502ec7481730cb",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 11,
@@ -107,6 +1087,35 @@
     "Ticks": 123,
     "Hash": "174ff2064c8324a211330e35046b40a0706916a71e35c4b4f129ea3c96af7117",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 183,
+        "Y": 185,
+        "VX": -131072,
+        "VY": 83200
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 123,
+    "Hash": "174ff2064c8324a211330e35046b40a0706916a71e35c4b4f129ea3c96af7117",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -132,6 +1141,35 @@
     "Ticks": 123,
     "Hash": "b105f2e1e89feedfbb04109d2cb4d7e816f6d90a75273eab55078434274de606",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 76,
+        "X": 183,
+        "Y": 185,
+        "VX": -131072,
+        "VY": 83200
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 123,
+    "Hash": "b105f2e1e89feedfbb04109d2cb4d7e816f6d90a75273eab55078434274de606",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -157,6 +1195,35 @@
     "Ticks": 100,
     "Hash": "220f60cbf836c74af99780179935367cd9372e4e580e0e2b7d34febe684dad5c",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 140,
+        "Y": 199,
+        "VX": -131072,
+        "VY": -53760
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 100,
+    "Hash": "220f60cbf836c74af99780179935367cd9372e4e580e0e2b7d34febe684dad5c",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -182,6 +1249,35 @@
     "Ticks": 100,
     "Hash": "f0a50def4d81c1ef747f2a5e69ecbb755c6ea506dcc5091c486b29b9e0633a02",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 40,
+        "X": 140,
+        "Y": 199,
+        "VX": -131072,
+        "VY": -53760
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 100,
+    "Hash": "f0a50def4d81c1ef747f2a5e69ecbb755c6ea506dcc5091c486b29b9e0633a02",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -207,6 +1303,35 @@
     "Ticks": 114,
     "Hash": "646e1c3c0d92710ebb022ee4a03f6fcea2638a4e1d26b2cfa184fa328eaab613",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 8,
+        "X": 53,
+        "Y": 32,
+        "VX": 57600,
+        "VY": 131072
+      },
+      {
+        "Tick": 64,
+        "X": 121,
+        "Y": 187,
+        "VX": 78592,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 114,
+    "Hash": "646e1c3c0d92710ebb022ee4a03f6fcea2638a4e1d26b2cfa184fa328eaab613",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 8,
@@ -232,6 +1357,35 @@
     "Ticks": 114,
     "Hash": "03b70a6ab1093d24db6b2b08da5639bb76839cd232016cbf3224e7a4bb060d36",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 8,
+        "X": 53,
+        "Y": 32,
+        "VX": 57600,
+        "VY": 131072
+      },
+      {
+        "Tick": 64,
+        "X": 121,
+        "Y": 187,
+        "VX": 78592,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 114,
+    "Hash": "03b70a6ab1093d24db6b2b08da5639bb76839cd232016cbf3224e7a4bb060d36",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 8,
@@ -257,6 +1411,35 @@
     "Ticks": 100,
     "Hash": "863a5c27681a0435fa63d2260d99a2cd3f482f7a8249d245a5e53c28c34332b0",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 8,
+        "X": 173,
+        "Y": 32,
+        "VX": -768,
+        "VY": 131072
+      },
+      {
+        "Tick": 64,
+        "X": 106,
+        "Y": 187,
+        "VX": 131072,
+        "VY": 34304
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 100,
+    "Hash": "863a5c27681a0435fa63d2260d99a2cd3f482f7a8249d245a5e53c28c34332b0",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 8,
@@ -282,6 +1465,35 @@
     "Ticks": 100,
     "Hash": "b4afd6988da9f80aea9933efa55245baf530287d1824de64412927d3eaf8a694",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 8,
+        "X": 173,
+        "Y": 32,
+        "VX": -768,
+        "VY": 131072
+      },
+      {
+        "Tick": 64,
+        "X": 106,
+        "Y": 187,
+        "VX": 131072,
+        "VY": 34304
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 100,
+    "Hash": "b4afd6988da9f80aea9933efa55245baf530287d1824de64412927d3eaf8a694",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 8,
@@ -307,6 +1519,35 @@
     "Ticks": 80,
     "Hash": "6a1d8664859119c5e5da89488456ba11c1b05119b9714c7c177df3b5a344c5b7",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 56,
+        "X": 60,
+        "Y": 187,
+        "VX": 131072,
+        "VY": 9984
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Hash": "6a1d8664859119c5e5da89488456ba11c1b05119b9714c7c177df3b5a344c5b7",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -332,6 +1573,35 @@
     "Ticks": 80,
     "Hash": "b33ef3200fceef8fc89b949c3007c8434ba981efb7bf05f79bae4f3b0e566948",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 111,
+        "Y": 32,
+        "VX": 10496,
+        "VY": 131072
+      },
+      {
+        "Tick": 56,
+        "X": 60,
+        "Y": 187,
+        "VX": 131072,
+        "VY": 9984
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Hash": "b33ef3200fceef8fc89b949c3007c8434ba981efb7bf05f79bae4f3b0e566948",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -357,6 +1627,35 @@
     "Ticks": 73,
     "Hash": "425df015eb02e2bdf200bdab779235d8f13e98cb3f954d134f5f65c95dd58fac",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 27,
+        "X": 144,
+        "Y": 191,
+        "VX": -131072,
+        "VY": 6144
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 73,
+    "Hash": "425df015eb02e2bdf200bdab779235d8f13e98cb3f954d134f5f65c95dd58fac",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -382,6 +1681,35 @@
     "Ticks": 73,
     "Hash": "8f10edad0f7368703b9e8e5475b508ba3f9fdf67e3e26536b6bcc380462b5246",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
+    "Fires": [
+      {
+        "Tick": 0,
+        "X": 211,
+        "Y": 152,
+        "VX": -124672,
+        "VY": 131072
+      },
+      {
+        "Tick": 27,
+        "X": 144,
+        "Y": 191,
+        "VX": -131072,
+        "VY": 6144
+      }
+    ]
+  },
+  {
+    "Kind": 4,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 73,
+    "Hash": "8f10edad0f7368703b9e8e5475b508ba3f9fdf67e3e26536b6bcc380462b5246",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
     "Fires": [
       {
         "Tick": 0,
@@ -407,6 +1735,8 @@
     "Ticks": 240,
     "Hash": "952039b0da9cc1ea0dab1cee68e67e0167287c3d1df627c0bcec914a0704846d",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -419,14 +1749,14 @@
         "Tick": 41,
         "X": 53,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 73,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -440,14 +1770,14 @@
         "Tick": 91,
         "X": 67,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 79,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -461,14 +1791,14 @@
         "Tick": 141,
         "X": 50,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 64,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -489,7 +1819,111 @@
         "Tick": 199,
         "X": 51,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 26,
+        "Y": 182,
+        "VX": 131072,
+        "VY": 13056
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "952039b0da9cc1ea0dab1cee68e67e0167287c3d1df627c0bcec914a0704846d",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 64,
+        "Y": 32,
+        "VX": 48640,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 53,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 73,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 79,
+        "Y": 70,
+        "VX": 47872,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 67,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 79,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 65,
+        "Y": 107,
+        "VX": 90880,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 50,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 64,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 40,
+        "Y": 145,
+        "VX": 131072,
+        "VY": 72448
+      },
+      {
+        "Tick": 191,
+        "X": 33,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 51,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -509,6 +1943,8 @@
     "Ticks": 240,
     "Hash": "5a7e9bff3168b0044c49914b4f5adfe66f7929b95ed2b0a12af63ff99d53386c",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -521,14 +1957,14 @@
         "Tick": 41,
         "X": 53,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 73,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -542,14 +1978,14 @@
         "Tick": 91,
         "X": 67,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 79,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -563,14 +1999,14 @@
         "Tick": 141,
         "X": 50,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 64,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -591,7 +2027,111 @@
         "Tick": 199,
         "X": 51,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 26,
+        "Y": 182,
+        "VX": 131072,
+        "VY": 13056
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "5a7e9bff3168b0044c49914b4f5adfe66f7929b95ed2b0a12af63ff99d53386c",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 64,
+        "Y": 32,
+        "VX": 48640,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 53,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 73,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 79,
+        "Y": 70,
+        "VX": 47872,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 67,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 79,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 65,
+        "Y": 107,
+        "VX": 90880,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 50,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 64,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 40,
+        "Y": 145,
+        "VX": 131072,
+        "VY": 72448
+      },
+      {
+        "Tick": 191,
+        "X": 33,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 51,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -611,6 +2151,8 @@
     "Ticks": 240,
     "Hash": "a184f1e9c6fe1ba9ebf217f549b00425d5eca1318552c238844e9fb8a1ac9df5",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -623,14 +2165,14 @@
         "Tick": 41,
         "X": 173,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 193,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -644,14 +2186,14 @@
         "Tick": 91,
         "X": 187,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 199,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -665,14 +2207,14 @@
         "Tick": 141,
         "X": 170,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 184,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -693,7 +2235,111 @@
         "Tick": 199,
         "X": 171,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 146,
+        "Y": 182,
+        "VX": -131072,
+        "VY": 56832
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "a184f1e9c6fe1ba9ebf217f549b00425d5eca1318552c238844e9fb8a1ac9df5",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 184,
+        "Y": 32,
+        "VX": -9728,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 173,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 193,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 199,
+        "Y": 70,
+        "VX": -28672,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 187,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 199,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 185,
+        "Y": 107,
+        "VX": -19968,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 170,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 184,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 160,
+        "Y": 145,
+        "VX": 33280,
+        "VY": 131072
+      },
+      {
+        "Tick": 191,
+        "X": 153,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 171,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -713,6 +2359,8 @@
     "Ticks": 240,
     "Hash": "0baa2c584eac503086aa123f783ed199698a9ec28eef9fe179e8aced7f9e665e",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -725,14 +2373,14 @@
         "Tick": 41,
         "X": 173,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 193,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -746,14 +2394,14 @@
         "Tick": 91,
         "X": 187,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 199,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -767,14 +2415,14 @@
         "Tick": 141,
         "X": 170,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 184,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -795,7 +2443,111 @@
         "Tick": 199,
         "X": 171,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 146,
+        "Y": 182,
+        "VX": -131072,
+        "VY": 56832
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "0baa2c584eac503086aa123f783ed199698a9ec28eef9fe179e8aced7f9e665e",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 184,
+        "Y": 32,
+        "VX": -9728,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 173,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 193,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 199,
+        "Y": 70,
+        "VX": -28672,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 187,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 199,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 185,
+        "Y": 107,
+        "VX": -19968,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 170,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 184,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 160,
+        "Y": 145,
+        "VX": 33280,
+        "VY": 131072
+      },
+      {
+        "Tick": 191,
+        "X": 153,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 171,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -815,6 +2567,8 @@
     "Ticks": 240,
     "Hash": "f802f03081a1d8c989745b0c787ab495db7b735a91bb231cd5168285fbca3d93",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -827,14 +2581,14 @@
         "Tick": 41,
         "X": 113,
         "Y": 70,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 133,
         "Y": 76,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -848,14 +2602,14 @@
         "Tick": 91,
         "X": 127,
         "Y": 108,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 139,
         "Y": 114,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -869,14 +2623,14 @@
         "Tick": 141,
         "X": 110,
         "Y": 145,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 124,
         "Y": 151,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -897,7 +2651,111 @@
         "Tick": 199,
         "X": 111,
         "Y": 189,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 86,
+        "Y": 214,
+        "VX": 131072,
+        "VY": -73728
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "f802f03081a1d8c989745b0c787ab495db7b735a91bb231cd5168285fbca3d93",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 124,
+        "Y": 64,
+        "VX": 0,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 113,
+        "Y": 70,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 133,
+        "Y": 76,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 139,
+        "Y": 102,
+        "VX": -21504,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 127,
+        "Y": 108,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 139,
+        "Y": 114,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 125,
+        "Y": 139,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 110,
+        "Y": 145,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 124,
+        "Y": 151,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 100,
+        "Y": 177,
+        "VX": 131072,
+        "VY": 78592
+      },
+      {
+        "Tick": 191,
+        "X": 93,
+        "Y": 183,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 111,
+        "Y": 189,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -917,6 +2775,8 @@
     "Ticks": 240,
     "Hash": "8ebc19b21da8517f87514963c81175a375b988f1e3badde5de3fe95ab450163f",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -929,14 +2789,14 @@
         "Tick": 41,
         "X": 113,
         "Y": 70,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 133,
         "Y": 76,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -950,14 +2810,14 @@
         "Tick": 91,
         "X": 127,
         "Y": 108,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 139,
         "Y": 114,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -971,14 +2831,14 @@
         "Tick": 141,
         "X": 110,
         "Y": 145,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 124,
         "Y": 151,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -999,7 +2859,111 @@
         "Tick": 199,
         "X": 111,
         "Y": 189,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 86,
+        "Y": 214,
+        "VX": 131072,
+        "VY": -73728
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "8ebc19b21da8517f87514963c81175a375b988f1e3badde5de3fe95ab450163f",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 124,
+        "Y": 64,
+        "VX": 0,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 113,
+        "Y": 70,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 133,
+        "Y": 76,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 139,
+        "Y": 102,
+        "VX": -21504,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 127,
+        "Y": 108,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 139,
+        "Y": 114,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 125,
+        "Y": 139,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 110,
+        "Y": 145,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 124,
+        "Y": 151,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 100,
+        "Y": 177,
+        "VX": 131072,
+        "VY": 78592
+      },
+      {
+        "Tick": 191,
+        "X": 93,
+        "Y": 183,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 111,
+        "Y": 189,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1019,6 +2983,8 @@
     "Ticks": 117,
     "Hash": "05aa88650cb9e2c0388092104033d7345f19945f34507bacc214fdfe629c228b",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1031,14 +2997,14 @@
         "Tick": 41,
         "X": 213,
         "Y": 190,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 233,
         "Y": 196,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1052,14 +3018,69 @@
         "Tick": 91,
         "X": 227,
         "Y": 228,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 239,
         "Y": 234,
-        "VX": 57344,
+        "VX": 41472,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 117,
+    "Hash": "05aa88650cb9e2c0388092104033d7345f19945f34507bacc214fdfe629c228b",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 224,
+        "Y": 184,
+        "VX": -131072,
+        "VY": 19712
+      },
+      {
+        "Tick": 41,
+        "X": 213,
+        "Y": 190,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 233,
+        "Y": 196,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 239,
+        "Y": 222,
+        "VX": -131072,
+        "VY": -58624
+      },
+      {
+        "Tick": 91,
+        "X": 227,
+        "Y": 228,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 239,
+        "Y": 234,
+        "VX": 58880,
         "VY": 131072
       }
     ]
@@ -1072,6 +3093,8 @@
     "Ticks": 117,
     "Hash": "ff77f13b9d94b228454fc1f113d196e5c0a5c8026ca507e140209ae5b4349a0e",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1084,14 +3107,14 @@
         "Tick": 41,
         "X": 213,
         "Y": 190,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 233,
         "Y": 196,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1105,14 +3128,69 @@
         "Tick": 91,
         "X": 227,
         "Y": 228,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 239,
         "Y": 234,
-        "VX": 57344,
+        "VX": 41472,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 117,
+    "Hash": "ff77f13b9d94b228454fc1f113d196e5c0a5c8026ca507e140209ae5b4349a0e",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 224,
+        "Y": 184,
+        "VX": -131072,
+        "VY": 19712
+      },
+      {
+        "Tick": 41,
+        "X": 213,
+        "Y": 190,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 233,
+        "Y": 196,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 239,
+        "Y": 222,
+        "VX": -131072,
+        "VY": -58624
+      },
+      {
+        "Tick": 91,
+        "X": 227,
+        "Y": 228,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 239,
+        "Y": 234,
+        "VX": 58880,
         "VY": 131072
       }
     ]
@@ -1125,6 +3203,8 @@
     "Ticks": 240,
     "Hash": "952039b0da9cc1ea0dab1cee68e67e0167287c3d1df627c0bcec914a0704846d",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1137,14 +3217,14 @@
         "Tick": 41,
         "X": 53,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 73,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1158,14 +3238,14 @@
         "Tick": 91,
         "X": 67,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 79,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1179,14 +3259,14 @@
         "Tick": 141,
         "X": 50,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 64,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1207,7 +3287,111 @@
         "Tick": 199,
         "X": 51,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 26,
+        "Y": 182,
+        "VX": 131072,
+        "VY": 13056
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "952039b0da9cc1ea0dab1cee68e67e0167287c3d1df627c0bcec914a0704846d",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 64,
+        "Y": 32,
+        "VX": 48640,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 53,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 73,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 79,
+        "Y": 70,
+        "VX": 47872,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 67,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 79,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 65,
+        "Y": 107,
+        "VX": 90880,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 50,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 64,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 40,
+        "Y": 145,
+        "VX": 131072,
+        "VY": 72448
+      },
+      {
+        "Tick": 191,
+        "X": 33,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 51,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1227,6 +3411,8 @@
     "Ticks": 240,
     "Hash": "5a7e9bff3168b0044c49914b4f5adfe66f7929b95ed2b0a12af63ff99d53386c",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1239,14 +3425,14 @@
         "Tick": 41,
         "X": 53,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 73,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1260,14 +3446,14 @@
         "Tick": 91,
         "X": 67,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 79,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1281,14 +3467,14 @@
         "Tick": 141,
         "X": 50,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 64,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1309,7 +3495,111 @@
         "Tick": 199,
         "X": 51,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 26,
+        "Y": 182,
+        "VX": 131072,
+        "VY": 13056
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "5a7e9bff3168b0044c49914b4f5adfe66f7929b95ed2b0a12af63ff99d53386c",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 64,
+        "Y": 32,
+        "VX": 48640,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 53,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 73,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 79,
+        "Y": 70,
+        "VX": 47872,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 67,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 79,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 65,
+        "Y": 107,
+        "VX": 90880,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 50,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 64,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 40,
+        "Y": 145,
+        "VX": 131072,
+        "VY": 72448
+      },
+      {
+        "Tick": 191,
+        "X": 33,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 51,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1329,6 +3619,8 @@
     "Ticks": 240,
     "Hash": "a184f1e9c6fe1ba9ebf217f549b00425d5eca1318552c238844e9fb8a1ac9df5",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1341,14 +3633,14 @@
         "Tick": 41,
         "X": 173,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 193,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1362,14 +3654,14 @@
         "Tick": 91,
         "X": 187,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 199,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1383,14 +3675,14 @@
         "Tick": 141,
         "X": 170,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 184,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1411,7 +3703,111 @@
         "Tick": 199,
         "X": 171,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 146,
+        "Y": 182,
+        "VX": -131072,
+        "VY": 56832
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "a184f1e9c6fe1ba9ebf217f549b00425d5eca1318552c238844e9fb8a1ac9df5",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 184,
+        "Y": 32,
+        "VX": -9728,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 173,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 193,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 199,
+        "Y": 70,
+        "VX": -28672,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 187,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 199,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 185,
+        "Y": 107,
+        "VX": -19968,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 170,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 184,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 160,
+        "Y": 145,
+        "VX": 33280,
+        "VY": 131072
+      },
+      {
+        "Tick": 191,
+        "X": 153,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 171,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1431,6 +3827,8 @@
     "Ticks": 240,
     "Hash": "0baa2c584eac503086aa123f783ed199698a9ec28eef9fe179e8aced7f9e665e",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1443,14 +3841,14 @@
         "Tick": 41,
         "X": 173,
         "Y": 38,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 193,
         "Y": 44,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1464,14 +3862,14 @@
         "Tick": 91,
         "X": 187,
         "Y": 76,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 199,
         "Y": 82,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1485,14 +3883,14 @@
         "Tick": 141,
         "X": 170,
         "Y": 113,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 184,
         "Y": 119,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1513,7 +3911,111 @@
         "Tick": 199,
         "X": 171,
         "Y": 157,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 146,
+        "Y": 182,
+        "VX": -131072,
+        "VY": 56832
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "0baa2c584eac503086aa123f783ed199698a9ec28eef9fe179e8aced7f9e665e",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 184,
+        "Y": 32,
+        "VX": -9728,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 173,
+        "Y": 38,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 193,
+        "Y": 44,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 199,
+        "Y": 70,
+        "VX": -28672,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 187,
+        "Y": 76,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 199,
+        "Y": 82,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 185,
+        "Y": 107,
+        "VX": -19968,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 170,
+        "Y": 113,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 184,
+        "Y": 119,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 160,
+        "Y": 145,
+        "VX": 33280,
+        "VY": 131072
+      },
+      {
+        "Tick": 191,
+        "X": 153,
+        "Y": 151,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 171,
+        "Y": 157,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1533,6 +4035,8 @@
     "Ticks": 240,
     "Hash": "f802f03081a1d8c989745b0c787ab495db7b735a91bb231cd5168285fbca3d93",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1545,14 +4049,14 @@
         "Tick": 41,
         "X": 113,
         "Y": 70,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 133,
         "Y": 76,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1566,14 +4070,14 @@
         "Tick": 91,
         "X": 127,
         "Y": 108,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 139,
         "Y": 114,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1587,14 +4091,14 @@
         "Tick": 141,
         "X": 110,
         "Y": 145,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 124,
         "Y": 151,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1615,7 +4119,111 @@
         "Tick": 199,
         "X": 111,
         "Y": 189,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 86,
+        "Y": 214,
+        "VX": 131072,
+        "VY": -73728
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "f802f03081a1d8c989745b0c787ab495db7b735a91bb231cd5168285fbca3d93",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 124,
+        "Y": 64,
+        "VX": 0,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 113,
+        "Y": 70,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 133,
+        "Y": 76,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 139,
+        "Y": 102,
+        "VX": -21504,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 127,
+        "Y": 108,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 139,
+        "Y": 114,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 125,
+        "Y": 139,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 110,
+        "Y": 145,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 124,
+        "Y": 151,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 100,
+        "Y": 177,
+        "VX": 131072,
+        "VY": 78592
+      },
+      {
+        "Tick": 191,
+        "X": 93,
+        "Y": 183,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 111,
+        "Y": 189,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1635,6 +4243,8 @@
     "Ticks": 240,
     "Hash": "8ebc19b21da8517f87514963c81175a375b988f1e3badde5de3fe95ab450163f",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1647,14 +4257,14 @@
         "Tick": 41,
         "X": 113,
         "Y": 70,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 133,
         "Y": 76,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1668,14 +4278,14 @@
         "Tick": 91,
         "X": 127,
         "Y": 108,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 139,
         "Y": 114,
-        "VX": 57344,
+        "VX": 41472,
         "VY": 131072
       },
       {
@@ -1689,14 +4299,14 @@
         "Tick": 141,
         "X": 110,
         "Y": 145,
-        "VX": -45056,
+        "VX": -52992,
         "VY": 131072
       },
       {
         "Tick": 149,
         "X": 124,
         "Y": 151,
-        "VX": 38400,
+        "VX": 48128,
         "VY": 131072
       },
       {
@@ -1717,7 +4327,111 @@
         "Tick": 199,
         "X": 111,
         "Y": 189,
-        "VX": 51712,
+        "VX": 57344,
+        "VY": 131072
+      },
+      {
+        "Tick": 233,
+        "X": 86,
+        "Y": 214,
+        "VX": 131072,
+        "VY": -73728
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "8ebc19b21da8517f87514963c81175a375b988f1e3badde5de3fe95ab450163f",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 124,
+        "Y": 64,
+        "VX": 0,
+        "VY": 131072
+      },
+      {
+        "Tick": 41,
+        "X": 113,
+        "Y": 70,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 133,
+        "Y": 76,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 139,
+        "Y": 102,
+        "VX": -21504,
+        "VY": 131072
+      },
+      {
+        "Tick": 91,
+        "X": 127,
+        "Y": 108,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 139,
+        "Y": 114,
+        "VX": 58880,
+        "VY": 131072
+      },
+      {
+        "Tick": 133,
+        "X": 125,
+        "Y": 139,
+        "VX": -2304,
+        "VY": 131072
+      },
+      {
+        "Tick": 141,
+        "X": 110,
+        "Y": 145,
+        "VX": -46080,
+        "VY": 131072
+      },
+      {
+        "Tick": 149,
+        "X": 124,
+        "Y": 151,
+        "VX": 39168,
+        "VY": 131072
+      },
+      {
+        "Tick": 183,
+        "X": 100,
+        "Y": 177,
+        "VX": 131072,
+        "VY": 78592
+      },
+      {
+        "Tick": 191,
+        "X": 93,
+        "Y": 183,
+        "VX": -33024,
+        "VY": 131072
+      },
+      {
+        "Tick": 199,
+        "X": 111,
+        "Y": 189,
+        "VX": 52992,
         "VY": 131072
       },
       {
@@ -1737,6 +4451,8 @@
     "Ticks": 117,
     "Hash": "05aa88650cb9e2c0388092104033d7345f19945f34507bacc214fdfe629c228b",
     "Damage": false,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1749,14 +4465,14 @@
         "Tick": 41,
         "X": 213,
         "Y": 190,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 233,
         "Y": 196,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1770,14 +4486,69 @@
         "Tick": 91,
         "X": 227,
         "Y": 228,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 239,
         "Y": 234,
-        "VX": 57344,
+        "VX": 41472,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 117,
+    "Hash": "05aa88650cb9e2c0388092104033d7345f19945f34507bacc214fdfe629c228b",
+    "Damage": false,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 224,
+        "Y": 184,
+        "VX": -131072,
+        "VY": 19712
+      },
+      {
+        "Tick": 41,
+        "X": 213,
+        "Y": 190,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 233,
+        "Y": 196,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 239,
+        "Y": 222,
+        "VX": -131072,
+        "VY": -58624
+      },
+      {
+        "Tick": 91,
+        "X": 227,
+        "Y": 228,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 239,
+        "Y": 234,
+        "VX": 58880,
         "VY": 131072
       }
     ]
@@ -1790,6 +4561,8 @@
     "Ticks": 117,
     "Hash": "ff77f13b9d94b228454fc1f113d196e5c0a5c8026ca507e140209ae5b4349a0e",
     "Damage": true,
+    "ClockStart": 1,
+    "ClockStep": 1,
     "Fires": [
       {
         "Tick": 33,
@@ -1802,14 +4575,14 @@
         "Tick": 41,
         "X": 213,
         "Y": 190,
-        "VX": -49152,
+        "VX": -39168,
         "VY": 131072
       },
       {
         "Tick": 49,
         "X": 233,
         "Y": 196,
-        "VX": 41472,
+        "VX": 36352,
         "VY": 131072
       },
       {
@@ -1823,14 +4596,69 @@
         "Tick": 91,
         "X": 227,
         "Y": 228,
-        "VX": -34560,
+        "VX": -45056,
         "VY": 131072
       },
       {
         "Tick": 99,
         "X": 239,
         "Y": 234,
-        "VX": 57344,
+        "VX": 41472,
+        "VY": 131072
+      }
+    ]
+  },
+  {
+    "Kind": 6,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 117,
+    "Hash": "ff77f13b9d94b228454fc1f113d196e5c0a5c8026ca507e140209ae5b4349a0e",
+    "Damage": true,
+    "ClockStart": 0,
+    "ClockStep": 2,
+    "Fires": [
+      {
+        "Tick": 33,
+        "X": 224,
+        "Y": 184,
+        "VX": -131072,
+        "VY": 19712
+      },
+      {
+        "Tick": 41,
+        "X": 213,
+        "Y": 190,
+        "VX": -50432,
+        "VY": 131072
+      },
+      {
+        "Tick": 49,
+        "X": 233,
+        "Y": 196,
+        "VX": 42240,
+        "VY": 131072
+      },
+      {
+        "Tick": 83,
+        "X": 239,
+        "Y": 222,
+        "VX": -131072,
+        "VY": -58624
+      },
+      {
+        "Tick": 91,
+        "X": 227,
+        "Y": 228,
+        "VX": -35072,
+        "VY": 131072
+      },
+      {
+        "Tick": 99,
+        "X": 239,
+        "Y": 234,
+        "VX": 58880,
         "VY": 131072
       }
     ]

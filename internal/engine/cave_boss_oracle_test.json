@@ -1,0 +1,26 @@
+[
+  {
+    "Mode": 1,
+    "Ticks": 600,
+    "Hash": "6830bfb7ea0f1814cecc69ba1899472e8fb30ff7160ca87b12f072739194d106",
+    "Damage": false
+  },
+  {
+    "Mode": 1,
+    "Ticks": 343,
+    "Hash": "f62ba940fceff68557d569a82a3f721c696b55a14df6dcce396501a80a41fbac",
+    "Damage": true
+  },
+  {
+    "Mode": 2,
+    "Ticks": 600,
+    "Hash": "c7a0e172ecb5fd6deabaa73b52802b6dc1de7caada3c01129a481d4c590d4b9c",
+    "Damage": false
+  },
+  {
+    "Mode": 2,
+    "Ticks": 561,
+    "Hash": "4891eaa661b6fa32a87506a482b756a933f08ea1a1d7d0ebbce0598d4b12df1a",
+    "Damage": true
+  }
+]

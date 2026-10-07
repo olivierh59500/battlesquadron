@@ -1,0 +1,1562 @@
+[
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      0,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 0,
+    "Target": 51,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 48,
+    "Target": 51,
+    "After": 49
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 96,
+    "Target": 51,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 0,
+    "Target": 42,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 48,
+    "Target": 42,
+    "After": 47
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 96,
+    "Target": 42,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 0,
+    "Target": 60,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 48,
+    "Target": 60,
+    "After": 49
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 96,
+    "Target": 60,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 0,
+    "Target": 42,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 48,
+    "Target": 42,
+    "After": 47
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 96,
+    "Target": 42,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 0,
+    "Target": 60,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 48,
+    "Target": 60,
+    "After": 49
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 96,
+    "Target": 60,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 0,
+    "Target": 51,
+    "After": 1
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 48,
+    "Target": 51,
+    "After": 49
+  },
+  {
+    "X": [
+      112,
+      160
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 96,
+    "Target": 51,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      256
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 0,
+    "Target": 96,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 48,
+    "Target": 96,
+    "After": 49
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 96,
+    "Target": 96,
+    "After": 96
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 0,
+    "Target": 0,
+    "After": 0
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 48,
+    "Target": 0,
+    "After": 47
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 96,
+    "Target": 0,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      256,
+      0
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 0,
+    "Target": 46,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 48,
+    "Target": 46,
+    "After": 47
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      0
+    ],
+    "Before": 96,
+    "Target": 46,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 0,
+    "Target": 3,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 48,
+    "Target": 3,
+    "After": 47
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      0,
+      255
+    ],
+    "Before": 96,
+    "Target": 3,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 0,
+    "Target": 91,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 48,
+    "Target": 91,
+    "After": 49
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      0
+    ],
+    "Before": 96,
+    "Target": 91,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      255,
+      255
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 0,
+    "Target": 3,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 48,
+    "Target": 3,
+    "After": 47
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      150
+    ],
+    "Before": 96,
+    "Target": 3,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 0,
+    "Target": 91,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 48,
+    "Target": 91,
+    "After": 49
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      100
+    ],
+    "Before": 96,
+    "Target": 91,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 0,
+    "Target": 48,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 48,
+    "Target": 48,
+    "After": 48
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      150,
+      150
+    ],
+    "Before": 96,
+    "Target": 48,
+    "After": 95
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 0,
+    "Target": 46,
+    "After": 1
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 48,
+    "Target": 46,
+    "After": 47
+  },
+  {
+    "X": [
+      10,
+      244
+    ],
+    "Marker": [
+      100,
+      100
+    ],
+    "Before": 96,
+    "Target": 46,
+    "After": 95
+  }
+]

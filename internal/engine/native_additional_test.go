@@ -25,6 +25,7 @@ func TestAdaptiveMovementAgainstOriginal68000(t *testing.T) {
 		Kind, Stage, X, Y, Ticks int
 		Hash                     string
 		Damage                   bool
+		ClockStart, ClockStep    int
 		Fires                    []struct{ Tick, X, Y, VX, VY int }
 	}
 	if err = json.Unmarshal(encoded, &references); err != nil {
@@ -40,8 +41,8 @@ func TestAdaptiveMovementAgainstOriginal68000(t *testing.T) {
 			if r.Damage && tick == 40 {
 				e.nativeDamage(&enemy)
 			}
-			e.Frame = tick + 1
-			if !e.moveNativeAdditional(&enemy) {
+			e.Frame = r.ClockStart + r.ClockStep*tick
+			if !e.moveNativeEnemy(&enemy) {
 				t.Fatal("verified controller was not selected")
 			}
 			if enemy.Health < 0 {

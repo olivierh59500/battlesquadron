@@ -1,0 +1,200 @@
+[
+  {
+    "Kind": 1,
+    "Mode": 0,
+    "Template": 11040,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "594833d133661061be7a5d81715f5034f033887a6954b1df2b7ba823a97468a1",
+    "Trace": "ground_1_0_false.bin"
+  },
+  {
+    "Kind": 1,
+    "Mode": 0,
+    "Template": 11040,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "594833d133661061be7a5d81715f5034f033887a6954b1df2b7ba823a97468a1",
+    "Trace": "ground_1_0_true.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 0,
+    "Template": 11568,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "2677058724a639444f263aaaf7bedd38ac2eef031bf3a48850a0a8d9ba0bf2a5",
+    "Trace": "ground_32_0_false.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 0,
+    "Template": 11568,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "3091e0ac7f7fe4ef96c77ff4c4fae3ab6c2457f6dc18a3341c2f67ae06e5c3e7",
+    "Trace": "ground_32_0_true.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 1,
+    "Template": 11616,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "b16d4a2d3e85e1d76dbfd3564ea7292d6f92a2ff7fde982e2644b2d6499695c5",
+    "Trace": "ground_32_1_false.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 1,
+    "Template": 11616,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "3fbe285c02402404a6a85d51670c0f5bc2fd59b8257b10586ddcb07fc88b08fe",
+    "Trace": "ground_32_1_true.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 2,
+    "Template": 11664,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "ed5d9a221e93ce67aadec5b2be17b64656a00919f926116fea6a1ed5c239024c",
+    "Trace": "ground_32_2_false.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 2,
+    "Template": 11664,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "eba31f798a26443f9877bbb2f4712ab62eb514149813c0eb91d89aaaeebf078c",
+    "Trace": "ground_32_2_true.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 3,
+    "Template": 11712,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "ebb4f6e774c901b357b4ed8ef1cbc59b30e26c0588a0a62f06d5248c0bdaf631",
+    "Trace": "ground_32_3_false.bin"
+  },
+  {
+    "Kind": 32,
+    "Mode": 3,
+    "Template": 11712,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "03f7138580c3020e602b32d98bf6f92812ede782a1039c3dc2464542c46134ea",
+    "Trace": "ground_32_3_true.bin"
+  },
+  {
+    "Kind": 34,
+    "Mode": 0,
+    "Template": 11856,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "b9a62974285dadde6dbd2a9f70b6ff56b3716078929421b75b7d233ec796a55f",
+    "Trace": "ground_34_0_false.bin"
+  },
+  {
+    "Kind": 34,
+    "Mode": 0,
+    "Template": 11856,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "b3a78a4c0e32fcdaddc36d80ab03f05d691dd180fcfcd1c4eadd77bb892371c8",
+    "Trace": "ground_34_0_true.bin"
+  },
+  {
+    "Kind": 34,
+    "Mode": 2,
+    "Template": 11808,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "0aefc2fa07a09b7ce20afd8104d0a83e23e034295a4b118e27ad8c54dfba0264",
+    "Trace": "ground_34_2_false.bin"
+  },
+  {
+    "Kind": 34,
+    "Mode": 2,
+    "Template": 11808,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "614b4cd32218faf734b034a5baf8326afd874844a1ca0ab5c5e8297a5132c495",
+    "Trace": "ground_34_2_true.bin"
+  },
+  {
+    "Kind": 37,
+    "Mode": 0,
+    "Template": 12000,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "29321f7653282ffb1885c1b2e0726f01f3590921fcbb6769aa95e5804c73865a",
+    "Trace": "ground_37_0_false.bin"
+  },
+  {
+    "Kind": 37,
+    "Mode": 0,
+    "Template": 12000,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "fb3dea7e500cfeefb44c8be03e045e00a825e1a2f2a32a4bf685df61a16acb57",
+    "Trace": "ground_37_0_true.bin"
+  },
+  {
+    "Kind": 40,
+    "Mode": 1,
+    "Template": 12144,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": false,
+    "Hash": "07be1eecbc810085cc04204055c85aac4cd1f9d4cf5db84ed8b57a55ddfd89fb",
+    "Trace": "ground_40_1_false.bin"
+  },
+  {
+    "Kind": 40,
+    "Mode": 1,
+    "Template": 12144,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 80,
+    "Damage": true,
+    "Hash": "07be1eecbc810085cc04204055c85aac4cd1f9d4cf5db84ed8b57a55ddfd89fb",
+    "Trace": "ground_40_1_true.bin"
+  }
+]

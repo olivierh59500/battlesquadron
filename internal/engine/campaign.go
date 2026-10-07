@@ -85,7 +85,7 @@ type Campaign struct {
 func NewCampaign(gates []Gate) Campaign { return Campaign{Gates: slices.Clone(gates)} }
 
 // GateAtScroll selects a visible, uncleared entrance while on the surface.
-// The original controller releases its entrance phase at a top edge of 252.
+// The supplied revision releases its entrance phase at a top edge of 204.
 func (c *Campaign) GateAtScroll(progress int) (Gate, bool) {
 	if c.ActiveCave != 0 {
 		return Gate{}, false
@@ -94,7 +94,7 @@ func (c *Campaign) GateAtScroll(progress int) (Gate, bool) {
 		if c.ClearedMask&(1<<uint(gate.Phase)) != 0 || progress < gate.Progress {
 			continue
 		}
-		if gate.NativeY(progress) >= 252 {
+		if gate.NativeY(progress) >= 204 {
 			continue
 		}
 		return gate, true

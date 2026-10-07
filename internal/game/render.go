@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"image"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -62,7 +63,18 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) drawPlayfield() {
 	g.view.Fill(color.Black)
-	g.art.drawTerrain(g.view, g.Core.Stage, g.Core.Scroll, g.Core.CameraX)
+	if g.Core.FinalBattle() {
+		if backdrop, ok := g.art.sprites["final_backdrop"]; ok {
+			start := max(0, 240-g.Core.Scroll)
+			end := min(240, start+208)
+			if end > start {
+				x := max(0, min(96, g.Core.CameraX))
+				g.view.DrawImage(backdrop.image.SubImage(image.Rect(x, start, x+288, end)).(*ebiten.Image), nil)
+			}
+		}
+	} else {
+		g.art.drawTerrain(g.view, g.Core.Stage, g.Core.Scroll, g.Core.CameraX)
+	}
 	if g.Core.Stage == 0 {
 		if gate, active := g.Core.Campaign.GateAtScroll(g.Core.Scroll); active {
 			frame := 1
@@ -74,6 +86,21 @@ func (g *Game) drawPlayfield() {
 		}
 	}
 	for _, enemy := range g.Core.Enemies {
+		if !g.Core.GroundVisible(enemy) {
+			continue
+		}
+		if enemy.Definition.FlyingPool && enemy.Definition.NativeKind == 7 {
+			if enemy.Frame >= 3 {
+				g.art.drawSprite(g.view, fmt.Sprintf("flying_10_%d_stage_%d", enemy.Frame-3, g.Core.Stage), enemy.X, enemy.Y, 0)
+			} else {
+				g.art.drawGrowingSprite(g.view, fmt.Sprintf("flying_7_%d_stage_%d", enemy.Frame, g.Core.Stage), enemy.X, enemy.Y, 0, enemy.Definition.Height)
+			}
+			continue
+		}
+		if enemy.Definition.NativeKind == 2 && g.Core.FinalBattle() || enemy.Definition.NativeKind == 9 {
+			g.art.drawIndexedSprite(g.view, enemy.Definition.Sprite, enemy.X, enemy.Y, enemy.Frame)
+			continue
+		}
 		id := g.art.objects[objectKey{g.Core.Stage, enemy.Definition.Address, enemy.Frame}]
 		if id == "" {
 			id = g.art.objects[objectKey{g.Core.Stage, enemy.Definition.Address, 0}]
@@ -95,15 +122,19 @@ func (g *Game) drawPlayfield() {
 		}
 	}
 	for _, pickup := range g.Core.Pickups {
-		frame := pickup.Weapon*2 + (g.Core.Frame >> 2 & 1)
-		if pickup.Nova > 0 {
-			frame = 10 + (g.Core.Frame >> 2 & 1)
-		}
-		id := fmt.Sprintf("flying_5_%d_stage_%d", frame, g.Core.Stage)
+		id := fmt.Sprintf("flying_5_%d_stage_%d", pickup.Frame, g.Core.Stage)
 		g.art.drawSprite(g.view, id, pickup.X, pickup.Y, 0)
 	}
 	for _, explosion := range g.Core.Explosions {
-		id := fmt.Sprintf("flying_10_%d_stage_%d", min(8, explosion.Age/4), g.Core.Stage)
+		frame := min(8, explosion.Age/4)
+		if explosion.Native {
+			frame = explosion.Frame
+		}
+		kind := 10
+		if explosion.Native {
+			kind = explosion.SpriteKind
+		}
+		id := fmt.Sprintf("flying_%d_%d_stage_%d", kind, frame, g.Core.Stage)
 		if explosion.Player {
 			id = fmt.Sprintf("player_explosion_%d", min(9, explosion.Age/7))
 		}
@@ -121,7 +152,7 @@ func (g *Game) drawPlayfield() {
 	for _, ray := range g.Core.NovaRays {
 		g.art.drawSprite(g.view, fmt.Sprintf("bullet_%d_0", ray.Graphic), ray.X, ray.Y, 0)
 	}
-	if g.Core.Players[0].Respawn > 60 && g.Core.Frame < 145 {
+	if g.Core.Players[0].Respawn >= 45 && g.Core.Frame < 130 {
 		g.art.text(g.view, "GET READY", 108, 103, white)
 	}
 	g.art.text(g.view, "1UP", 22, 1, color.RGBA{136, 187, 255, 255})

@@ -16,6 +16,8 @@ func main() {
 	screen := flag.String("screen", "game", "smoke capture screen: game or title")
 	players := flag.Int("players", 1, "one or two simultaneous players")
 	stage := flag.Int("stage", 0, "start on original surface (0) or underground stage (1-3)")
+	final := flag.Bool("final", false, "start the original final encounter for inspection")
+	nova := flag.Bool("nova", false, "activate an original Nova during a smoke run")
 	smoke := flag.Int("smoke", 0, "drive native gameplay for this many PAL ticks, then exit")
 	capture := flag.String("capture", "", "write the actual final Ebitengine frame to PNG")
 	scale := flag.Int("scale", 3, "integer desktop window scale")
@@ -33,8 +35,15 @@ func main() {
 	g.SetMuted(*mute)
 	g.SetDataDir(*dataDir)
 	g.SmokeFrames, g.Capture = *smoke, *capture
+	g.SmokeNova = *nova
 	if *play || *smoke > 0 && *screen == "game" || *stage != 0 {
 		g.Start(*players, *stage)
+	}
+	if *final {
+		g.Start(*players, 0)
+		if err := g.Core.StartFinalBattle(); err != nil {
+			log.Fatal(err)
+		}
 	}
 	width, height := g.Layout(0, 0)
 	ebiten.SetWindowSize(width*max(1, *scale), height*max(1, *scale))

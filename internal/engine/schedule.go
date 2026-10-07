@@ -86,6 +86,7 @@ func NativeSchedules(loader []byte, base uint32, overlays map[string][]byte) ([4
 			}
 			if event.X >= 800 {
 				event.X -= 1000
+				event.AbsoluteX = kind != 1 && kind != 6 && kind != 8
 			}
 			if kind == 1 || kind == 6 || kind == 8 {
 				event.RandomMode = kind
@@ -106,6 +107,12 @@ func NativeSchedules(loader []byte, base uint32, overlays map[string][]byte) ([4
 				if err != nil {
 					return result, fmt.Errorf("stage%d schedule $%x: %w", stage, pointer-12, err)
 				}
+			} else if stage == 1 && kind == 9 {
+				event.Script, err = decodeBossCircle(dataMemory, 0x2ef20)
+				if err != nil {
+					return result, err
+				}
+				event.RepeatScript = true
 			}
 			result[stage] = append(result[stage], event)
 		}
@@ -114,6 +121,18 @@ func NativeSchedules(loader []byte, base uint32, overlays map[string][]byte) ([4
 		}
 	}
 	return result, nil
+}
+
+func decodeBossCircle(source scheduleReader, address uint32) ([]Motion, error) {
+	data, err := source.at(address, 400*4)
+	if err != nil {
+		return nil, err
+	}
+	motions := make([]Motion, 400)
+	for i := range motions {
+		motions[i] = Motion{Duration: 1, VX: signedWord(data[i*4:]) * 16, VY: signedWord(data[i*4+2:]) * 16}
+	}
+	return motions, nil
 }
 
 // nativeStageTable follows the original immediate table assignment used by the
@@ -188,11 +207,16 @@ func decodeFlyingDefinition(loader []byte, base, address uint32, kind byte) (Def
 	}
 	stride := (widthWords - 1) * 2 * height
 	frames := 16
+	killSound := 28
+	if kind == 2 {
+		killSound = 29
+	}
 	if kind == 4 || kind == 8 {
 		frames = 32
 	}
 	return Definition{Address: address, GraphicAddress: binary.BigEndian.Uint32(record[20:]), Kind: kind, Graphic: kind,
 		Width: (widthWords - 1) * 16, Height: height, Health: int(record[12]), Score: DecodeBCDScore(binary.BigEndian.Uint16(record[24:])),
+		HitSound: int(record[13]), KillSound: killSound,
 		PlaneStride: stride, FrameStride: stride * 6, Frames: frames, Frame: 0, Sprite: fmt.Sprintf("flying_%d_0", kind), NativeKind: int(kind), FlyingPool: true, Boss: kind == 2 || kind == 9, Collectable: kind == 5, TrackingFrames: int(record[27])}, nil
 }
 

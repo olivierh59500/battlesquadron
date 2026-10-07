@@ -132,6 +132,8 @@ func (e *Engine) nativeDamage(enemy *Enemy) {
 		return
 	}
 	switch enemy.Definition.NativeKind {
+	case 1:
+		enemy.native.hit = 6
 	case 4:
 		enemy.native.hit = 8
 	case 6:

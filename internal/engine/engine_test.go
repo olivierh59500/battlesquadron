@@ -74,7 +74,8 @@ func TestMovementTiltAndBounds(t *testing.T) {
 	for range 12 {
 		e.Tick([2]Input{{X: 1, Y: 1}})
 	}
-	if e.Players[0].X != 24 || e.Players[0].Y != 26 || e.Players[0].Tilt != 6 {
+	// The second PAL field reuses the previous field's latched joystick input.
+	if e.Players[0].X != 22 || e.Players[0].Y != 24 || e.Players[0].Tilt != 6 {
 		t.Fatalf("diagonal speed or four-frame tilt cadence changed: %+v", e.Players[0])
 	}
 	for range 12 {
@@ -85,10 +86,10 @@ func TestMovementTiltAndBounds(t *testing.T) {
 	}
 }
 
-func TestPrimaryRepeatIsSixteenFrames(t *testing.T) {
+func TestPrimaryRepeatIsSixteenGameUpdates(t *testing.T) {
 	e := newFixture(t)
 	var frames []int
-	for range 40 {
+	for range 70 {
 		e.Tick([2]Input{{Fire: true}})
 		for _, event := range e.Events {
 			if event.Kind == "shot" {
@@ -96,8 +97,8 @@ func TestPrimaryRepeatIsSixteenFrames(t *testing.T) {
 			}
 		}
 	}
-	if len(frames) != 3 || frames[0] != 1 || frames[1] != 17 || frames[2] != 33 {
-		t.Fatalf("primary-fire frames = %v; want [1 17 33]", frames)
+	if len(frames) != 3 || frames[0] != 1 || frames[1] != 33 || frames[2] != 65 {
+		t.Fatalf("primary-fire PAL frames = %v; want [1 33 65]", frames)
 	}
 }
 
@@ -152,7 +153,7 @@ func TestDecodedStageAndEndingGate(t *testing.T) {
 	}
 	e.Start(1)
 	e.Scroll = 0
-	for range 4 {
+	for range 8 {
 		e.Tick([2]Input{})
 	}
 	if e.Stage != 1 || e.Mode != Playing || len(e.Enemies) != 1 {
@@ -187,7 +188,9 @@ func TestShipsPassAboveGroundScenery(t *testing.T) {
 		t.Fatal("ground scenery incorrectly destroyed the flying ship")
 	}
 	e.Enemies[0].Definition.Ground = false
-	e.Tick([2]Input{})
+	for range 4 {
+		e.Tick([2]Input{})
+	}
 	if e.Players[0].Dying == 0 {
 		t.Fatal("a colliding flying object did not hit the ship")
 	}
@@ -211,13 +214,13 @@ func TestOriginalEntryAnimation(t *testing.T) {
 	}
 	e.Start(1)
 	p := e.Players[0]
-	if e.Scroll != 160 || p.Respawn != 145 || p.Invulnerable != 300 || p.Y != 256 {
+	if e.Scroll != 160 || p.Respawn != 130 || p.Invulnerable != 360 || p.Y != 208 {
 		t.Fatalf("original level-entry state changed: scroll=%d player=%+v", e.Scroll, p)
 	}
-	for range 145 {
+	for range 130 {
 		e.Tick([2]Input{})
 	}
-	if e.Players[0].Y != 138 || e.Players[0].Respawn != 0 {
+	if e.Players[0].Y != 118 || e.Players[0].Respawn != 0 {
 		t.Fatalf("original level-entry movement changed: %+v", e.Players[0])
 	}
 }
@@ -246,14 +249,21 @@ func TestVerifiedNativeFlyingMovement(t *testing.T) {
 	for range 4 {
 		e.Tick([2]Input{})
 	}
-	if e.Enemies[0].Y != -14 {
+	if e.Enemies[0].Y != -17 {
 		t.Fatalf("type12 scroll cadence changed: %+v", e.Enemies[0])
 	}
 	e.Spawn(Spawn{X: 20, Y: -20, Definition: Definition{FlyingPool: true, NativeKind: 1, Health: 10}})
+	initialWorldX := 20 + e.CameraX
 	for range 16 {
 		e.Tick([2]Input{})
 	}
-	if e.Enemies[1].VX != 131072 || e.Enemies[1].X != 37 || e.Enemies[1].Y != 12 {
-		t.Fatalf("type1 acceleration changed: %+v", e.Enemies[1])
+	var tracking Enemy
+	for _, enemy := range e.Enemies {
+		if enemy.Definition.NativeKind == 1 {
+			tracking = enemy
+		}
+	}
+	if tracking.VX != 65536 || tracking.X+e.CameraX != initialWorldX+4 || tracking.Y != -4 {
+		t.Fatalf("type1 acceleration changed: %+v", tracking)
 	}
 }

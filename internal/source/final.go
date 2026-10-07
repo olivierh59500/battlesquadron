@@ -81,3 +81,39 @@ func appendFinalBoss(bundle *Bundle, loader, data []byte, save func(string, imag
 	}
 	return nil
 }
+
+// appendFinalBackdrop preserves the final 240 surface pixels already copied to
+// the original terrain ring when LODFIN loads. The original branch selects its
+// brown palette at Amiga $163E (loader file $153E) and then stops the scroll.
+func appendFinalBackdrop(bundle *Bundle, loader, mem []byte, save func(string, image.Image) error) error {
+	const width, height, startY = 384, 240, 8192 - 240
+	palette := make(color.Palette, 32)
+	for i := 0; i < 32; i++ {
+		v := binary.BigEndian.Uint16(loader[0x153e+i*2:])
+		palette[i] = color.RGBA{uint8(v>>8&15) * 17, uint8(v>>4&15) * 17, uint8(v&15) * 17, 255}
+	}
+	img := image.NewNRGBA(image.Rect(0, 0, width, height))
+	for y := 0; y < height; y++ {
+		sourceY := startY + y
+		mapRow, tileY := sourceY/16, sourceY%16
+		for x := 0; x < width; x++ {
+			tileX, bitX := x/16, x%16
+			word := binary.BigEndian.Uint16(mem[0x44000+(mapRow*24+tileX)*2:])
+			value := 0
+			for plane := 0; plane < 5; plane++ {
+				off := 0x4a000 + int(word)*2 + plane*32 + tileY*2 + bitX/8
+				if off >= len(mem) {
+					return fmt.Errorf("final backdrop tile outside original RAM")
+				}
+				value |= int(mem[off]>>uint(7-bitX%8)&1) << plane
+			}
+			img.Set(x, y, palette[value])
+		}
+	}
+	const file = "graphics/final_backdrop.png"
+	if err := save(file, img); err != nil {
+		return err
+	}
+	bundle.Sprites = append(bundle.Sprites, Sprite{ID: "final_backdrop", File: file, Kind: "background", Width: width, Height: height, Address: 0x44000 + (startY/16)*48, Stage: 0})
+	return nil
+}

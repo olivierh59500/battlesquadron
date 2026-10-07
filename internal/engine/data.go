@@ -62,6 +62,7 @@ type Definition struct {
 	Frames, PlaneStride, FrameStride int
 	Width, Height, Health            int
 	Score, FireDelay                 int
+	HitSound, KillSound              int
 	Sprite                           string
 	Ground, Boss, Collectable        bool
 	Weapon, Nova                     int
@@ -79,6 +80,7 @@ type Spawn struct {
 	Script       []Motion
 	ClearObjects bool
 	RandomMode   uint8
+	AbsoluteX    bool
 	ScriptLoop   int
 	RepeatScript bool
 }
@@ -92,6 +94,7 @@ type Motion struct {
 // Stage carries original map words and any decoded timed-object schedule.
 // Tile storage follows disk order: the first row is the top of the level.
 type Stage struct {
+	TileBank                []byte
 	ID, Mode, Height, Width int
 	Tiles                   []uint16
 	Events                  []Spawn
@@ -111,15 +114,16 @@ type MapRule struct {
 
 // Data contains only decoded originals; the engine does not load image files.
 type Data struct {
-	Nova        *NovaConfig
-	Loader      []byte
-	LoaderBase  uint32
-	WeaponTable uint32
-	Weapons     [4][6]Weapon
-	Stages      []Stage
-	MapRules    []MapRule
-	Random      []byte
-	Options     Options
+	PlayerSpawnX [2]int
+	Nova         *NovaConfig
+	Loader       []byte
+	LoaderBase   uint32
+	WeaponTable  uint32
+	Weapons      [4][6]Weapon
+	Stages       []Stage
+	MapRules     []MapRule
+	Random       []byte
+	Options      Options
 }
 
 // DecodeWeapons finds and validates all twenty-four weapon-level definitions.

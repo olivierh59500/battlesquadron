@@ -1,0 +1,79 @@
+[
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 0,
+    "Hash": "a639910f733a5a014f487c8ebd40e268b54a8e7c6efcf94756866111aa7b4a77",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 1,
+    "Hash": "b3bcaa9f24cb1901fb8c773741f0628cb7454888646494847d8898f6e7a881dd",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 2,
+    "Hash": "7bcf9b4097118f13fb19e869c0c35686d39011afdf25d26eaff07b88efa835d9",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 8,
+    "Hash": "b1325da057ab9190ec1f9a69411daf18c36ae20e9c2095cc515cf7570ebde887",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 16,
+    "Hash": "1f58a61d463ca135fca4dca2b050e81988ea0e449e8287a2485dbc324c368fc1",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 64,
+    "Hash": "d23e1c46029865ff791cc137349a4e538cc9988df0ed69257a9be20ff471d66a",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 128,
+    "Hash": "66094d0f38cc5ef5a7c2380e50330cfe62cefb7d2e48e5a63c3c6e003f81ac67",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 256,
+    "Hash": "0a36c8ee3ce77d17b75cd7f7feb8d85bc4165836b2a6a4b1f41f99d99bf48f8c",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 512,
+    "Hash": "591c9b7f3aa02d9f695ec29687d3c25cb484361e36ae749d0240319e31307bc9",
+    "DataHash": "996237c976fd56cdf45b9e9199da12bd2e8e273f51258d6d804b097d64c811f8"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 1024,
+    "Hash": "b2dd7efbcdbca8b57b944f140b725ee9665bd8a9c6c95355295f97781d5d4443",
+    "DataHash": "3345f5fca27a362da9ef3508592daa41eb0ec7b2becffa4aa2b2e1d3f1cae664"
+  },
+  {
+    "Overlay": "lodgam",
+    "Track": 1,
+    "Tick": 4096,
+    "Hash": "c230674958c75028df74751e52fd3f4ec563c06a9649ca660ae3c52d950b64d5",
+    "DataHash": "1abe7540d4064d3248679c116a96ec31a203ec6e8567270294d6a124119993f3"
+  }
+]

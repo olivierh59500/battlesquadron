@@ -61,9 +61,14 @@ func (e *Engine) updateNativePickup(pickup *Pickup) bool {
 	return true
 }
 
-// nativeClock is the original display-frame word: $5468 advances it at both
-// halves of every PAL game frame, while Engine.Frame counts complete updates.
-func (e *Engine) nativeClock() int { return e.Frame * 2 }
+// nativeClock supplies the current source clock selection. Its relationship to
+// physical PAL frames is audited independently with original emulator states.
+func (e *Engine) nativeClock() int {
+	if e.npcPhase {
+		return e.Frame - 1
+	}
+	return e.Frame
+}
 
 // Clock returns the original two-phase display word for authentic animation.
 func (e *Engine) Clock() int { return e.nativeClock() }

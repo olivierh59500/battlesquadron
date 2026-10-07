@@ -239,6 +239,9 @@ func WriteGraphics(root string) error {
 				return e
 			}
 			copy(mem[0x44000:], tiles)
+			if e := appendFinalBackdrop(&bundle, loader, mem, save); e != nil {
+				return e
+			}
 		} else {
 			name := fmt.Sprintf("lodst%d", id)
 			stage, e := read(name)
@@ -249,6 +252,9 @@ func WriteGraphics(root string) error {
 			copy(mem[base:], stage)
 			// This SPIK revision already contains the runtime order. Its patched
 			// loader returns before the older BOND loader's byte-reversal pass.
+		}
+		if e := appendCaveBoss(&bundle, mem, id, pal, save); e != nil {
+			return e
 		}
 		if e := appendCatalog(&bundle, loader, mem, id, pal, save); e != nil {
 			return e

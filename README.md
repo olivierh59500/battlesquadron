@@ -28,7 +28,8 @@ go run ./cmd/extract -adf '/path/to/original.adf'
 ./bin/battlesquadron -touch
 ```
 
-Simulation runs at 50 updates per second. Original bitmap pixels use nearest
+Player movement and timers run at 50 updates per second; the original terrain
+and NPC loop runs at 25 Hz. Original bitmap pixels use nearest
 neighbor scaling. The desktop canvas is 320 × 256; Android adds touch gutters
 to a 480 × 256 canvas without stretching the original picture.
 
@@ -84,6 +85,17 @@ make vet
 ```
 
 The capture option saves the actual Ebitengine framebuffer before exiting.
+
+```sh
+# Exercise every extracted stage without a graphics environment.
+go run ./cmd/verify
+# Exercise the original multipart final encounter until its ending signal.
+go run ./cmd/verify -final
+```
+
+The headless driver enables its verification-only invulnerability option and
+uses deterministic input. It checks native stage progression and fixed pool
+bounds; it does not establish visual parity or normal-player difficulty.
 [Sound verification](docs/sound.md) compares the native sequencer with the
 original sound routines using a separate development oracle. That CPU core
 is never linked into the application.

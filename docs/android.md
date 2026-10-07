@@ -89,7 +89,9 @@ The Go build command generates a separate Android instrumentation APK for
 runtime checks. It injects two real simultaneous touchscreen pointers, verifies
 movement and firing against snapshots published by the Go update thread, then
 checks HOME suspension, input cancellation, the paused return to the app and
-touch continuation. The checker requires an `emulator-*` transport and refuses
+touch continuation. It also checks Nova charge consumption and captures the
+original cave and final-battle artwork through diagnostics-only scene fixtures.
+The checker requires an `emulator-*` transport and refuses
 physical device serials:
 
 ```sh
@@ -99,14 +101,19 @@ GOCACHE="$PWD/.cache/go-build" go run ./cmd/android \
 
 Use `-skip-bind` when checking an unchanged AAR. The separate test APK is installed
 only for this option. Evidence is written to the ignored `captures/` directory:
-`android-title.png`, `android-touch.png`, `android-paused.png` and
-`android-check.json`. A fresh emulator's one-time fullscreen hint is dismissed
+`android-title.png`, `android-touch.png`, `android-paused.png`, `android-nova.png`,
+`android-cave.png`, `android-final.png` and `android-check.json`. A fresh
+emulator's one-time fullscreen hint is dismissed
 before injected touches so that the check measures application input.
 
 The Android 35 ARM64 session in this workspace used a cache-local AVD with
-SwiftShader OpenGL ES 3. Simultaneous gestures moved the ship from X112 to X162
-while two primary shots were active. After HOME and returning to the app, frame
-185 and X164 stayed unchanged; touching the paused game resumed its updates.
+SwiftShader OpenGL ES 3. The corrected original entry finished at Y118 after
+130 PAL fields. Simultaneous gestures moved the ship from X64 to X114
+while a primary fire bank was emitted. Cumulative fire events are checked because
+projectiles can leave the screen before a later snapshot. After HOME and
+returning to the app, frame 171 and X116 stayed unchanged; touching the paused
+game resumed its updates. The Nova touch consumed one of the original three
+charges and produced twelve active Nova projectiles.
 These checks establish Android control and lifecycle behavior, not complete
 visual or gameplay parity with the Amiga original. The emulator ran with host
 audio output disabled, so its successful audio initialization does not establish

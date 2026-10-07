@@ -35,6 +35,7 @@ type Game struct {
 	audioPlayer                             *audio.Player
 	sound                                   *sound.Player
 	updates, SmokeFrames                    int
+	SmokeNova                               bool
 	Capture                                 string
 	captured                                bool
 	touchIDs                                []ebiten.TouchID
@@ -69,7 +70,7 @@ func New() (*Game, error) {
 		return nil, err
 	}
 	overlays := make(map[string][]byte)
-	for _, name := range []string{"lods0f", "lods0s", "lodst1", "lodst2", "lodst3"} {
+	for _, name := range []string{"lods0f", "lods0s", "lods0t", "lodst1", "lodst2", "lodst3"} {
 		overlays[name], err = fs.ReadFile(assets.Files, "unpacked/"+name+".bin")
 		if err != nil {
 			return nil, err
@@ -81,7 +82,13 @@ func New() (*Game, error) {
 	}
 	for index, spec := range a.manifest.Stages {
 		tiles := spec.Tiles
-		data.Stages = append(data.Stages, engine.Stage{ID: spec.ID, Mode: spec.Mode, Width: 24, Height: spec.Height, Tiles: tiles, Events: schedules[spec.ID], Next: (index + 1) % len(a.manifest.Stages)})
+		name := []string{"lods0t", "lodst1", "lodst2", "lodst3"}[spec.ID]
+		offset := 0x4a000 - []int{0x44000, 0x2e89a, 0x2e4c0, 0x2e840}[spec.ID]
+		bank := overlays[name]
+		if offset+81920 > len(bank) {
+			return nil, fmt.Errorf("original terrain bank%d is truncated", spec.ID)
+		}
+		data.Stages = append(data.Stages, engine.Stage{ID: spec.ID, Mode: spec.Mode, Width: 24, Height: spec.Height, Tiles: tiles, TileBank: bank[offset : offset+81920], Events: schedules[spec.ID], Next: (index + 1) % len(a.manifest.Stages)})
 	}
 	core, err := engine.New(data)
 	if err != nil {
@@ -284,6 +291,7 @@ func (g *Game) Update() error {
 	}
 	if g.SmokeFrames > 0 {
 		inputs[0].Fire = true
+		inputs[0].Nova = g.SmokeNova && g.updates == 161
 		inputs[0].X = 0
 		if (g.updates/50)%2 == 0 {
 			inputs[0].X = -1
@@ -302,12 +310,19 @@ func (g *Game) Update() error {
 				g.sound.PlayEffect([4]uint16{48, 54, 49, 55}[g.Core.Players[event.Player].Weapon])
 			case "nova":
 				g.sound.PlayEffect(57)
+				g.sound.PlayTrack(10)
 			case "explosion":
-				g.sound.PlayEffect(29)
+				g.sound.PlayEffect(uint16(event.Value))
 			case "hit":
-				g.sound.PlayEffect(28)
+				g.sound.PlayEffect(uint16(event.Value))
+			case "original-sfx":
+				g.sound.PlayEffect(uint16(event.Value))
 			case "pickup":
-				g.sound.PlayEffect(56)
+				if event.Value == 6 || event.Value == 7 {
+					g.sound.PlayTrack(uint16(event.Value))
+				}
+			case "death":
+				g.sound.PlayTrack(5)
 			}
 		}
 	}

@@ -29,6 +29,11 @@ The simulation is Go code using typed state and decoded tables. It does not
 interpret or execute the original 68000 game. Both desktop and Android use
 the same deterministic 50 Hz update and the same original assets.
 
+FS-UAE cycle-count snapshots establish 50 Hz player movement/timers and 25 Hz
+terrain advancement. The native update keeps those distinct cadences, latches
+joystick input across the two source fields, and selects alternating collision
+banks. See [physical timing](time.md) for exact original measurements.
+
 Tests cover independent two-player movement, two-pixel axis steps and full
 diagonal speed, banking and bounds, decoded fire cooldowns and projectile
 bank ownership, delayed shots, fixed pool limits, death/respawn, weapon-level
@@ -38,15 +43,30 @@ enemy-controller or campaign parity.
 
 All 674 original scheduled events are decoded across the surface and three
 caves. An independent development oracle verifies 56 directed formations,
-32 adaptive movement/hit-flash cases and eight tracking-missile cases against
+96 movement/hit/firing cases across three actor types and eight tracking-missile cases against
 the original 68000 routines. The original aimed-fire division is also checked
 in 60 direction/speed cases. These checks establish those movement and
 arithmetic seams; full firing, boss and campaign behavior remains separately
 bounded in [the wave report](waves.md).
 
+Additional original comparisons cover 1,212 Nova-emitter checkpoints, 120
+camera cases, 20 capsule trajectories, 24 formation rewards and 72 weapon-carrier
+drops. The emitter checks all eight rays, counter phases and twelve-projectile
+rewrites. The native campaign uses the three original portal operands and its
+ten-consecutive-update watch rectangle. Original final and cave boss artwork,
+HUD Nova counters and staff card are decoded from their native bitplanes.
+
+The final encounter's four-part allocation, 256-update entry and complete
+754-update scripted damage/destruction sequence have original 68000 fingerprints.
+Both cave boss movement paths and protected/vulnerable destruction phases also
+have original comparisons. These checks cover logical controller state; player
+collision geometry and the complete composited framebuffer remain separate
+verification boundaries. Ground controllers are described in [the ground report](ground.md).
+
 The native music driver's original state and waveform data match 120
 independent 68000 oracle checkpoints across twelve songs and 4,096 timer
-updates per song, including effects. PCM tests establish nonzero original
+updates per song, including effects, with eleven further source control checks.
+PCM tests establish nonzero original
 audio and stable output across split reads. The original title's shared
 LODSPE sample bank is included. See [the sound report](sound.md).
 
@@ -54,12 +74,14 @@ LODSPE sample bank is included. See [the sound report](sound.md).
 
 - Complete enemy and hostile-projectile controller behavior, including
   animation phases, homing, scripted control commands and destructive collisions.
-- The precise Nova trajectory, timing and damage behavior, pickup color
-  cycling, complete formation rewards, and per-object collision rectangles.
-- Campaign entrance, boss, return-to-surface and ending sequence behavior.
-- Initial terrain/starfield ring construction, horizontal camera movement,
+- Complete integrated Nova damage, collision ordering and per-object rectangles;
+  emitter positions and capsule/reward data have independent original checks.
+- Full campaign entrance/fade/return and ending presentation parity, including
+  original bonus payouts, controller menu details and original raster phases.
+- Complete initial terrain/starfield ring parity, foreground camera interaction,
   per-scanline Copper colors, original HUD composition, and all effect frames.
-- Original menu/controller options, high-score initials and persistent scores.
+- Original menu/controller option behavior and high-score entry interaction.
+  Native initials, the original twelve-entry table and atomic saves are implemented.
 - Analog Amiga sound output/filter response and every presentation sound-event
   mapping; digital sequencer parity alone does not prove analog waveform parity.
 - Longer matched-input reference sessions that compare native state and pixels

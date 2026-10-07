@@ -15,8 +15,10 @@ import (
 )
 
 type bus struct {
-	memory []byte
-	dma    uint16
+	memory               []byte
+	dma                  uint16
+	watchStart, watchEnd uint32
+	writes               int
 }
 
 func (b *bus) Reset()                  {}
@@ -34,7 +36,12 @@ func (b *bus) Write16(a uint32, v uint16) {
 	}
 	binary.BigEndian.PutUint16(b.memory[a:], v)
 }
-func (b *bus) Write32(a uint32, v uint32) { binary.BigEndian.PutUint32(b.memory[a:], v) }
+func (b *bus) Write32(a uint32, v uint32) {
+	if a >= b.watchStart && a < b.watchEnd {
+		b.writes++
+	}
+	binary.BigEndian.PutUint32(b.memory[a:], v)
+}
 
 type overlay struct {
 	name                                                       string
@@ -56,15 +63,55 @@ var overlays = []overlay{
 }
 
 func main() {
+	ground := flag.Bool("ground", false, "fingerprint original ground scenery controllers")
+	carriers := flag.Bool("carriers", false, "fingerprint original weapon-carrier destruction and capsule rewards")
+	camera := flag.Bool("camera", false, "record the original canonical-ship camera formula")
+	controls := flag.Bool("controls", false, "fingerprint the original music and sample-effect mute controls")
+	rewards := flag.Bool("rewards", false, "fingerprint original delayed formation rewards")
+	nova := flag.Bool("nova", false, "fingerprint the original complete Nova ray and shot-bank emitter")
 	pickups := flag.Bool("pickups", false, "fingerprint the original collectable capsule movement")
 	aim := flag.Bool("aim", false, "record the original aimed enemy-projectile arithmetic")
 	waves := flag.Bool("waves", false, "fingerprint original directed flying formations instead of sound")
 	controllers := flag.Bool("controllers", false, "fingerprint original adaptive flying controllers instead of sound")
 	trackers := flag.Bool("trackers", false, "fingerprint original kind-eight tracking controllers instead of sound")
+	bosses := flag.Bool("bosses", false, "fingerprint the original multipart final-boss entry")
+	caveBosses := flag.Bool("cave-bosses", false, "fingerprint the original cave-boss movement controllers")
 	assets := flag.String("assets", "../../assets/unpacked", "extracted original sound overlays")
 	output := flag.String("out", "../../internal/sound/oracle_reference_test.json", "native regression fingerprints")
 	dump := flag.String("dump", "../../.cache/sound-oracle/dumps", "original state dumps for development comparison")
 	flag.Parse()
+	if *ground {
+		generateGround(*assets, *output)
+		return
+	}
+	if *caveBosses {
+		generateCaveBosses(*assets, *output)
+		return
+	}
+	if *carriers {
+		generateCarriers(*assets, *output)
+		return
+	}
+	if *camera {
+		generateCamera(*assets, *output)
+		return
+	}
+	if *bosses {
+		generateBosses(*assets, *output)
+		return
+	}
+	if *controls {
+		generateControls(*assets, *output)
+		return
+	}
+	if *rewards {
+		generateRewards(*assets, *output)
+		return
+	}
+	if *nova {
+		generateNova(*assets, *output)
+		return
+	}
 	if *pickups {
 		generatePickups(*assets, *output)
 		return

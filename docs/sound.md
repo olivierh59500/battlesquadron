@@ -49,6 +49,7 @@ linked into either the desktop or Android application.
 ```sh
 cd tools/sound-oracle
 go run .
+go run . -controls -out ../../internal/sound/control_oracle_test.json
 cd ../..
 go test ./internal/sound
 ```
@@ -57,6 +58,9 @@ The committed regression file contains SHA-256 fingerprints only, with no
 original samples or songs. The current suite compares 120 checkpoints across
 all twelve songs, up to 4,096 original timer updates per song, including sample
 effects 17, 28 and 57. Every compared state and waveform fingerprint matches.
+Eleven additional original comparisons exercise music pause/resume, effects
+mute/unmute and a sample effect played while the song is paused. Music disabling
+freezes the original command stream; enabling it resumes the saved position.
 The PCM test verifies nonzero original audio and identical output when the audio
 consumer splits a PCM frame across arbitrary read boundaries. Tests requiring
 original data skip when the excluded extracted assets are absent.

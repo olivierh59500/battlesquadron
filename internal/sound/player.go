@@ -145,11 +145,17 @@ func (p *Player) PlayTrack(track uint16) {
 // and the low nibble selects one of sixteen unmodified sample descriptors.
 func (p *Player) PlayEffect(code uint16) { p.mu.Lock(); defer p.mu.Unlock(); p.effect(code) }
 
-// SetMusicEnabled controls the native music output while preserving sequence time.
+// SetMusicEnabled pauses the original sequence while sample effects continue.
 func (p *Player) SetMusicEnabled(enabled bool) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	p.musicEnabled = enabled
+	p.muted = !enabled
+	if !enabled {
+		for i := range p.voices {
+			p.voices[i].volume = 0
+		}
+	}
 }
 
 // SetEffectsEnabled enables or disables subsequent original sample events.
@@ -157,6 +163,7 @@ func (p *Player) SetEffectsEnabled(enabled bool) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	p.effectsEnabled = enabled
+	p.effectsMuted = !enabled
 }
 
 // Fade follows the driver's original master-volume fade.
@@ -205,8 +212,8 @@ func (p *Player) install(l layout, data []byte) {
 	p.master = p.byte(l.global + 1)
 	p.savedMaster = 0
 	p.fade = false
-	p.muted = false
-	p.effectsMuted = false
+	p.muted = !p.musicEnabled
+	p.effectsMuted = !p.effectsEnabled
 	p.pending = 0
 	p.restore = false
 	p.busy = false

@@ -1,0 +1,194 @@
+[
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "b331db0e82474c3a40edb4e0dac82e006503682fc4a3e5aa3caeb11039666aa6"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "798a8cb36afe5c3d0b24c242a7d28fe8a070222e24dc7bb5cd9db02c3a748a6d"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "b03e053f40bca30d9a3507fa38e0980c5ff7e75deaacefc059e48b4f6b72c540"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "d88cb1778a9a2bb6b93315b4c47ee3d897e24f21383a94b387a8a525c6066e8f"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 0,
+    "Ticks": 15,
+    "Hash": "cdcf90685147b0376828befa458f10a1fc1d9e2bc474ac9db421757d9d6233bc"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 1,
+    "Ticks": 15,
+    "Hash": "5dcad3bab39d79e4c1f38ce2b30bd54ea7c23d816292696c0afe4a2cb8260d2b"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 0,
+    "Ticks": 14,
+    "Hash": "003202fff8bc9c1935ee0175c888dd42b505b6800c9c616460c17b6fa39cd1f5"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 1,
+    "Ticks": 14,
+    "Hash": "f8bbbe17d738711bf43ed598ecd6feb318461f6be74f7b3a486a316a5541d21a"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "cd30ce2ac88ef917406d420d10a5e26132e1e9e5f1a99563420fa5fbc3fd4072"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "2491ef23196c38c015d558a048f9d4a3d52dc185eeddf9646cfd840a03037e00"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "b94c90e534659cfe180180913a0ba28cc361795bb00c16d6ac44c944648f9373"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "441fde7a7b7549152b620c1be523450e5732b85d5aadca13eb1cc5935e6614f8"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 0,
+    "Ticks": 15,
+    "Hash": "1fa03ee4788f2032adc1d135bf1f3f812f7e2f130d64e60258de28007230dec6"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 1,
+    "Ticks": 15,
+    "Hash": "2355259ea43703a0b982db6892e8ff93819ea95c03ba321ba68c3b44abef2fc8"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 0,
+    "Ticks": 14,
+    "Hash": "c6a325c20fd6cf0c0944bfc47ee7e61fbe02ab4e6cdad46208c92aeda2da1508"
+  },
+  {
+    "X": 140,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 1,
+    "Ticks": 14,
+    "Hash": "c13221824771925177d1748b4475bb766ed1f6a5c6aede6732075e9660be1869"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "cb5ecd2f3312910ce5f21220d92d49bea00ce98a6d49c2d647fe519590f6123c"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 0,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "b50d822a5a951968bfc35a752801a95e292a1f6e172504a0bac4a38a622479d0"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 0,
+    "Ticks": 16,
+    "Hash": "91498e6edf3443a5d95d30f4aaf5b0215ada2003043cb6d069054d4d0f88286e"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 1,
+    "Others": 1,
+    "Ticks": 16,
+    "Hash": "197ad8cd995257ca9b50220d99b34ad7101635fdfeb1de2ded0467038a2cf674"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 0,
+    "Ticks": 15,
+    "Hash": "99c83318bd56d8464a2b71db5c88fb79be6d35d92ec1de42c1827d1c45263844"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 2,
+    "Others": 1,
+    "Ticks": 15,
+    "Hash": "fe9de40cddb91fad70a32f084070e57b97f9a6434bbb79f26dea6d13e846d988"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 0,
+    "Ticks": 14,
+    "Hash": "2b7e5b64af4c01c15b598109034631227f0e3fa60bb6615077ea9458404d4515"
+  },
+  {
+    "X": 200,
+    "Y": 20,
+    "ClockStart": 3,
+    "Others": 1,
+    "Ticks": 14,
+    "Hash": "1ede73e77fd8eee14fe09102152654bc96333e186955637311798e452b8c0aef"
+  }
+]

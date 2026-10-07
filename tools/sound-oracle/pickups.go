@@ -42,7 +42,7 @@ func generatePickups(assets, output string) {
 			trajectory := []byte{}
 			ticks := 0
 			for tick := 0; tick < 512; tick++ {
-				b.Write16(0x1058, uint16(2*(tick+1)))
+				b.Write16(0x1058, uint16(tick+1))
 				r := m68k.Registers{PC: 0x89ea, SR: 0x2700, SSP: 0x70000}
 				r.A[7] = 0x70000
 				r.A[4] = 0x2dc80

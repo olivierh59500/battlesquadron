@@ -15,9 +15,30 @@ func enemyBox(enemy Enemy) box {
 	return box{enemy.X, enemy.Y, enemy.X + enemy.Definition.Width, enemy.Y + enemy.Definition.Height}
 }
 
+func (e *Engine) originalEnemyBox(enemy Enemy) box {
+	if enemy.Definition.Ground {
+		x,y,width,height:=e.GroundCollisionBounds(enemy)
+		return box{x,y,x+width,y+height}
+	}
+	return enemyBox(enemy)
+}
+
 func (e *Engine) collisions() {
+	if e.NovaFrames > 0 {
+		for _, ray := range e.NovaRays {
+			for index, enemy := range e.Enemies {
+				if enemy.Health >= 0 && enemy.Definition.Kind != 39 && overlap(box{ray.X, ray.Y, ray.X + 16, ray.Y + 16}, e.originalEnemyBox(enemy)) {
+					e.damageEnemy(index, 2, e.NovaOwner)
+				}
+			}
+		}
+	}
 	shots := e.PlayerShots[:0]
 	for _, bullet := range e.PlayerShots {
+		if bullet.Player != (e.Frame >> 1 & 1) {
+			shots = append(shots, bullet)
+			continue
+		}
 		if bullet.Delay > 0 {
 			shots = append(shots, bullet)
 			continue
@@ -28,7 +49,7 @@ func (e *Engine) collisions() {
 			shot = box{bullet.X - 32, bullet.Y - 32, bullet.X + 48, bullet.Y + 48}
 		}
 		for enemyIndex, enemy := range e.Enemies {
-			if enemy.Health < 0 || enemy.Definition.Kind == 0x27 || !overlap(shot, enemyBox(enemy)) {
+			if enemy.Health < 0 || enemy.Definition.Kind == 0x27 || !e.nativeGroundTouchable(enemy) || !e.nativeSpecialTouchable(enemy) || !overlap(shot, e.originalEnemyBox(enemy)) {
 				continue
 			}
 			damage := bullet.Damage
@@ -45,14 +66,17 @@ func (e *Engine) collisions() {
 	}
 	e.PlayerShots = shots
 	for index, player := range e.Players {
+		if index != (e.Frame >> 1 & 1) {
+			continue
+		}
 		if !player.Active || player.Lives == 0 || player.Dying > 0 || player.Respawn > 0 {
 			continue
 		}
 		bounds := playerBox(player)
-		if player.Invulnerable == 0 && !e.Options.Invulnerable {
+		if player.Invulnerable == 0 && !e.Options.Invulnerable && e.NovaFrames == 0 {
 			for _, enemy := range e.Enemies {
 				// Ground scenery is below the ships; original hazards use a separate list.
-				if !enemy.Definition.Ground && enemy.Health >= 0 && overlap(bounds, enemyBox(enemy)) {
+				if !enemy.Definition.Ground && enemy.Health >= 0 && e.nativeSpecialContact(enemy) && overlap(bounds, enemyBox(enemy)) {
 					e.HitPlayer(index)
 					break
 				}
@@ -80,6 +104,12 @@ func (e *Engine) collisions() {
 }
 
 func (e *Engine) damageEnemy(index, damage, player int) {
+	if e.damageNativeGround(index, damage, player) {
+		return
+	}
+	if e.damageNativeSpecial(index, damage, player) {
+		return
+	}
 	enemy := &e.Enemies[index]
 	if enemy.Health < 0 {
 		return
@@ -90,11 +120,11 @@ func (e *Engine) damageEnemy(index, damage, player int) {
 		if player >= 0 && player < 2 {
 			e.Players[player].Score += enemy.Definition.Score
 		}
-		e.Explosions = append(e.Explosions, Explosion{X: enemy.X, Y: enemy.Y, Duration: 32})
-		e.Events = append(e.Events, Event{Kind: "explosion", Player: player, Value: int(enemy.Definition.Kind)})
+		e.Explosions = append(e.Explosions, enemyExplosion(*enemy))
+		e.Events = append(e.Events, Event{Kind: "explosion", Player: player, Value: enemy.Definition.KillSound})
 	} else {
 		e.nativeDamage(enemy)
-		e.Events = append(e.Events, Event{Kind: "hit", Player: player})
+		e.Events = append(e.Events, Event{Kind: "hit", Player: player, Value: enemy.Definition.HitSound})
 	}
 }
 
@@ -135,5 +165,9 @@ func (e *Engine) collect(index int, pickup Pickup) {
 		}
 		e.PlayerShots = kept
 	}
-	e.Events = append(e.Events, Event{Kind: "pickup", Player: index})
+	track := 7
+	if pickup.Nova > 0 {
+		track = 6
+	}
+	e.Events = append(e.Events, Event{Kind: "pickup", Player: index, Value: track})
 }

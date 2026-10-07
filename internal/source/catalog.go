@@ -95,7 +95,10 @@ func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Pale
 		if d.Kind == 0x27 {
 			last = 1
 		}
-		for frame := d.Frame; frame <= max(d.Frame, last); frame++ {
+		if d.Kind < 6 {
+			last = []int{15, 9, 11, 20, 17, 11}[d.Kind]
+		}
+		for frame := 0; frame <= max(d.Frame, last); frame++ {
 			start := int(d.GraphicAddress) + step*frame
 			spec := Sprite{ID: fmt.Sprintf("object_%d_%d_%d", d.Kind, frame, d.Address), Kind: "object", Graphic: int(d.Kind), Frame: frame, TemplateAddress: d.Address}
 			if err := add(spec, start, d.Width, d.Height, 5, d.PlaneStride, d.Width/8, -1, false); err != nil {
@@ -109,6 +112,9 @@ func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Pale
 	descriptorBase := bytes.Index(loader, []byte{0, 0x20, 0, 3, 0, 0, 0, 0, 0, 0x20, 0, 0x20, 0, 0, 0, 0, 0, 1, 0x77, 0x80, 0, 1, 0x75, 0})
 	if descriptorBase >= 0 {
 		for kind := 0; kind < 15; kind++ {
+			if kind == 9 && stage == 3 {
+				continue
+			}
 			off := descriptorBase + kind*32
 			if off+32 > len(loader) {
 				break
@@ -125,7 +131,7 @@ func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Pale
 			mask := int(binary.BigEndian.Uint32(d[16:]))
 			// Contiguous banks end at the next demonstrated source pointer.
 			// The loader selects these direction and explosion frames explicitly.
-			frames := []int{16, 10, 1, 4, 32, 12, 10, 1, 16, 1, 9, 1, 1, 4, 1}[kind]
+			frames := []int{16, 10, 1, 4, 32, 12, 10, 3, 16, 1, 8, 1, 1, 4, 1}[kind]
 			for frame := 0; frame < frames; frame++ {
 				spec := Sprite{ID: fmt.Sprintf("flying_%d_%d", kind, frame), Kind: "flying", Graphic: kind, Frame: frame, TemplateAddress: uint32(descriptorBase + 0x100 + kind*32)}
 				if err := add(spec, gfx+frame*stride*6, w, h, 5, stride, w/8, mask+frame*stride*6, false); err != nil {

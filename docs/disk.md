@@ -179,3 +179,35 @@ Each gun frame stores five colour planes followed by its one-plane mask. These
 spans sum to exactly 98,208 bytes. The finale's actual palette selector points
 to Amiga `$163E`, decoded loader file offset `$153E`. Native atlas IDs are
 `final_body`, `final_head`, `final_gun_left` and `final_gun_right`.
+
+## Cave multipart graphics
+
+The first-cave kind-nine body uses four combined colour/mask frames at `$2F560`.
+Each 96 by 32 frame has five 384-byte colour planes and a 384-byte mask, a
+2,304-byte combined stride. The 96 by 48 turret follows at `$31960`, with four
+combined 3,456-byte frames. Native IDs are `boss_1_body` and `boss_1_turret`.
+Their regular states are 0/1, flash state 2 and damaged state 3.
+
+The second-cave body uses eight five-plane colour frames at `$2E4C0`, each
+128 by 48 with 768-byte planes and a 3,840-byte colour stride. A shared mask at
+`$35CC0` follows the eight colour frames. Frames 0–5 are regular animation;
+frame 6 at `$33EC0` is the flash, and frame 7 at `$34DC0` is damaged. Its
+64 by 39 turret has 312-byte planes, with regular colours at `$35FC0`, flash
+at `$365D8`, damaged at `$36BF0`, and a shared mask at `$37208`. Regular turret
+states 0/1 share pixels; state 2 flashes and state 3 is damaged. Native IDs are
+`boss_2_body` and `boss_2_turret`, using the original second-cave palette.
+
+The original third-cave scheduled stream contains no kind-nine multipart actor.
+Although that controller's generic non-first-cave branch retains the second-
+cave body pointer, it is below the third module's load address and is not a
+verified third-cave sprite bank. No `boss_3_*` art is synthesized or padded.
+The third cave's scenery state machines require their own demonstrated records.
+
+The finale background preserves the last 240 pixels of the original surface
+map, source rows 497–511 beginning at `$49D30`. Its five original tile bitplanes
+are decoded with the verified finale palette at loader file `$153E`. Native
+`final_backdrop` is 384 by 240, a background sprite rather than an additional
+stage. Its source y coordinate is `max(0, 240-progress)`; the original final
+branch freezes progress at 240 while `lodfin` replaces the now-unused source
+map/tile memory. The previously drawn terrain ring therefore retains its
+starfield and upper border behind the multipart boss.

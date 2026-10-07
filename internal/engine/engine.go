@@ -22,19 +22,23 @@ type Player struct {
 	Score, Invulnerable, Dying, Respawn    int
 	Cooldown, Repeat                       int
 	Active                                 bool
+	WreckBonus                             int
 	novaHeld                               bool
 }
 
 // Enemy is one decoded object in the original eighteen-entry scenery pool.
 type Enemy struct {
 	ID, X, Y, VX, VY, Frame, Health, Age, FireTimer int
+	PoolSlot                                        int
 	Definition                                      Definition
 	Script                                          []Motion
 	scriptIndex, scriptTicks, fixedX, fixedY        int
 	scriptLoop                                      int
 	repeatScript                                    bool
+	ground                                          nativeGroundState
 	native                                          nativeAdaptiveState
 	tracker                                         nativeTrackerState
+	special                                         nativeSpecialState
 }
 
 // Bullet is one original primary projectile or one hostile fixed-point shot.
@@ -50,15 +54,23 @@ type Bullet struct {
 // Pickup is a weapon or Nova charge released by a decoded original object.
 type Pickup struct {
 	X, Y, Weapon, Nova, Age int
-	Frame int
+	Frame                   int
 	Graphic                 uint8
 	Sprite                  string
-	native nativePickupState
+	PoolSlot                int
+	SlotHeld                bool
+	native                  nativePickupState
 }
 
 // Explosion is a timed animation; the renderer selects its original frames.
 type Explosion struct {
 	X, Y, Age, Duration int
+	Frame               int
+	Native, Formation   bool
+	WeaponCarrier       bool
+	SpriteKind          int
+	PoolSlot            int
+	nativeCount         byte
 	Player              bool
 }
 
@@ -76,6 +88,8 @@ type Engine struct {
 	Mode                 Mode
 	Frame, Stage, Scroll int
 	CameraX              int
+	finalBattle          bool
+	initialSurfaceEvents []Spawn
 	Players              [2]Player
 	Enemies              []Enemy
 	PlayerShots          []Bullet
@@ -88,6 +102,9 @@ type Engine struct {
 	NovaOwner            int
 	NovaRays             []NovaRay
 	novaIndex            int
+	npcPhase             bool
+	groundSpawns         []Spawn
+	latchedInputs        [2]Input
 	nextEvent, nextID    int
 	randomCursor         int
 	modeFrames           int
@@ -144,26 +161,44 @@ func New(data *Data) (*Engine, error) {
 			return nil, err
 		}
 		campaign = NewCampaign(gates)
+		for index, address := range []uint32{0x4da2, 0x4eac} {
+			word, err := (memory{copyData.Loader, copyData.LoaderBase}).at(address+54, 2)
+			if err != nil {
+				return nil, err
+			}
+			copyData.PlayerSpawnX[index] = int(word[0])<<8 | int(word[1])
+			copyData.PlayerSpawnX[index] -= 256
+		}
+	}
+	if copyData.PlayerSpawnX == ([2]int{}) {
+		copyData.PlayerSpawnX = [2]int{112, 160}
 	}
 	return &Engine{Data: &copyData, Options: options, Mode: Title, CameraX: 48, Campaign: campaign}, nil
 }
 
 // Start resets both pools while retaining the selected game options.
 func (e *Engine) Start(players int) {
+	if e.finalBattle && len(e.Data.Stages) != 0 {
+		e.Data.Stages[0].Events = e.initialSurfaceEvents
+	}
+	e.finalBattle = false
 	e.Campaign = NewCampaign(e.Campaign.Gates)
+	e.NovaRays, e.novaIndex, e.NovaOwner = nil, 0, 0
 	e.Mode, e.Frame, e.Scroll, e.Stage, e.modeFrames = Playing, 0, 160, 0, 0
 	e.nextEvent, e.nextID, e.randomCursor, e.NovaFrames = 0, 0, 0, 0
 	e.bossSpawned = false
 	e.Enemies, e.PlayerShots, e.EnemyShots, e.Pickups, e.Explosions, e.Events = nil, nil, nil, nil, nil, nil
 	for index := range e.Players {
-		e.Players[index] = Player{X: 112 + index*48, Y: 256, Tilt: 3, Lives: e.Options.Lives,
+		// The fresh-game initializer differs from the later death respawn.
+		e.Players[index] = Player{X: e.Data.PlayerSpawnX[index], Y: 208, Tilt: 3, Lives: e.Options.Lives,
 			Weapon: max(0, min(3, e.Options.StartWeapon)), Nova: 3, Active: index < players,
-			Invulnerable: 300, Respawn: 145}
+			Invulnerable: 360, Respawn: 130}
 	}
 }
 
 // ReturnToTitle abandons the current session and releases the gameplay pools.
 func (e *Engine) ReturnToTitle() {
+	e.NovaRays, e.NovaFrames = nil, 0
 	e.Mode, e.modeFrames = Title, 0
 	e.Enemies, e.PlayerShots, e.EnemyShots, e.Pickups, e.Explosions = nil, nil, nil, nil, nil
 }
@@ -176,20 +211,31 @@ func (e *Engine) Tick(inputs [2]Input) {
 		return
 	}
 	e.Frame++
+	firstHalf := e.Frame&1 != 0
+	if firstHalf {
+		e.latchedInputs = inputs
+		e.npcPhase = true
+		e.updateCamera()
+		e.updateEnemies()
+		e.updatePickups()
+		e.npcPhase = false
+	}
 	if e.NovaFrames > 0 && e.Data.Nova == nil {
 		e.NovaFrames--
 	}
 	for index := range e.Players {
-		e.updatePlayer(index, inputs[index])
+		e.updatePlayer(index, e.latchedInputs[index])
 	}
 	e.updatePlayerShots()
-	e.updateEnemies()
 	e.updateEnemyShots()
-	e.updatePickups()
 	e.updateExplosions()
 	e.updateNova()
-	e.collisions()
-	e.advanceStage()
+	if firstHalf {
+		e.collisions()
+		e.npcPhase = true
+		e.advanceStage()
+		e.npcPhase = false
+	}
 	living := false
 	for _, player := range e.Players {
 		living = living || player.Active && (player.Lives > 0 || player.Dying > 0)
@@ -216,7 +262,7 @@ func (e *Engine) updatePlayer(index int, input Input) {
 				// Original $530A/$5344 resets Nova and halves the weapon level.
 				p.Level /= 2
 				p.Nova, p.Invulnerable, p.Respawn = 3, 300, 145
-				p.X, p.Y, p.Tilt = 112+48*index, 256, 3
+				p.X, p.Y, p.Tilt = e.Data.PlayerSpawnX[index], 256, 3
 				p.Cooldown, p.Repeat = 0, 0
 			}
 		}
@@ -224,15 +270,15 @@ func (e *Engine) updatePlayer(index int, input Input) {
 	}
 	if p.Respawn > 0 {
 		p.Respawn--
-		// Original $50BE drives the ship upward during the last sixty ticks.
-		if p.Respawn > 0 && p.Respawn < 60 && p.Y > 2 {
+		// Actual $5026 selects Up during the last 45 fields, including field zero.
+		if p.Respawn < 45 && p.Y > 2 {
 			p.Y -= 2
 		}
 		return
 	}
 	// Original movement tests each axis independently; diagonals retain full speed.
 	x, y := clampDirection(input.X), clampDirection(input.Y)
-	p.X, p.Y = max(0, min(256, p.X+x*2)), max(2, min(224, p.Y+y*2))
+	p.X, p.Y = max(0, min(256, p.X+x*2)), max(2, min(176, p.Y+y*2))
 	if e.Frame%4 == 0 {
 		if x != 0 {
 			p.Tilt = max(0, min(6, p.Tilt+x))
@@ -241,6 +287,9 @@ func (e *Engine) updatePlayer(index int, input Input) {
 		} else if p.Tilt > 3 {
 			p.Tilt--
 		}
+	}
+	if e.Frame&1 == 0 {
+		return
 	}
 	if input.Nova && !p.novaHeld && p.Nova > 0 && e.NovaFrames == 0 {
 		p.Nova--
@@ -369,6 +418,9 @@ func (e *Engine) updatePlayerShots() {
 
 // Spawn creates a decoded object while enforcing the original fixed pool size.
 func (e *Engine) Spawn(spawn Spawn) bool {
+	if spawn.AbsoluteX {
+		spawn.X -= e.CameraX
+	}
 	if spawn.ClearObjects {
 		kept := e.Enemies[:0]
 		for _, enemy := range e.Enemies {
@@ -377,6 +429,20 @@ func (e *Engine) Spawn(spawn Spawn) bool {
 			}
 		}
 		e.Enemies = kept
+		explosions := e.Explosions[:0]
+		for _, explosion := range e.Explosions {
+			if !explosion.Native {
+				explosions = append(explosions, explosion)
+			}
+		}
+		e.Explosions = explosions
+		pickups := e.Pickups[:0]
+		for _, pickup := range e.Pickups {
+			if !pickup.SlotHeld {
+				pickups = append(pickups, pickup)
+			}
+		}
+		e.Pickups = pickups
 		return true
 	}
 	switch spawn.RandomMode {
@@ -386,8 +452,16 @@ func (e *Engine) Spawn(spawn Spawn) bool {
 		spawn.X = int(e.nextRandom()) + int(e.nextRandom()&0x7f) - 0x40
 	}
 	if spawn.Definition.Collectable {
+		slot, held := 0, false
+		if spawn.Definition.FlyingPool {
+			slot = e.availableFlyingSlot()
+			if slot < 0 {
+				return false
+			}
+			held = true
+		}
 		e.Pickups = append(e.Pickups, Pickup{X: spawn.X, Y: spawn.Y, Weapon: spawn.Definition.Weapon,
-			Nova: spawn.Definition.Nova, Graphic: spawn.Definition.Graphic, Sprite: spawn.Definition.Sprite})
+			Nova: spawn.Definition.Nova, Graphic: spawn.Definition.Graphic, Sprite: spawn.Definition.Sprite, PoolSlot: slot, SlotHeld: held})
 		return true
 	}
 	count, limit := 0, EnemyLimit
@@ -399,8 +473,15 @@ func (e *Engine) Spawn(spawn Spawn) bool {
 			count++
 		}
 	}
-	if count >= limit {
+	if !spawn.Definition.FlyingPool && count >= limit {
 		return false
+	}
+	slot := 0
+	if spawn.Definition.FlyingPool {
+		slot = e.availableFlyingSlot()
+		if slot < 0 {
+			return false
+		}
 	}
 	e.nextID++
 	delay := spawn.Definition.FireDelay
@@ -408,22 +489,53 @@ func (e *Engine) Spawn(spawn Spawn) bool {
 		delay = e.Options.EnemyFireDelay
 	}
 	e.Enemies = append(e.Enemies, Enemy{
-		ID: e.nextID, X: spawn.X, Y: spawn.Y, VX: spawn.VX, VY: spawn.VY,
+		ID: e.nextID, PoolSlot: slot, X: spawn.X, Y: spawn.Y, VX: spawn.VX, VY: spawn.VY,
 		Frame: spawn.Definition.Frame, Health: spawn.Definition.Health, Definition: spawn.Definition,
 		Script: spawn.Script, FireTimer: delay, fixedX: spawn.X << 16, fixedY: spawn.Y << 16,
 		scriptLoop: spawn.ScriptLoop, repeatScript: spawn.RepeatScript,
 	})
+	// The source scenery allocator consumes its random byte before returning.
+	if spawn.Definition.Ground && !spawn.Definition.FlyingPool {
+		e.initializeGround(&e.Enemies[len(e.Enemies)-1])
+	}
 	return true
 }
 
 func (e *Engine) updateEnemies() {
-	kept := e.Enemies[:0]
-	for _, enemy := range e.Enemies {
+	e.updateEnemyPass(true)
+	for _, spawn := range e.takeNativeGroundSpawns() {
+		e.Spawn(spawn)
+	}
+	e.updateEnemyPass(false)
+}
+
+func (e *Engine) updateEnemyPass(groundPass bool) {
+	// The source scans flying records from slot zero, updating boss parents first.
+	slices.SortStableFunc(e.Enemies, func(first, second Enemy) int {
+		if first.Definition.FlyingPool != second.Definition.FlyingPool {
+			if first.Definition.FlyingPool {
+				return 1
+			}
+			return -1
+		}
+		return first.PoolSlot - second.PoolSlot
+	})
+	kept := make([]Enemy, 0, len(e.Enemies))
+	for index, enemy := range e.Enemies {
+		if enemy.Definition.FlyingPool == groundPass {
+			kept = append(kept, enemy)
+			continue
+		}
 		if enemy.Health < 0 {
 			continue
 		}
 		enemy.Age++
-		if len(enemy.Script) != 0 {
+		groundHandled := e.moveNativeGround(&enemy)
+		if groundHandled {
+			// Ground controllers retain their original mailbox and animation state.
+		} else if e.moveNativeSpecial(&enemy) {
+			// Multipart controllers own their original script and damage phases.
+		} else if len(enemy.Script) != 0 {
 			if enemy.scriptTicks == 0 {
 				if enemy.scriptIndex == len(enemy.Script) {
 					if enemy.repeatScript && enemy.scriptLoop >= 0 && enemy.scriptLoop < len(enemy.Script) {
@@ -448,17 +560,18 @@ func (e *Engine) updateEnemies() {
 				enemy.Y++
 			}
 		}
-		if enemy.Y > 256 || enemy.X < -96 || enemy.X > 384 {
+		if enemy.Health < 0 || enemy.Y > 256 || enemy.X < -96 || enemy.X > 384 {
 			continue
 		}
 		// A decoded zero fire delay marks scenery that never emits hostile shots.
-		if enemy.Definition.FireDelay > 0 {
+		if !groundHandled && enemy.Definition.FireDelay > 0 {
 			enemy.FireTimer--
 			if enemy.FireTimer <= 0 && enemy.Y >= 0 && enemy.Y < 208 {
 				e.fireEnemy(enemy)
 				enemy.FireTimer = max(8, enemy.Definition.FireDelay)
 			}
 		}
+		e.Enemies[index] = enemy
 		kept = append(kept, enemy)
 	}
 	e.Enemies = kept
@@ -517,14 +630,7 @@ func (e *Engine) updatePickups() {
 }
 
 func (e *Engine) updateExplosions() {
-	kept := e.Explosions[:0]
-	for _, explosion := range e.Explosions {
-		explosion.Age++
-		if explosion.Age < explosion.Duration {
-			kept = append(kept, explosion)
-		}
-	}
-	e.Explosions = kept
+	e.advanceExplosions()
 }
 
 func clampDirection(value int) int { return max(-1, min(1, value)) }
