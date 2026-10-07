@@ -35,6 +35,11 @@ from the original records and direction table, not a generated formation.
 
 ## Commands and controllers
 
+Flying allocation applies the original byte-sized quarter-armor reduction for
+one player, including its `$FF` increment wrap. The shared allocator preserves
+full template armor for two players. All fourteen descriptor values and explicit
+boundary cases have [independent source checks](allocation.md).
+
 Kind-zero formation commands contain duration, direction/speed, turn delta and
 turn delay. The thirty-two signed X/Y vectors are read from the original `$CC58`
 table. Movement uses the old direction; animation uses the direction after a
@@ -70,7 +75,12 @@ pickup. Original collection at `$3600` grants one Nova for subtype ten, capped a
 eight; other subtypes select `subtype >> 1` as the weapon family and increment
 the current level, capped at five. Changing weapon family does not reset the
 level. The source plays original song six for a Nova pickup and song seven for a
-weapon pickup. The last exploding kind-zero ship changes into a Nova capsule.
+weapon pickup. A weapon capsule collected at level five, or a Nova capsule
+collected with eight charges already stored, instead adds 10000 original points.
+Weapon collection clears that player's shot records while preserving the current
+cooldown and repeat timers. These inventory rules have 120 independent original
+collection comparisons, described in [the collection report](collection.md).
+The last exploding kind-zero ship changes into a Nova capsule.
 A destroyed kind-six carrier displays its original death frames five through ten
 and then becomes a weapon capsule using `random & 6` as its subtype. Both source
 transformations immediately update the new capsule in the same object pass.

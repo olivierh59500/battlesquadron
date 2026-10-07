@@ -35,6 +35,12 @@ func originalBossFixture(t *testing.T) *Engine {
 	for _, event := range e.Data.Stages[0].Events {
 		e.Spawn(event)
 	}
+	// The independent boss harness injects template armor directly into its
+	// records, bypassing allocation. Preserve that explicit post-allocation
+	// input; one/two-player allocation has its own original-instruction cases.
+	for index := range e.Enemies {
+		e.Enemies[index].Health = e.Enemies[index].Definition.Health
+	}
 	return e
 }
 

@@ -10,6 +10,7 @@ import (
 // WorldX is measured before the viewport's horizontal camera displacement.
 type Gate struct {
 	Phase, Progress, WorldX int
+	ReturnScroll            int
 	CodeAddress             uint32
 	Definition              Definition
 }
@@ -22,6 +23,10 @@ func (g Gate) NativeY(progress int) int { return progress - g.Progress - g.Defin
 // guest code, so relocated cracker and original loader tables remain supported.
 func DecodeSurfaceGates(loader []byte, base uint32) ([]Gate, error) {
 	word := func(off int) uint16 { return binary.BigEndian.Uint16(loader[off:]) }
+	returns, err := decodeSurfaceReturns(loader)
+	if err != nil {
+		return nil, err
+	}
 	for start := 0; start+76 <= len(loader); start += 2 {
 		if word(start) != 0x0c6d || word(start+2) != 0x0f10 {
 			continue
@@ -42,7 +47,7 @@ func DecodeSurfaceGates(loader []byte, base uint32) ([]Gate, error) {
 				valid = false
 				break
 			}
-			gates = append(gates, Gate{Phase: phase, Progress: progress, WorldX: (23 - counter) * 16, CodeAddress: base + uint32(off)})
+			gates = append(gates, Gate{Phase: phase, Progress: progress, WorldX: (23 - counter) * 16, ReturnScroll: returns[index], CodeAddress: base + uint32(off)})
 		}
 		if !valid || word(start+70) != 0x247c {
 			continue
@@ -69,9 +74,32 @@ func DecodeSurfaceGates(loader []byte, base uint32) ([]Gate, error) {
 	return nil, fmt.Errorf("the original three surface gate checks were not found")
 }
 
-// Campaign tracks functional surface/cave routing and the original portal hold.
-// It preserves the entered surface position; the original animated transition
-// and its earlier return offsets still require a separate presentation pass.
+// decodeSurfaceReturns reads the three original phase checks and fixed map rows.
+// The transition fills a 256-pixel display ring before returning control, so the
+// playable progress differs from both the map reload row and portal entry point.
+func decodeSurfaceReturns(loader []byte) ([3]int, error) {
+	word := func(off int) uint16 { return binary.BigEndian.Uint16(loader[off:]) }
+	for start := 0; start+78 <= len(loader); start += 2 {
+		valid := true
+		var scrolls [3]int
+		for index := range scrolls {
+			off := start + index*26
+			if word(off) != 0x0c6d || word(off+2) != uint16(index+1) || word(off+8) != 0x08ed || word(off+10) != uint16(index+1) || word(off+14) != 0x323c || word(off+18) != 0x2b7c || word(off+24) != 0xf4b0 {
+				valid = false
+				break
+			}
+			scrolls[index] = int(word(off+16))*16 + 256
+		}
+		if valid {
+			return scrolls, nil
+		}
+	}
+	return [3]int{}, fmt.Errorf("the original three surface return rows were not found")
+}
+
+// Campaign tracks original surface/cave routing, portal holds and cave-three's
+// terrain-clock delay before returning to the surface. Fade pixels remain a
+// separate presentation boundary.
 type Campaign struct {
 	Gates         []Gate
 	SurfaceScroll int
@@ -79,6 +107,9 @@ type Campaign struct {
 	PortalHold    int
 	Entrance      Gate
 	ActiveCave    int
+	EndHold       int
+	WreckAwarded  [2]int
+	endingCave    bool
 }
 
 // NewCampaign starts a fresh native campaign with a private entrance list.
@@ -153,18 +184,105 @@ func (c *Campaign) EnterCave(phase, scroll int) (int, error) {
 		return 0, fmt.Errorf("cave phase %d has no original entrance", phase)
 	}
 	c.SurfaceScroll, c.ActiveCave, c.Entrance, c.PortalHold = scroll, phase, entrance, 0
+	c.EndHold, c.endingCave = 0, false
 	return phase, nil
 }
 
-// ExitCave marks only the completed cave and restores the stored surface scroll.
+// CaveReturnReady preserves the original 300 terrain updates after cave three's
+// map ends. It does not change the player's 50 Hz movement or timer cadence.
+func (c *Campaign) CaveReturnReady() bool {
+	if c.ActiveCave != 3 {
+		return true
+	}
+	if !c.endingCave {
+		c.EndHold, c.endingCave = 300, true
+		return false
+	}
+	if c.EndHold > 0 {
+		c.EndHold--
+	}
+	return c.EndHold == 0
+}
+
+// ExitCave marks only the completed cave and returns its fixed playable surface
+// progress after the original transition's display-ring prefill.
 func (c *Campaign) ExitCave() (int, error) {
 	if c.ActiveCave < 1 || c.ActiveCave > 3 {
 		return 0, fmt.Errorf("no cave is active")
 	}
 	c.ClearedMask |= 1 << uint(c.ActiveCave)
+	scroll := c.Entrance.ReturnScroll
+	if scroll == 0 {
+		// Data-only fixtures without a recovered loader retain their entry point.
+		scroll = c.SurfaceScroll
+	}
 	c.ActiveCave, c.PortalHold, c.Entrance = 0, 0, Gate{}
-	return c.SurfaceScroll, nil
+	c.EndHold, c.endingCave = 0, false
+	return scroll, nil
 }
 
 // Completed reports the original three cave-clear bits, without ending a game.
 func (c *Campaign) Completed() bool { return c.ClearedMask&0x0e == 0x0e }
+
+// originalScoreIncrement decodes the eight decimal digits preceding an original
+// score-adder operand. They are data bytes, not ASCII or packed BCD words.
+func (e *Engine) originalScoreIncrement(end uint32) int {
+	if e.Data == nil || end < 8 {
+		return 0
+	}
+	digits, err := (memory{e.Data.Loader, e.Data.LoaderBase}).at(end-8, 8)
+	if err != nil {
+		return 0
+	}
+	value := 0
+	for _, digit := range digits {
+		if digit > 9 {
+			return 0
+		}
+		value = value*10 + int(digit)
+	}
+	return value
+}
+
+// tickWreckBonus translates the original even-clock payout after its 160-update
+// text introduction. Score wraps at eight decimal digits, as the source adder
+// drops the final carry. Disabled ships lose their unclaimed wreck bonuses.
+func (e *Engine) tickWreckBonus(clock int) {
+	if clock < 160 || clock&1 != 0 {
+		return
+	}
+	increment := e.originalScoreIncrement(0x7322)
+	for index := range e.Players {
+		p := &e.Players[index]
+		if !p.Active || p.Lives == 0 && p.Dying == 0 {
+			p.WreckBonus = 0
+			continue
+		}
+		if p.WreckBonus > 0 {
+			p.WreckBonus--
+			e.Campaign.WreckAwarded[index]++
+			p.Score = (p.Score + increment) % 100000000
+		}
+	}
+}
+
+// settleWreckBonus folds only the currently instantaneous transition's payout.
+// Its final balances match the source; the animated countdown remains unproved.
+func (e *Engine) settleWreckBonus() {
+	e.Campaign.WreckAwarded = [2]int{}
+	for clock := 160; clock < 360; clock += 2 {
+		e.tickWreckBonus(clock)
+	}
+}
+
+// ApplyOriginalEndingBonusTick grants one original 1000-point increment to each
+// enabled ship. The caller invokes it for the ending's first 100 PAL updates.
+func (e *Engine) ApplyOriginalEndingBonusTick() {
+	increment := e.originalScoreIncrement(0x401a)
+	for index := range e.Players {
+		p := &e.Players[index]
+		if p.Active && (p.Lives > 0 || p.Dying > 0) {
+			p.Score = (p.Score + increment) % 100000000
+		}
+	}
+}

@@ -87,7 +87,13 @@ func (e *Engine) advanceStage() {
 		return
 	}
 	stage := &e.Data.Stages[e.Stage]
-	if e.Scroll < stage.Height && !e.NativeBossBlocksScroll() {
+	originalCampaign := len(e.Campaign.Gates) > 0
+	lastProgress := stage.Height
+	if originalCampaign && stage.Height > 0 {
+		// The original map pointer crosses its lower boundary on progress 8193.
+		lastProgress++
+	}
+	if e.Scroll < lastProgress && !e.NativeBossBlocksScroll() {
 		e.Scroll++
 		if e.Scroll%16 == 0 {
 			e.exposeMapRow(*stage)
@@ -97,7 +103,7 @@ func (e *Engine) advanceStage() {
 		gate, active := e.Campaign.GateAtScroll(e.Scroll)
 		if e.Campaign.UpdatePortal(e.Players, gate.WorldX-e.CameraX, gate.NativeY(e.Scroll), active) {
 			if cave, err := e.Campaign.EnterCave(gate.Phase, e.Scroll); err == nil {
-				e.SelectStage(cave, 0)
+				e.SelectStage(cave, 256)
 				return
 			}
 		}
@@ -106,7 +112,7 @@ func (e *Engine) advanceStage() {
 		e.Spawn(stage.Events[e.nextEvent])
 		e.nextEvent++
 	}
-	if e.Scroll < stage.Height || stage.Height == 0 {
+	if e.Scroll < lastProgress || stage.Height == 0 {
 		return
 	}
 	if stage.Boss != nil && !e.bossSpawned {
@@ -121,23 +127,22 @@ func (e *Engine) advanceStage() {
 	}
 	if len(e.Campaign.Gates) > 0 {
 		if e.Stage > 0 && e.Campaign.ActiveCave == e.Stage {
+			if !e.Campaign.CaveReturnReady() {
+				return
+			}
 			if scroll, err := e.Campaign.ExitCave(); err == nil {
-				if e.Campaign.Completed() {
-					if err := e.StartFinalBattle(); err == nil {
-						return
-					}
-				}
 				e.SelectStage(0, scroll)
 				return
 			}
 		}
 		if e.Stage == 0 && !e.Campaign.Completed() {
-			e.SelectStage(0, 160)
+			e.wrapSurface()
 			return
 		}
 		if e.Stage == 0 && e.Campaign.Completed() && !e.FinalBattle() {
-			e.Mode, e.modeFrames = Ending, 0
-			e.Events = append(e.Events, Event{Kind: "ending"})
+			if err := e.StartFinalBattle(); err == nil {
+				e.Scroll = 1
+			}
 			return
 		}
 	}
@@ -153,12 +158,19 @@ func (e *Engine) advanceStage() {
 	e.Events = append(e.Events, Event{Kind: "stage", Value: e.Stage})
 }
 
+// wrapSurface restarts only the surface terrain and wave cursor. The original
+// wrap retains ships, active objects, hostile shots and the horizontal camera.
+func (e *Engine) wrapSurface() {
+	e.Scroll, e.nextEvent, e.bossSpawned = 1, 0, false
+}
+
 // SelectStage preserves ships while switching original map and wave banks.
 // The animated warp compositor remains a separate presentation boundary.
 func (e *Engine) SelectStage(stage, scroll int) {
 	if stage < 0 || stage >= len(e.Data.Stages) {
 		return
 	}
+	e.settleWreckBonus()
 	e.Stage, e.Scroll, e.nextEvent, e.bossSpawned = stage, scroll, 0, false
 	e.NovaRays, e.NovaFrames, e.novaIndex = nil, 0, 0
 	e.Enemies, e.PlayerShots, e.EnemyShots, e.Pickups, e.Explosions = nil, nil, nil, nil, nil
@@ -166,9 +178,44 @@ func (e *Engine) SelectStage(stage, scroll int) {
 		e.nextEvent++
 	}
 	for index := range e.Players {
-		e.Players[index].Invulnerable = max(100, e.Players[index].Invulnerable)
+		p := &e.Players[index]
+		if p.Active && p.Lives > 0 && p.Dying == 0 {
+			p.X, p.Y, p.Tilt = e.Data.PlayerSpawnX[index], 208, 3
+			p.Invulnerable, p.Respawn, p.Cooldown, p.Repeat = 360, 130, 0, 0
+			// Original return byte+$29 suppresses consumption of another spare
+			// when this existing ship finishes the transition entry animation.
+			p.entryKeepsShip = true
+		}
 	}
+	// During display-ring prefill the original ships have marker 150, making the
+	// camera converge to its fixed midpoint while their movement clock is frozen.
+	e.CameraX = 48
+	e.prefillStage()
 	e.Events = append(e.Events, Event{Kind: "stage", Value: stage})
+}
+
+// prefillStage restores the original scenery already exposed by a transition's
+// 256 terrain updates. It runs ground controllers and row triggers with source
+// Clock 0, leaving ship timers, flying controllers and projectile motion frozen.
+func (e *Engine) prefillStage() {
+	stage := e.Data.Stages[e.Stage]
+	if len(stage.Tiles) == 0 || len(e.Data.MapRules) == 0 || e.Scroll < 256 {
+		return
+	}
+	frame, npcPhase := e.Frame, e.npcPhase
+	e.Frame, e.npcPhase = 1, true
+	e.Scroll -= 256
+	for tick := 0; tick < 256; tick++ {
+		e.Scroll++
+		e.updateEnemyPass(true)
+		for _, spawn := range e.takeNativeGroundSpawns() {
+			e.Spawn(spawn)
+		}
+		if e.Scroll%16 == 0 {
+			e.exposeMapRow(stage)
+		}
+	}
+	e.Frame, e.npcPhase = frame, npcPhase
 }
 
 func (e *Engine) exposeMapRow(stage Stage) {
@@ -185,8 +232,13 @@ func (e *Engine) exposeMapRow(stage Stage) {
 			if rule.Mode != stage.Mode || rule.Tile != tile || e.Scroll < rule.MinProgress || rule.MaxProgress > 0 && e.Scroll >= rule.MaxProgress {
 				continue
 			}
-			if rule.FollowingTile != 0 && (row+1)*stage.Width+column < len(stage.Tiles) && stage.Tiles[(row+1)*stage.Width+column] != rule.FollowingTile {
-				continue
+			if rule.FollowingTile != 0 {
+				// MOVE.W (A1)+ has advanced by one word before the source checks
+				// $30(A1), selecting the next row's next column.
+				following := (row+1)*stage.Width + column + 1
+				if following >= len(stage.Tiles) || stage.Tiles[following] != rule.FollowingTile {
+					continue
+				}
 			}
 			if rule.RandomBelow > 0 && int(e.nextRandom()) >= rule.RandomBelow {
 				continue

@@ -1,0 +1,30 @@
+[
+  {
+    "Graphic": 84,
+    "Address": 52056,
+    "Height": 16,
+    "SourceHash": "c1f9a0f2e442194e95aede117098e12fca1234ca5d8c0a05a4322af14c13310f",
+    "PixelHash": "c77774d619195112e57cd5c4155fb9623511cbad2300d2aeca0536e815b31e5f"
+  },
+  {
+    "Graphic": 85,
+    "Address": 52120,
+    "Height": 16,
+    "SourceHash": "5a5564544dd78e933fc44099bab94f1d70d9224cf82efaf553bfd571ca29721e",
+    "PixelHash": "12467a9718f255605c0806f6b5db28232ac504241dcd1e05e6ae1057268e69bb"
+  },
+  {
+    "Graphic": 86,
+    "Address": 52184,
+    "Height": 16,
+    "SourceHash": "aa3f96e29d96c9d5cd1a459c77938f00967778d9bd120a8469cb029e6db3ab94",
+    "PixelHash": "1f0534c0b8fe001eb7071e48030463aa101a44739061e0aa9c58552459c704c9"
+  },
+  {
+    "Graphic": 87,
+    "Address": 52248,
+    "Height": 16,
+    "SourceHash": "ce9d78c62e51fb05029cdae18fbce68a1c9b38fc32bb959c89fabd50f36b5fd9",
+    "PixelHash": "c4d12fb2b0ea89b4ce8a20de2ddfaf319bd041f8ccddb1fc17f151ae10878d4e"
+  }
+]

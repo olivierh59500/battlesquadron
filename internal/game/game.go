@@ -17,6 +17,7 @@ import (
 	"github.com/olivierh59500/battlesquadron/assets"
 	"github.com/olivierh59500/battlesquadron/internal/controls"
 	"github.com/olivierh59500/battlesquadron/internal/engine"
+	"github.com/olivierh59500/battlesquadron/internal/original"
 	"github.com/olivierh59500/battlesquadron/internal/sound"
 )
 
@@ -25,6 +26,7 @@ const Width, Height = 320, 256
 // Game holds platform presentation; gameplay remains in the headless engine.
 type Game struct {
 	Core                                    *engine.Engine
+	presentation                            *presentation
 	art                                     *artwork
 	view                                    *ebiten.Image
 	touch                                   *controls.Controller
@@ -49,6 +51,7 @@ type Game struct {
 	showScores                              bool
 	storageErr                              error
 	lastFire                                [2]bool
+	endingTicks                             int
 }
 
 // New requires every asset to have been reproduced from the original disk.
@@ -57,38 +60,9 @@ func New() (*Game, error) {
 	if err != nil {
 		return nil, err
 	}
-	data := &engine.Data{Loader: a.loader, LoaderBase: 0x100}
-	dat, err := fs.ReadFile(assets.Files, "unpacked/loddat.bin")
+	data, err := original.Load(assets.Files)
 	if err != nil {
 		return nil, err
-	}
-	if len(dat) >= 0x7500 {
-		data.Random = append([]byte(nil), dat[0x7400:0x7500]...)
-	}
-	data.Nova, err = engine.DecodeNova(a.loader, 0x100, dat)
-	if err != nil {
-		return nil, err
-	}
-	overlays := make(map[string][]byte)
-	for _, name := range []string{"lods0f", "lods0s", "lods0t", "lodst1", "lodst2", "lodst3"} {
-		overlays[name], err = fs.ReadFile(assets.Files, "unpacked/"+name+".bin")
-		if err != nil {
-			return nil, err
-		}
-	}
-	schedules, err := engine.NativeSchedules(a.loader, 0x100, overlays)
-	if err != nil {
-		return nil, err
-	}
-	for index, spec := range a.manifest.Stages {
-		tiles := spec.Tiles
-		name := []string{"lods0t", "lodst1", "lodst2", "lodst3"}[spec.ID]
-		offset := 0x4a000 - []int{0x44000, 0x2e89a, 0x2e4c0, 0x2e840}[spec.ID]
-		bank := overlays[name]
-		if offset+81920 > len(bank) {
-			return nil, fmt.Errorf("original terrain bank%d is truncated", spec.ID)
-		}
-		data.Stages = append(data.Stages, engine.Stage{ID: spec.ID, Mode: spec.Mode, Width: 24, Height: spec.Height, Tiles: tiles, TileBank: bank[offset : offset+81920], Events: schedules[spec.ID], Next: (index + 1) % len(a.manifest.Stages)})
 	}
 	core, err := engine.New(data)
 	if err != nil {
@@ -98,7 +72,7 @@ func New() (*Game, error) {
 	if err != nil {
 		return nil, err
 	}
-	g := &Game{Core: core, art: a, view: ebiten.NewImage(288, 208), touch: controls.New(480, 256), players: 1, musicEnabled: true, effectsEnabled: true, scores: scores}
+	g := &Game{Core: core, presentation: newPresentation(), art: a, view: ebiten.NewImage(288, 208), touch: controls.New(480, 256), players: 1, musicEnabled: true, effectsEnabled: true, scores: scores}
 	return g, nil
 }
 
@@ -204,6 +178,7 @@ func (g *Game) initializeAudio() error {
 
 // Update receives one PAL tick from Ebitengine on desktop and Android.
 func (g *Game) Update() error {
+	defer g.observePresentation()
 	if g.storageErr != nil {
 		return fmt.Errorf("save settings: %w", g.storageErr)
 	}
@@ -280,6 +255,14 @@ func (g *Game) Update() error {
 		}
 		return nil
 	}
+	if g.Core.Mode == engine.Ending && g.endingTicks < 100 {
+		g.Core.Tick([2]engine.Input{})
+		g.endingTicks++
+		if g.endingTicks == 100 {
+			g.queueScores()
+		}
+		return nil
+	}
 	if g.Core.Mode == engine.GameOver || g.Core.Mode == engine.Ending {
 		if justFire || inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 			g.Back()
@@ -291,7 +274,8 @@ func (g *Game) Update() error {
 	}
 	if g.SmokeFrames > 0 {
 		inputs[0].Fire = true
-		inputs[0].Nova = g.SmokeNova && g.updates == 161
+		inputs[1].Fire = g.Core.Players[1].Active
+		inputs[0].Nova = inputs[0].Nova || g.SmokeNova && g.updates == 161
 		inputs[0].X = 0
 		if (g.updates/50)%2 == 0 {
 			inputs[0].X = -1
@@ -300,7 +284,7 @@ func (g *Game) Update() error {
 		}
 	}
 	g.Core.Tick(inputs)
-	if g.Core.Mode == engine.GameOver || g.Core.Mode == engine.Ending {
+	if g.Core.Mode == engine.GameOver {
 		g.queueScores()
 	}
 	if g.sound != nil {
@@ -323,6 +307,8 @@ func (g *Game) Update() error {
 				}
 			case "death":
 				g.sound.PlayTrack(5)
+			case "extra-life":
+				g.sound.PlayTrack(8)
 			}
 		}
 	}
@@ -330,6 +316,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) start() {
+	g.endingTicks = 0
 	g.Core.Start(g.players)
 	g.paused = false
 	g.CancelInput()

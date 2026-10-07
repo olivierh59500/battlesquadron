@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"image/draw"
 	_ "image/png"
 	"io/fs"
 	"strconv"
@@ -39,6 +40,7 @@ type stageSpec struct {
 
 type sprite struct {
 	image         *ebiten.Image
+	frames        []*ebiten.Image
 	width, height int
 }
 
@@ -49,14 +51,24 @@ type terrain struct {
 }
 
 type artwork struct {
-	manifest    manifest
-	title, font *ebiten.Image
-	sprites     map[string]sprite
-	stages      map[int]terrain
-	graphics    map[int]string
-	loader      []byte
-	objects     map[objectKey]string
+	manifest                            manifest
+	title, font                         *ebiten.Image
+	sprites                             map[string]sprite
+	stages                              map[int]terrain
+	graphics                            map[int]string
+	loader                              []byte
+	objects                             map[objectKey]string
+	glyphs                              [256]*ebiten.Image
+	bullets                             map[int]string
+	flying                              map[flyingKey]string
+	players                             [2][7]string
+	explosions                          [10]string
+	hudNova                             [2]string
+	touchButtons, touchStick, touchKnob *ebiten.Image
+	density                             int
 }
+
+type flyingKey struct{ stage, kind, frame int }
 
 type objectKey struct {
 	stage    int
@@ -69,7 +81,7 @@ func loadArtwork() (*artwork, error) {
 	if err != nil {
 		return nil, fmt.Errorf("extract the original ADF: %w", err)
 	}
-	a := &artwork{sprites: make(map[string]sprite), stages: make(map[int]terrain), graphics: make(map[int]string), objects: make(map[objectKey]string)}
+	a := &artwork{sprites: make(map[string]sprite), stages: make(map[int]terrain), graphics: make(map[int]string), objects: make(map[objectKey]string), bullets: make(map[int]string), flying: make(map[flyingKey]string), density: 1}
 	if err := json.Unmarshal(data, &a.manifest); err != nil {
 		return nil, err
 	}
@@ -95,6 +107,13 @@ func loadArtwork() (*artwork, error) {
 			return nil, err
 		}
 		a.font = ebiten.NewImageFromImage(img)
+		columns := max(1, a.font.Bounds().Dx()/8)
+		for index := range a.glyphs {
+			rect := image.Rect(index%columns*8, index/columns*10, (index%columns+1)*8, (index/columns+1)*10)
+			if rect.In(a.font.Bounds()) {
+				a.glyphs[index] = a.font.SubImage(rect).(*ebiten.Image)
+			}
+		}
 	}
 	for _, spec := range a.manifest.Sprites {
 		img, err := load(spec.File)
@@ -108,12 +127,46 @@ func loadArtwork() (*artwork, error) {
 		if height <= 0 {
 			height = img.Bounds().Dy()
 		}
-		a.sprites[spec.ID] = sprite{ebiten.NewImageFromImage(img), width, height}
+		s := sprite{image: ebiten.NewImageFromImage(img), width: width, height: height}
+		for y := 0; y+height <= s.image.Bounds().Dy(); y += height {
+			for x := 0; x+width <= s.image.Bounds().Dx(); x += width {
+				s.frames = append(s.frames, s.image.SubImage(image.Rect(x, y, x+width, y+height)).(*ebiten.Image))
+			}
+		}
+		a.sprites[spec.ID] = s
+		var first, second, third int
+		switch {
+		case strings.HasPrefix(spec.ID, "bullet_"):
+			if n, _ := fmt.Sscanf(spec.ID, "bullet_%d_0", &first); n == 1 {
+				a.bullets[first] = spec.ID
+			}
+		case strings.HasPrefix(spec.ID, "flying_"):
+			if n, _ := fmt.Sscanf(spec.ID, "flying_%d_%d_stage_%d", &first, &second, &third); n == 3 {
+				a.flying[flyingKey{third, first, second}] = spec.ID
+			}
+		case strings.HasPrefix(spec.ID, "player_explosion_"):
+			if n, _ := fmt.Sscanf(spec.ID, "player_explosion_%d", &first); n == 1 && first >= 0 && first < len(a.explosions) {
+				a.explosions[first] = spec.ID
+			}
+		case strings.HasPrefix(spec.ID, "player_"):
+			if n, _ := fmt.Sscanf(spec.ID, "player_%d_%d", &first, &second); n == 2 && first >= 1 && first <= 2 && second >= 0 && second < 7 {
+				a.players[first-1][second] = spec.ID
+			}
+		case strings.HasPrefix(spec.ID, "hud_nova_"):
+			if n, _ := fmt.Sscanf(spec.ID, "hud_nova_%d", &first); n == 1 && first >= 1 && first <= 2 {
+				a.hudNova[first-1] = spec.ID
+			}
+		}
 		if spec.Kind == "object" {
 			a.graphics[spec.Graphic] = spec.ID
 		}
 		if spec.TemplateAddress != 0 {
 			a.objects[objectKey{spec.Stage, spec.TemplateAddress, spec.Frame}] = spec.ID
+		}
+	}
+	for graphic := 84; graphic <= 87; graphic++ {
+		if a.bullets[graphic] == "" {
+			return nil, fmt.Errorf("original Nova graphic %d is missing; recreate assets from the ADF", graphic)
 		}
 	}
 	for _, spec := range a.manifest.Stages {
@@ -126,11 +179,7 @@ func loadArtwork() (*artwork, error) {
 			end := min(y+512, t.height)
 			rect := image.Rect(0, y, t.width, end)
 			page := image.NewRGBA(image.Rect(0, 0, t.width, end-y))
-			for py := rect.Min.Y; py < rect.Max.Y; py++ {
-				for x := 0; x < t.width; x++ {
-					page.Set(x, py-y, img.At(x, py))
-				}
-			}
+			draw.Draw(page, page.Bounds(), img, rect.Min, draw.Src)
 			t.pages = append(t.pages, ebiten.NewImageFromImage(page))
 		}
 		a.stages[spec.ID] = t
@@ -147,38 +196,47 @@ func loadArtwork() (*artwork, error) {
 }
 
 func (a *artwork) drawSprite(dst *ebiten.Image, id string, x, y int, frame int) bool {
+	return a.drawSpriteAt(dst, id, float64(x), float64(y), frame)
+}
+
+func (a *artwork) drawSpriteAt(dst *ebiten.Image, id string, x, y float64, frame int) bool {
 	s, ok := a.sprites[id]
 	if !ok {
 		return false
 	}
-	bounds := s.image.Bounds()
-	columns := max(1, bounds.Dx()/s.width)
-	rows := max(1, bounds.Dy()/s.height)
-	frame = max(0, frame) % (columns * rows)
-	rect := image.Rect((frame%columns)*s.width, (frame/columns)*s.height, (frame%columns+1)*s.width, (frame/columns+1)*s.height)
-	if !rect.In(bounds) {
+	if len(s.frames) == 0 {
 		return false
 	}
+	frame = max(0, frame) % len(s.frames)
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(x), float64(y))
-	dst.DrawImage(s.image.SubImage(rect).(*ebiten.Image), op)
+	op.GeoM.Scale(float64(a.density), float64(a.density))
+	op.GeoM.Translate(x*float64(a.density), y*float64(a.density))
+	dst.DrawImage(s.frames[frame], op)
 	return true
 }
 
 // Boss controllers name a source frame; the assets store its contiguous atlas.
 func (a *artwork) drawIndexedSprite(dst *ebiten.Image, id string, x, y, frame int) bool {
+	return a.drawIndexedSpriteAt(dst, id, float64(x), float64(y), frame)
+}
+
+func (a *artwork) drawIndexedSpriteAt(dst *ebiten.Image, id string, x, y float64, frame int) bool {
 	if _, ok := a.sprites[id]; ok {
-		return a.drawSprite(dst, id, x, y, frame)
+		return a.drawSpriteAt(dst, id, x, y, frame)
 	}
 	if split := strings.LastIndex(id, "_"); split >= 0 {
 		if index, err := strconv.Atoi(id[split+1:]); err == nil {
-			return a.drawSprite(dst, id[:split], x, y, index)
+			return a.drawSpriteAt(dst, id[:split], x, y, index)
 		}
 	}
 	return false
 }
 
 func (a *artwork) drawGrowingSprite(dst *ebiten.Image, id string, x, y, frame, height int) bool {
+	return a.drawGrowingSpriteAt(dst, id, float64(x), float64(y), frame, height)
+}
+
+func (a *artwork) drawGrowingSpriteAt(dst *ebiten.Image, id string, x, y float64, frame, height int) bool {
 	s, ok := a.sprites[id]
 	if !ok {
 		return false
@@ -195,37 +253,31 @@ func (a *artwork) drawGrowingSprite(dst *ebiten.Image, id string, x, y, frame, h
 		return false
 	}
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(x), float64(y))
+	op.GeoM.Scale(float64(a.density), float64(a.density))
+	op.GeoM.Translate(x*float64(a.density), y*float64(a.density))
 	dst.DrawImage(s.image.SubImage(rect).(*ebiten.Image), op)
 	return true
 }
 
 func (a *artwork) drawTerrain(dst *ebiten.Image, stage, scroll, camera int) {
+	a.drawTerrainAt(dst, stage, float64(scroll), float64(camera))
+}
+
+func (a *artwork) drawTerrainAt(dst *ebiten.Image, stage int, scroll, camera float64) {
 	t, ok := a.stages[stage]
 	if !ok {
 		return
 	}
 	// The original map pointer identifies the newest top scanline. The rows
 	// below it are the terrain already written into the scrolling ring.
-	start := max(0, t.height-scroll)
-	for py := 0; py < 208; {
-		y := start + py
-		if y >= t.height {
-			break
-		}
-		page := y / 512
-		row := y % 512
-		if page >= len(t.pages) {
-			break
-		}
-		height := min(208-py, t.pages[page].Bounds().Dy()-row)
-		x := max(0, min(camera, t.width-288))
-		width := min(288, t.width-x)
-		img := t.pages[page].SubImage(image.Rect(x, row, x+width, row+height)).(*ebiten.Image)
+	start := max(0, float64(t.height)-scroll)
+	x := max(0, min(camera, float64(t.width-288)))
+	for page := int(start) / 512; page < len(t.pages) && float64(page*512) < start+208; page++ {
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(0, float64(py))
-		dst.DrawImage(img, op)
-		py += height
+		op.GeoM.Scale(float64(a.density), float64(a.density))
+		// Destination clipping selects the same rows without allocating a subimage.
+		op.GeoM.Translate(-x*float64(a.density), (float64(page*512)-start)*float64(a.density))
+		dst.DrawImage(t.pages[page], op)
 	}
 }
 
@@ -236,7 +288,6 @@ func (a *artwork) text(dst *ebiten.Image, value string, x, y int, ink color.Colo
 	}
 	value = strings.ToUpper(value)
 	width, height := 8, 10
-	columns := max(1, a.font.Bounds().Dx()/width)
 	r, g, b, alpha := ink.RGBA()
 	for _, char := range value {
 		if char == '\n' {
@@ -244,16 +295,16 @@ func (a *artwork) text(dst *ebiten.Image, value string, x, y int, ink color.Colo
 			continue
 		}
 		index := int(char)
-		if index < 0 {
+		if index < 0 || index >= len(a.glyphs) {
 			x += width
 			continue
 		}
-		rect := image.Rect(index%columns*width, index/columns*height, (index%columns+1)*width, (index/columns+1)*height)
-		if rect.In(a.font.Bounds()) {
+		if glyph := a.glyphs[index]; glyph != nil {
 			op := &ebiten.DrawImageOptions{}
-			op.GeoM.Translate(float64(x), float64(y))
+			op.GeoM.Scale(float64(a.density), float64(a.density))
+			op.GeoM.Translate(float64(x*a.density), float64(y*a.density))
 			op.ColorScale.Scale(float32(r)/65535, float32(g)/65535, float32(b)/65535, float32(alpha)/65535)
-			dst.DrawImage(a.font.SubImage(rect).(*ebiten.Image), op)
+			dst.DrawImage(glyph, op)
 		}
 		x += width
 	}

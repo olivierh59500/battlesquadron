@@ -11,6 +11,7 @@ import (
 
 func main() {
 	touch := flag.Bool("touch", false, "preview Android touch controls")
+	originalCadence := flag.Bool("original-cadence", false, "render original 25/50 Hz steps without smooth interpolation")
 	mute := flag.Bool("mute", false, "disable audio")
 	play := flag.Bool("play", false, "start directly in the native game")
 	screen := flag.String("screen", "game", "smoke capture screen: game or title")
@@ -32,6 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 	g.SetTouchEnabled(*touch)
+	g.SetSmoothRendering(!*originalCadence)
 	g.SetMuted(*mute)
 	g.SetDataDir(*dataDir)
 	g.SmokeFrames, g.Capture = *smoke, *capture
@@ -52,6 +54,7 @@ func main() {
 	ebiten.SetScreenFilterEnabled(false)
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetTPS(50)
+	ebiten.SetVsyncEnabled(true)
 	ebiten.SetFullscreen(*fullscreen)
 	if err := ebiten.RunGame(g); err != nil {
 		log.Fatal(err)

@@ -309,6 +309,7 @@ func (e *Engine) consumeGroundArmor(enemy *Enemy, damage byte, secondary bool) b
 	if dead && !s.scored && s.owner >= 0 && s.owner < 2 {
 		s.scored = true
 		e.Players[s.owner].Score += enemy.Definition.Score
+		e.Events = append(e.Events, Event{Kind: "building-destroyed", Player: s.owner, Value: int(s.template.Kind)})
 		e.Events = append(e.Events, Event{Kind: "explosion", Player: s.owner, Value: int(s.template.Kind)})
 	}
 	return dead
@@ -384,9 +385,7 @@ func (e *Engine) queueGroundFlying(kind byte, x, y int, parameter uint32) bool {
 		return false
 	}
 	definition.Collectable = false
-	if !(e.Players[0].Active && e.Players[1].Active) {
-		definition.Health -= (definition.Health + 1) >> 2
-	}
+	// The shared flying allocator applies its player-count armor rule once.
 	spawn := Spawn{X: x, Y: y, Definition: definition}
 	if kind == 13 {
 		if parameter != 0 {

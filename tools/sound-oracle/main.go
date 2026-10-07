@@ -63,6 +63,12 @@ var overlays = []overlay{
 }
 
 func main() {
+	lives := flag.Bool("lives", false, "fingerprint original extra-life digit sampling and spare-ship cap")
+	collection := flag.Bool("collection", false, "fingerprint original capsule collection inventory, capped bonuses and firing timers")
+	allocations := flag.Bool("allocations", false, "fingerprint original flying allocation armor for one and two players")
+	lifeInput := flag.String("life-input", "", "optional native joystick recording for original extra-life seam comparisons")
+	lifePlayers := flag.Int("life-players", 1, "ordinary player count for the recorded extra-life comparison")
+	campaign := flag.Bool("campaign", false, "fingerprint original campaign return, prefill, wrap and bonus routines")
 	ground := flag.Bool("ground", false, "fingerprint original ground scenery controllers")
 	carriers := flag.Bool("carriers", false, "fingerprint original weapon-carrier destruction and capsule rewards")
 	camera := flag.Bool("camera", false, "record the original canonical-ship camera formula")
@@ -80,6 +86,28 @@ func main() {
 	output := flag.String("out", "../../internal/sound/oracle_reference_test.json", "native regression fingerprints")
 	dump := flag.String("dump", "../../.cache/sound-oracle/dumps", "original state dumps for development comparison")
 	flag.Parse()
+	if *allocations {
+		generateAllocations(*assets, *output)
+		return
+	}
+	if *collection {
+		generateCollection(*assets, *output)
+		return
+	}
+	if *lives {
+		if *lifeInput != "" {
+			if err := compareRecordedLives(*assets, *lifeInput, *output, *lifePlayers); err != nil {
+				panic(err)
+			}
+			return
+		}
+		generateLives(*assets, *output)
+		return
+	}
+	if *campaign {
+		generateCampaign(*assets, *output)
+		return
+	}
 	if *ground {
 		generateGround(*assets, *output)
 		return

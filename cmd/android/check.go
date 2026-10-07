@@ -28,7 +28,15 @@ func (c *configuration) checkEmulator(apk string) error {
 			return err
 		}
 	}
-	command := exec.Command(adb, "-s", c.serial, "shell", "am", "instrument", "-w", applicationID+".test/"+applicationID+".TouchRunner")
+	instrument := []string{"-s", c.serial, "shell", "am", "instrument", "-w"}
+	if c.performance {
+		instrument = append(instrument, "-e", "performance", "true")
+	}
+	if c.novaPerformance {
+		instrument = append(instrument, "-e", "nova_performance", "true")
+	}
+	instrument = append(instrument, applicationID+".test/"+applicationID+".TouchRunner")
+	command := exec.Command(adb, instrument...)
 	command.Env, command.Dir = c.environment, c.root
 	result, err := command.CombinedOutput()
 	fmt.Print(string(result))
@@ -42,7 +50,14 @@ func (c *configuration) checkEmulator(apk string) error {
 	if err := os.MkdirAll(captures, 0755); err != nil {
 		return err
 	}
-	for _, name := range []string{"android-title.png", "android-touch.png", "android-paused.png", "android-nova.png", "android-cave.png", "android-final.png", "android-check.json"} {
+	names := []string{"android-title.png", "android-touch.png", "android-paused.png", "android-nova.png", "android-cave.png", "android-final.png", "android-check.json"}
+	if c.performance {
+		names = append(names, "android-performance.json", "android-smooth.png")
+	}
+	if c.novaPerformance {
+		names = append(names, "android-nova-performance.json", "android-nova-restored.png")
+	}
+	for _, name := range names {
 		path := filepath.Join(captures, name)
 		file, err := os.Create(path)
 		if err != nil {
@@ -85,9 +100,13 @@ import com.olivierh.battlesquadron.mobile.Mobile;
 public final class TouchRunner extends Instrumentation {
     private long downTime;
     private float scale, offsetX, offsetY;
+    private boolean measurePerformance;
+    private boolean measureNova;
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
+        measurePerformance = arguments != null && "true".equals(arguments.getString("performance"));
+        measureNova = arguments != null && "true".equals(arguments.getString("nova_performance"));
         start();
     }
 
@@ -162,6 +181,41 @@ public final class TouchRunner extends Instrumentation {
             SystemClock.sleep(3000);
             screenshot("android-final.png");
 
+            if (measurePerformance) {
+                JSONObject performance = new JSONObject();
+                performance.put("surface_original_cadence", measure(4, false));
+                performance.put("surface_smooth", measure(4, true));
+                screenshot("android-smooth.png");
+                performance.put("cave_one_smooth", measure(1, true));
+                performance.put("cave_two_smooth", measure(2, true));
+                performance.put("cave_three_smooth", measure(5, true));
+                performance.put("final_smooth", measure(3, true));
+                write("android-performance.json", performance.toString(2).getBytes(StandardCharsets.UTF_8));
+            }
+            if (measureNova) {
+                Mobile.setVerificationScene(4);
+                Mobile.setVerificationSmoothRendering(true);
+                SystemClock.sleep(500);
+                Mobile.startPerformanceMeasurement();
+                SystemClock.sleep(2500);
+                JSONObject novaBefore = state();
+                tap(440, 126);
+                SystemClock.sleep(300);
+                JSONObject novaVisible = state();
+                require(novaVisible.getInt("Nova") < novaBefore.getInt("Nova"),
+                    "restored Nova did not consume its native charge");
+                require(novaVisible.getInt("NovaFrames") > 0,
+                    "restored Nova was not active during its actual Android capture");
+                screenshot("android-nova-restored.png");
+                SystemClock.sleep(8500);
+                Mobile.finishPerformanceMeasurement();
+                JSONObject performance = awaitPerformance();
+                performance.put("native_before_nova", novaBefore);
+                performance.put("native_visible_nova", novaVisible);
+                performance.put("native_after_measurement", state());
+                write("android-nova-performance.json", performance.toString(2).getBytes(StandardCharsets.UTF_8));
+            }
+
             JSONObject report = new JSONObject();
             report.put("before", before);
             report.put("simultaneous_touch", together);
@@ -194,6 +248,36 @@ public final class TouchRunner extends Instrumentation {
     }
 
     private JSONObject state() throws Exception { return new JSONObject(Mobile.verificationState()); }
+
+    private JSONObject measure(int scene, boolean smooth) throws Exception {
+        Mobile.setVerificationScene(scene);
+        Mobile.setVerificationSmoothRendering(smooth);
+        SystemClock.sleep(500);
+        Mobile.startPerformanceMeasurement();
+        // Two seconds warm up, then ten seconds of actual presented frames.
+        SystemClock.sleep(12000);
+        Mobile.finishPerformanceMeasurement();
+        JSONObject report = awaitPerformance();
+        report.put("scene", scene);
+        report.put("smooth", smooth);
+        return report;
+    }
+
+    private JSONObject awaitPerformance() throws Exception {
+        long deadline = SystemClock.uptimeMillis() + 5000;
+        do {
+            JSONObject report = new JSONObject(Mobile.performanceState());
+            if (report.optInt("draws") >= 100) {
+                require(report.getDouble("elapsed_seconds") >= 9,
+                    "the performance sample was shorter than the requested steady interval");
+                require(report.getInt("simulation_tps") == 50,
+                    "rendering diagnostics changed native PAL simulation time");
+                return report;
+            }
+            SystemClock.sleep(100);
+        } while (SystemClock.uptimeMillis() < deadline);
+        throw new AssertionError("the Go performance measurement was not published");
+    }
 
     private void tap(float x, float y) {
         downTime = SystemClock.uptimeMillis();

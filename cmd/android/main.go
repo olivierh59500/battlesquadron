@@ -31,6 +31,8 @@ type configuration struct {
 	root, project, cache, sdk, ndk, java, gradle    string
 	target, serial, seed                            string
 	prepare, skipBind, aarOnly, run, offline, check bool
+	performance                                     bool
+	novaPerformance                                 bool
 	environment                                     []string
 }
 
@@ -49,6 +51,8 @@ func main() {
 	flag.BoolVar(&cfg.run, "run", false, "Install and launch the successfully verified debug APK")
 	flag.BoolVar(&cfg.offline, "offline", false, "Disable dependency downloads after seeding existing caches")
 	flag.BoolVar(&cfg.check, "check", false, "Run generated simultaneous-touch and lifecycle checks on an emulator selected by -serial")
+	flag.BoolVar(&cfg.performance, "performance", false, "Include real frame-time and smooth-motion measurements with -check")
+	flag.BoolVar(&cfg.novaPerformance, "nova-performance", false, "Include a short restored-Nova rendering measurement with -check")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		flag.Usage()
@@ -70,6 +74,12 @@ func (c *configuration) build() error {
 	c.cache = filepath.Join(c.root, ".cache", "android")
 	if c.check && !strings.HasPrefix(c.serial, "emulator-") {
 		return errors.New("-check requires -serial emulator-NNNN and never installs on physical devices")
+	}
+	if c.performance && !c.check {
+		return errors.New("-performance requires -check")
+	}
+	if c.novaPerformance && !c.check {
+		return errors.New("-nova-performance requires -check")
 	}
 	if err := c.discover(); err != nil {
 		return err

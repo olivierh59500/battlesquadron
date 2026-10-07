@@ -1,0 +1,443 @@
+[
+  {
+    "Name": "prefill-entry",
+    "Phase": 1,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "3abb12787f86dc9777d9baa7671aa808d338accf0a85dc8b11bb53e81f466c4b"
+  },
+  {
+    "Name": "prefill-return",
+    "Phase": 1,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "b301e9d5a16d5aa4ffe874246ce52da6921fb5ed0da995d5cde2c705cc6dfce6"
+  },
+  {
+    "Name": "prefill-entry",
+    "Phase": 2,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "15604a0d2a87a4cbbd9fa37bff4765152478c7a176431233430f65492737edad"
+  },
+  {
+    "Name": "prefill-return",
+    "Phase": 2,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "74bd8dd466a0ff6d28e1e5e6a151f40881b1a404c3c5e8478ad46fbb78679d9a"
+  },
+  {
+    "Name": "prefill-entry",
+    "Phase": 3,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "ac7587dbba36cac9539b9dda1253e31cacbce2433984ae55bd595fe0f20530a7"
+  },
+  {
+    "Name": "prefill-return",
+    "Phase": 3,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "88f6ecda701c417a623815ca24c608d953a87f359995ad6109627d294f0302b8"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "9cbc73d18d70c94fe366e696035c4f2cffdbab7ea6d6c2c039ca185f9c9f2746"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 0,
+    "Mask": 14,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "9cbc73d18d70c94fe366e696035c4f2cffdbab7ea6d6c2c039ca185f9c9f2746"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 1,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "2d99b7b84736c1a5fe753ca5028dddd3fc298c1dc247bc2955ca64e4bbc4ba6a"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 1,
+    "Mask": 14,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "2d99b7b84736c1a5fe753ca5028dddd3fc298c1dc247bc2955ca64e4bbc4ba6a"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 2,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "2d99b7b84736c1a5fe753ca5028dddd3fc298c1dc247bc2955ca64e4bbc4ba6a"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 2,
+    "Mask": 14,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 1,
+    "Hash": "2d99b7b84736c1a5fe753ca5028dddd3fc298c1dc247bc2955ca64e4bbc4ba6a"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 3,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 301,
+    "Hash": "7cfc062d09ad2d557416d66fa9d6749667d0760f8e0c2fa61bebcd611c56781c"
+  },
+  {
+    "Name": "map-end",
+    "Phase": 3,
+    "Mask": 14,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 301,
+    "Hash": "7cfc062d09ad2d557416d66fa9d6749667d0760f8e0c2fa61bebcd611c56781c"
+  },
+  {
+    "Name": "transition",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "4afe190c99cd7cd941910b6f49983d8c053799bfdc13f20a5a0ee067b80ec5a5"
+  },
+  {
+    "Name": "transition",
+    "Phase": 1,
+    "Mask": 0,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "622e8ea3dbd1b6de675bac3e25cdcd7c2776e3c9e93f2ebb4de4dfc4d7600640"
+  },
+  {
+    "Name": "transition",
+    "Phase": 1,
+    "Mask": 12,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "467f73c89d18568d5a82de13fe71fbd96402eb76188b14f8905cd950d392e455"
+  },
+  {
+    "Name": "transition",
+    "Phase": 2,
+    "Mask": 0,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "d09a2eaa5c326875c7b7a2da737b086c2c51c4aea0b3750f96ecf9f60a820c26"
+  },
+  {
+    "Name": "transition",
+    "Phase": 2,
+    "Mask": 10,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "1a75c02c1238d3e23b7e1b9dfb8ea913b47c191d0ef7a6f74420cf262ece6798"
+  },
+  {
+    "Name": "transition",
+    "Phase": 3,
+    "Mask": 0,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "6439eea9e5551eccb6f9914438320236b7cb99c5366471c6095f2182c9c1c626"
+  },
+  {
+    "Name": "transition",
+    "Phase": 3,
+    "Mask": 6,
+    "Score": 123456,
+    "Bonus": 0,
+    "Ticks": 256,
+    "Hash": "93742817d753ef8f73a15e24a326e643f169189625ea30cf529b36b7dbf00195"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "f4bd02594372d0dd1c870df95e7367a161dbbe5bcd0feb025ca856910013152c"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "f4bd02594372d0dd1c870df95e7367a161dbbe5bcd0feb025ca856910013152c"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "5131b73fc5097da59c0bfc921567082a74adb96e3a070f7bfbe49ec18c4109c6"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 0,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "d699b1ea0664bead06f324eacfff47c9b0d7dbc0233224e38c4f39d0d59c9561"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "cdd3ac69a6c4be8728c156a9955ee4b2576fb392b5f12ecbb97931e5a28f53ab"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 0,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "676bd4f0e3ad501575ff47838f66d4a666458b1ab4ac8695adf5f781ef5cf97d"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "ba64771a1d40eaebf0c10f3e0366bea2f0f99d3934fc59bd3d501fc46890966e"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 0,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "082b917adc4a13d008e884797a058d54cf11ae88df6dbaa13b7d641c9dca66e3"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99000,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "a8f939327925fe7c4fed7a36b0584986cfcbb96f3fd2a2359fd3c95fb27b4953"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99000,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "a8f939327925fe7c4fed7a36b0584986cfcbb96f3fd2a2359fd3c95fb27b4953"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99000,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "e4723bceac655c5cd80f4814ec4280ee1863fe47a32d97e0a36e6ae604574013"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99000,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "d861c65e3311b8183b2935407e9a5b044548965987f3dba85b1521b30801dfe0"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99000,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "6032ce428d8477fa6ff599540730846738d9daf9534f6bfbbda7f325c73d3ef1"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99000,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "acf9f6c7ba67ddd0daa376df848af8012fdb1a44f7f4df68027072922f2370f4"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99000,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "9f51e3ae5ce64a7c1dcf43f8f4638a0bb466e626ddc78ebdf7270533c2d9187a"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99000,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "c734f9195919a4b2e7d2b586dbc35bcd722d855c7ac7e1dcfbfd66d49f9aded3"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99999000,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "b18dba78a90f4945024025858230e185b919ef288fcc55541f949f78d9da791e"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99999000,
+    "Bonus": 0,
+    "Ticks": 361,
+    "Hash": "b18dba78a90f4945024025858230e185b919ef288fcc55541f949f78d9da791e"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99999000,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "7aa834341426f49330e5f59ebbf1c6e7bbde3b5d86d5c87ef8560ceeeb4fb6df"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99999000,
+    "Bonus": 1,
+    "Ticks": 361,
+    "Hash": "1c7ba45c838629073c59981a61a70b7b24b14fd1e23d6d218bfa3046a5efeac7"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99999000,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "76063493f2807e4cd0731b6daf3e79d4870fa00e1f2c7e741268989cd4a61b5c"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99999000,
+    "Bonus": 10,
+    "Ticks": 361,
+    "Hash": "a0b7dc6ab3a430fdf45abc933c504db480765127052827c00ef5d5a6df0af469"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99999000,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "85688c181a2ff382d4c40c571ac9a22a28f99a484b71cf095d61034507e6f737"
+  },
+  {
+    "Name": "wreck",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99999000,
+    "Bonus": 99,
+    "Ticks": 361,
+    "Hash": "334246a0fa50ebd6327d65a44689edf01873cd9f1bfc12c6ba0fe3140989e90b"
+  },
+  {
+    "Name": "ending",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 100,
+    "Hash": "83367cf79395193ca3d3b52b451f16df7ba08b1f9eff4ec1328289d7e04414fd"
+  },
+  {
+    "Name": "ending",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 0,
+    "Bonus": 0,
+    "Ticks": 100,
+    "Hash": "5d4e3c5914dc7981d285d05f172c9b7474f8a96e0154cfcbf03a7c4d6e054168"
+  },
+  {
+    "Name": "ending",
+    "Phase": 0,
+    "Mask": 0,
+    "Score": 99900000,
+    "Bonus": 0,
+    "Ticks": 100,
+    "Hash": "8adf0c792b5bfe080709e7a3138396971051b2d982235aa485654cceb50d6c0c"
+  },
+  {
+    "Name": "ending",
+    "Phase": 0,
+    "Mask": 2,
+    "Score": 99900000,
+    "Bonus": 0,
+    "Ticks": 100,
+    "Hash": "d3c6f36e2e6001238d28070606d2ddd1a4e18252887fa7de331df82f786bff9a"
+  }
+]

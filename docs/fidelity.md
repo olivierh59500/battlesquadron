@@ -34,6 +34,25 @@ terrain advancement. The native update keeps those distinct cadences, latches
 joystick input across the two source fields, and selects alternating collision
 banks. See [physical timing](time.md) for exact original measurements.
 
+A further recorded FS-UAE opening session matches all 29 selected ship,
+Clock, terrain and camera scalars over 36 physical PAL fields and 36 native
+updates. Exact record frames, raster-line input, cycle counters and CPU PCs
+identify equivalent capture phases. A separate mixed-phase pair has one extra
+original terrain/camera pass and cannot be treated as an atomic native state.
+The diagnostic seeds observed player and camera state; it does not reconstruct
+complete original actor pools or compare pixels. See [bounded reference input
+comparison](reference.md) for exact provenance and reproduction.
+
+The default presentation intentionally differs from the original movement
+cadence. A shared 40 ms visual delay interpolates positions between native
+fields at the display refresh rate. The original textures are sampled into a
+denser viewport with a linear final sample, preserving fractional positions
+on Android displays. Animation artwork, collision coordinates, inputs, score
+rules and audio timing retain their native source cadence. `-original-cadence`
+disables this presentation change. Neither mode establishes complete original
+framebuffer parity. See [performance and smooth presentation](performance.md)
+for measurements and the comparison video's capture limitations.
+
 Tests cover independent two-player movement, two-pixel axis steps and full
 diagonal speed, banking and bounds, decoded fire cooldowns and projectile
 bank ownership, delayed shots, fixed pool limits, death/respawn, weapon-level
@@ -56,12 +75,48 @@ rewrites. The native campaign uses the three original portal operands and its
 ten-consecutive-update watch rectangle. Original final and cave boss artwork,
 HUD Nova counters and staff card are decoded from their native bitplanes.
 
+The four Nova hardware-sprite frames are extracted from the separate original
+Nova shot bank. Source-strip and decoded-pixel checksums cover the restored
+16 × 16 frames and their original Copper palette. These checks establish
+artwork integrity, while compositing and integrated collision parity remain
+separate. See [Nova artwork](nova.md).
+
 The final encounter's four-part allocation, 256-update entry and complete
 754-update scripted damage/destruction sequence have original 68000 fingerprints.
 Both cave boss movement paths and protected/vulnerable destruction phases also
 have original comparisons. These checks cover logical controller state; player
 collision geometry and the complete composited framebuffer remain separate
 verification boundaries. Ground controllers are described in [the ground report](ground.md).
+
+Forty-nine additional original fingerprints cover cave entrance/return
+inventory, the combined 256-update terrain/ground/map prefill, fixed surface
+returns, preserved actors across the surface wrap, the third cave's 300-update
+hold, wreck balances and the complete ending bonus. The resulting return
+positions are 4000, 5408 and 7792. The final stream begins after the completed
+surface wraps to progress 1. The native transition settles wreck bonuses
+immediately; its score balance is verified, while its countdown presentation
+and timing remain incomplete. See [campaign checks](campaign.md).
+
+Eighty source fingerprints cover extra-life digit comparisons and original
+spare-stock limits. Another 120 cover weapon/Nova collection, capped 10000-point
+bonuses, retained firing timers and ownership of cleared projectile banks.
+These are independent executions of the supplied loader's original routines,
+compared with the native translation; they do not derive expected results from
+the Go implementation. See [extra lives](lives.md) and [collection](collection.md).
+
+Another 36 original allocator fingerprints cover all fourteen flying-object
+armor templates for one and two players, plus byte-overflow boundaries. The
+native allocator applies the original solo quarter reduction once, and boss
+initialization preserves that allocated armor. See [flying allocation](allocation.md).
+
+The [expert controller](autoplay.md) exercises a complete ordinary campaign
+using input only, without immunity, added resources, starting upgrades or stage
+skips. A fresh engine replays its recorded input and compares every checkpoint
+and terminal digest, including private controller state. This proves native
+progression and the absence of hidden planner edits for the tested run. It
+does not prove that the original Amiga reaches the same state with that input;
+focused source-routine comparisons and complete reference replay have different
+verification scopes.
 
 The native music driver's original state and waveform data match 120
 independent 68000 oracle checkpoints across twelve songs and 4,096 timer
@@ -77,7 +132,7 @@ LODSPE sample bank is included. See [the sound report](sound.md).
 - Complete integrated Nova damage, collision ordering and per-object rectangles;
   emitter positions and capsule/reward data have independent original checks.
 - Full campaign entrance/fade/return and ending presentation parity, including
-  original bonus payouts, controller menu details and original raster phases.
+  animated wreck payouts, controller menu details and original raster phases.
 - Complete initial terrain/starfield ring parity, foreground camera interaction,
   per-scanline Copper colors, original HUD composition, and all effect frames.
 - Original menu/controller option behavior and high-score entry interaction.

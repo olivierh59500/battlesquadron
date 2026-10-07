@@ -1,0 +1,38 @@
+[
+  {
+    "AfterFrame": 69,
+    "AfterHash": "a823161135d4de0dbdd307e360407331901be5ef3a84bb6b042e6c6b2cd04973",
+    "BeforeFrame": 34,
+    "BeforeHash": "206f2e41bb232bd9278f1ae43b14a21b22d437877b1d675564265d2f3ebc5639",
+    "ComparedScalars": 29,
+    "CycleDelta": 1273233920,
+    "LogicalTicks": 34,
+    "MatchedScalars": 27,
+    "Phase": "Initial PC$0CE0 follows both player passes; terminal PC$0BAE follows the next terrain/camera/NPC pass and precedes its first player pass. One extra source terrain/camera step is present between these mixed-phase saves.",
+    "PhysicalPALFields": 35,
+    "RecordHash": "016b69353e4059a53e48002bbac4c5d7c8356433edb7845507eb0e2ae78fe6e1",
+    "ReportHash": "9a3db85ccc7238135b97b32e44b45a4e569b7435e2316ca477163481e94172fe",
+    "ReportPath": ".cache/validation/reference-mixed-phase.json",
+    "Scope": "Bounded held-right diagnostic seeded from original ship/camera scalars. Enemy/projectile pools and composite pixels are not reconstructed; this does not establish whole-game matched-input parity.",
+    "Source": "de335a312577f757ea699bd9a19162df9f5e89d83b7ca8a8deeac7ff0116609f",
+    "StoredCyclesPerPALField": 36378112
+  },
+  {
+    "AfterFrame": 70,
+    "AfterHash": "233785d8be6f1d477b39ad11709f63132d1326443d20af9bf156cb3b2a1f24c9",
+    "BeforeFrame": 34,
+    "BeforeHash": "5303531a990bec1c8d4d48c290ff7e704708dff4517fb7746ed8a6b3dc931362",
+    "ComparedScalars": 29,
+    "CycleDelta": 1309612032,
+    "LogicalTicks": 36,
+    "MatchedScalars": 29,
+    "Phase": "Both checkpoints are in the original post-player raster-wait loop$0CCE..$0CE6. No gameplay-state writes occur between these instruction positions; the selected scalars have a corresponding complete-loop phase.",
+    "PhysicalPALFields": 36,
+    "RecordHash": "268ad6ff3a0fc26cc07d899f8df90011a74d91c8818b82efb487d5bbbc028da3",
+    "ReportHash": "b95591fb30a9f475b1fd67f5db6fd61268582903ff0eac1e52a3af0b68d7eb0c",
+    "ReportPath": ".cache/validation/reference-same-phase.json",
+    "Scope": "Bounded held-right diagnostic seeded from original ship/camera scalars. Enemy/projectile pools and composite pixels are not reconstructed; this does not establish whole-game matched-input parity.",
+    "Source": "de335a312577f757ea699bd9a19162df9f5e89d83b7ca8a8deeac7ff0116609f",
+    "StoredCyclesPerPALField": 36378112
+  }
+]

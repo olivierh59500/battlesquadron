@@ -1,7 +1,10 @@
 # Android
 
 The Android version runs the same Go game through Ebitengine's Android view at
-50 updates per second. The maintained build tool, game, rendering, audio and
+50 native updates per second, with independently paced smooth rendering at the
+display refresh rate. See [performance and presentation](performance.md) for
+60 FPS measurements, interpolation and the comparison mode. The maintained
+build tool, game, rendering, audio and
 touch controls are Go. Android requires a small native Activity; the Go build
 tool generates that lifecycle bridge and its Gradle project under
 `android/generated/`. Generated Java, build caches, extracted assets, signing
@@ -105,6 +108,23 @@ only for this option. Evidence is written to the ignored `captures/` directory:
 `android-cave.png`, `android-final.png` and `android-check.json`. A fresh
 emulator's one-time fullscreen hint is dismissed
 before injected touches so that the check measures application input.
+
+Add `-performance` to the emulator check command to measure actual frame rates,
+CPU work, allocation, native update rates and intervening terrain movement in
+the surface, all three caves and final encounter. Results remain local in
+`captures/android-performance.json`; the measured smooth view is captured in
+`captures/android-smooth.png`. The run includes an original-cadence surface
+comparison and uses real Go rendering, audio and touch-control paths. It takes
+approximately ninety seconds after installation. These measurements describe
+the selected emulator rather than guaranteeing every physical device's frame
+deadline.
+
+Use `-nova-performance` instead of `-performance` for a shorter targeted check
+of the restored original Nova hardware artwork. It injects the actual Nova
+touch during the two-player stress fixture, checks the original charge and
+active counter, captures `android-nova-restored.png` and writes
+`android-nova-performance.json`. See [original Nova artwork](nova.md) for
+source addresses, checksums and the final APK's measured timing boundaries.
 
 The Android 35 ARM64 session in this workspace used a cache-local AVD with
 SwiftShader OpenGL ES 3. The corrected original entry finished at Y118 after

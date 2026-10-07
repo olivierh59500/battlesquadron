@@ -13,6 +13,15 @@ import (
 // appendCatalog renders original object, masked flying-object and hardware
 // projectile records. The source addresses come from the supplied game loader.
 func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Palette, save func(string, image.Image) error) error {
+	copper := bytes.Index(loader, []byte{1, 0x80, 0, 0, 1, 0x82, 6, 0x10, 1, 0x84, 0xd, 0xdd})
+	if copper < 0 || copper+32*4 > len(loader) {
+		return fmt.Errorf("original hardware sprite Copper palette not found")
+	}
+	hardwarePalette := color.Palette{color.Transparent}
+	for index := 25; index <= 27; index++ {
+		rgb := binary.BigEndian.Uint16(loader[copper+index*4+2:])
+		hardwarePalette = append(hardwarePalette, color.NRGBA{uint8(rgb>>8&15) * 17, uint8(rgb>>4&15) * 17, uint8(rgb&15) * 17, 255})
+	}
 	add := func(spec Sprite, start, w, h, planes, stride, rowBytes, mask int, hardware bool) error {
 		img := image.NewNRGBA(image.Rect(0, 0, w, h))
 		visible := false
@@ -46,8 +55,7 @@ func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Pale
 				}
 				visible = true
 				if hardware {
-					palette := []color.Color{color.Transparent, color.RGBA{255, 221, 221, 255}, color.RGBA{136, 136, 153, 255}, color.RGBA{34, 34, 85, 255}}
-					img.Set(x, y, palette[v])
+					img.Set(x, y, hardwarePalette[v])
 				} else {
 					img.Set(x, y, pal[v])
 				}
@@ -157,6 +165,16 @@ func appendCatalog(bundle *Bundle, loader, mem []byte, stage int, pal color.Pale
 					heights[int(shot.Graphic)] = max(heights[int(shot.Graphic)], shot.Height)
 				}
 			}
+		}
+		// Nova templates live outside the twenty-four ordinary weapon banks.
+		// Their four source graphics are also used by the eight emitted rays.
+		// Omitting this separate bank left both visible Nova effects undecoded.
+		nova, err := engine.DecodeNova(loader, 0x100, mem[0x10000:])
+		if err != nil {
+			return err
+		}
+		for _, shot := range nova.Shots {
+			heights[int(shot.Graphic)] = max(heights[int(shot.Graphic)], shot.Height)
 		}
 		if pointerBase >= 0 {
 			keys := make([]int, 0, len(heights))

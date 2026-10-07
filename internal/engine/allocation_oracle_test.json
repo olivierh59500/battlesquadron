@@ -1,0 +1,254 @@
+[
+  {
+    "Kind": 0,
+    "Players": 1,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 0,
+    "Players": 2,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 1,
+    "Players": 1,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+  },
+  {
+    "Kind": 1,
+    "Players": 2,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  {
+    "Kind": 2,
+    "Players": 1,
+    "TemplateHealth": 89,
+    "Boundary": false,
+    "Hash": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d"
+  },
+  {
+    "Kind": 2,
+    "Players": 2,
+    "TemplateHealth": 89,
+    "Boundary": false,
+    "Hash": "18f5384d58bcb1bba0bcd9e6a6781d1a6ac2cc280c330ecbab6cb7931b721552"
+  },
+  {
+    "Kind": 3,
+    "Players": 1,
+    "TemplateHealth": 7,
+    "Boundary": false,
+    "Hash": "e77b9a9ae9e30b0dbdb6f510a264ef9de781501d7b6b92ae89eb059c5ab743db"
+  },
+  {
+    "Kind": 3,
+    "Players": 2,
+    "TemplateHealth": 7,
+    "Boundary": false,
+    "Hash": "ca358758f6d27e6cf45272937977a748fd88391db679ceda7dc7bf1f005ee879"
+  },
+  {
+    "Kind": 4,
+    "Players": 1,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+  },
+  {
+    "Kind": 4,
+    "Players": 2,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  {
+    "Kind": 5,
+    "Players": 1,
+    "TemplateHealth": 1,
+    "Boundary": false,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 5,
+    "Players": 2,
+    "TemplateHealth": 1,
+    "Boundary": false,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 6,
+    "Players": 1,
+    "TemplateHealth": 31,
+    "Boundary": false,
+    "Hash": "8f11b05da785e43e713d03774c6bd3405d99cd3024af334ffd68db663aa37034"
+  },
+  {
+    "Kind": 6,
+    "Players": 2,
+    "TemplateHealth": 31,
+    "Boundary": false,
+    "Hash": "ffe679bb831c95b67dc17819c63c5090d221aac6f4c7bf530f594ab43d21fa1e"
+  },
+  {
+    "Kind": 7,
+    "Players": 1,
+    "TemplateHealth": 7,
+    "Boundary": false,
+    "Hash": "e77b9a9ae9e30b0dbdb6f510a264ef9de781501d7b6b92ae89eb059c5ab743db"
+  },
+  {
+    "Kind": 7,
+    "Players": 2,
+    "TemplateHealth": 7,
+    "Boundary": false,
+    "Hash": "ca358758f6d27e6cf45272937977a748fd88391db679ceda7dc7bf1f005ee879"
+  },
+  {
+    "Kind": 8,
+    "Players": 1,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+  },
+  {
+    "Kind": 8,
+    "Players": 2,
+    "TemplateHealth": 3,
+    "Boundary": false,
+    "Hash": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  {
+    "Kind": 9,
+    "Players": 1,
+    "TemplateHealth": 127,
+    "Boundary": false,
+    "Hash": "d2e2adf7177b7a8afddbc12d1634cf23ea1a71020f6a1308070a16400fb68fde"
+  },
+  {
+    "Kind": 9,
+    "Players": 2,
+    "TemplateHealth": 127,
+    "Boundary": false,
+    "Hash": "620bfdaa346b088fb49998d92f19a7eaf6bfc2fb0aee015753966da1028cb731"
+  },
+  {
+    "Kind": 10,
+    "Players": 1,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 10,
+    "Players": 2,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 11,
+    "Players": 1,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 11,
+    "Players": 2,
+    "TemplateHealth": 0,
+    "Boundary": false,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 12,
+    "Players": 1,
+    "TemplateHealth": 47,
+    "Boundary": false,
+    "Hash": "334359b90efed75da5f0ada1d5e6b256f4a6bd0aee7eb39c0f90182a021ffc8b"
+  },
+  {
+    "Kind": 12,
+    "Players": 2,
+    "TemplateHealth": 47,
+    "Boundary": false,
+    "Hash": "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1"
+  },
+  {
+    "Kind": 13,
+    "Players": 1,
+    "TemplateHealth": 1,
+    "Boundary": false,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 13,
+    "Players": 2,
+    "TemplateHealth": 1,
+    "Boundary": false,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 6,
+    "Players": 1,
+    "TemplateHealth": 0,
+    "Boundary": true,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 6,
+    "Players": 2,
+    "TemplateHealth": 0,
+    "Boundary": true,
+    "Hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  {
+    "Kind": 6,
+    "Players": 1,
+    "TemplateHealth": 1,
+    "Boundary": true,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 6,
+    "Players": 2,
+    "TemplateHealth": 1,
+    "Boundary": true,
+    "Hash": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+  },
+  {
+    "Kind": 6,
+    "Players": 1,
+    "TemplateHealth": 3,
+    "Boundary": true,
+    "Hash": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+  },
+  {
+    "Kind": 6,
+    "Players": 2,
+    "TemplateHealth": 3,
+    "Boundary": true,
+    "Hash": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+  },
+  {
+    "Kind": 6,
+    "Players": 1,
+    "TemplateHealth": 255,
+    "Boundary": true,
+    "Hash": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+  },
+  {
+    "Kind": 6,
+    "Players": 2,
+    "TemplateHealth": 255,
+    "Boundary": true,
+    "Hash": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+  }
+]

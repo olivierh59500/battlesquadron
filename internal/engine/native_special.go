@@ -29,9 +29,9 @@ func (e *Engine) initializeSpecial(enemy *Enemy) {
 		return
 	}
 	enemy.special.initialized = true
-	enemy.special.hp = enemy.Definition.Health
+	enemy.special.hp = enemy.Health
 	enemy.special.budget = 255
-	enemy.Health = max(1, enemy.Definition.Health)
+	enemy.Health = max(1, enemy.Health)
 }
 
 // moveNativeSpecial handles the source's kind-two and kind-nine multipart groups.
@@ -659,7 +659,8 @@ func (e *Engine) NativeBossBlocksScroll() bool {
 	return false
 }
 
-// StartFinalBattle installs the loader's separate surface schedule after cave three.
+// StartFinalBattle installs the loader's separate schedule when the surface wraps
+// after all three caves. Existing objects remain until the original clear event.
 func (e *Engine) StartFinalBattle() error {
 	stream, err := decodeFinalSchedule(e.Data.Loader, e.Data.LoaderBase)
 	if err != nil {
@@ -673,7 +674,6 @@ func (e *Engine) StartFinalBattle() error {
 	}
 	e.Data.Stages[0].Events = stream
 	e.Stage, e.Scroll, e.nextEvent, e.modeFrames = 0, 0, 0, 0
-	e.Enemies, e.PlayerShots, e.EnemyShots, e.Pickups = nil, nil, nil, nil
 	e.finalBattle = true
 	return nil
 }

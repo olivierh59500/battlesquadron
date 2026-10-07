@@ -17,8 +17,8 @@ func enemyBox(enemy Enemy) box {
 
 func (e *Engine) originalEnemyBox(enemy Enemy) box {
 	if enemy.Definition.Ground {
-		x,y,width,height:=e.GroundCollisionBounds(enemy)
-		return box{x,y,x+width,y+height}
+		x, y, width, height := e.GroundCollisionBounds(enemy)
+		return box{x, y, x + width, y + height}
 	}
 	return enemyBox(enemy)
 }
@@ -122,6 +122,7 @@ func (e *Engine) damageEnemy(index, damage, player int) {
 		}
 		e.Explosions = append(e.Explosions, enemyExplosion(*enemy))
 		e.Events = append(e.Events, Event{Kind: "explosion", Player: player, Value: enemy.Definition.KillSound})
+		e.Events = append(e.Events, Event{Kind: "enemy-destroyed", Player: player, Value: int(enemy.Definition.Kind)})
 	} else {
 		e.nativeDamage(enemy)
 		e.Events = append(e.Events, Event{Kind: "hit", Player: player, Value: enemy.Definition.HitSound})
@@ -152,11 +153,15 @@ func (e *Engine) HitPlayer(index int) {
 
 func (e *Engine) collect(index int, pickup Pickup) {
 	p := &e.Players[index]
+	capped := false
 	if pickup.Nova > 0 {
+		capped = p.Nova >= 8
 		p.Nova = min(8, p.Nova+pickup.Nova)
 	} else {
+		capped = p.Level >= 5
 		p.Weapon, p.Level = max(0, min(3, pickup.Weapon)), min(5, p.Level+1)
-		p.Cooldown, p.Repeat = 0, 0
+		// The source reload clears shot records and preserves both running
+		// firing timers, even when the pickup changes the weapon family.
 		kept := e.PlayerShots[:0]
 		for _, bullet := range e.PlayerShots {
 			if bullet.Player != index {
@@ -164,6 +169,10 @@ func (e *Engine) collect(index int, pickup Pickup) {
 			}
 		}
 		e.PlayerShots = kept
+	}
+	if capped {
+		// Original $3678 adds the eight decimal digits before endpoint $4012.
+		p.Score = (p.Score + e.originalScoreIncrement(0x4012)) % 100000000
 	}
 	track := 7
 	if pickup.Nova > 0 {

@@ -24,6 +24,8 @@ type Player struct {
 	Active                                 bool
 	WreckBonus                             int
 	novaHeld                               bool
+	lastLifeScore                          int
+	entryKeepsShip                         bool
 }
 
 // Enemy is one decoded object in the original eighteen-entry scenery pool.
@@ -117,6 +119,7 @@ func New(data *Data) (*Engine, error) {
 		return nil, fmt.Errorf("original game data is required")
 	}
 	copyData := *data
+	copyData.Stages = slices.Clone(data.Stages)
 	if len(copyData.Loader) != 0 {
 		var err error
 		copyData.Weapons, copyData.WeaponTable, err = DecodeWeapons(copyData.Loader, copyData.LoaderBase, copyData.WeaponTable)
@@ -207,6 +210,9 @@ func (e *Engine) ReturnToTitle() {
 func (e *Engine) Tick(inputs [2]Input) {
 	e.Events = e.Events[:0]
 	if e.Mode != Playing {
+		if e.Mode == Ending && e.modeFrames < 100 {
+			e.ApplyOriginalEndingBonusTick()
+		}
 		e.modeFrames++
 		return
 	}
@@ -232,6 +238,7 @@ func (e *Engine) Tick(inputs [2]Input) {
 	e.updateNova()
 	if firstHalf {
 		e.collisions()
+		e.awardOriginalLife()
 		e.npcPhase = true
 		e.advanceStage()
 		e.npcPhase = false
@@ -259,6 +266,7 @@ func (e *Engine) updatePlayer(index int, input Input) {
 		if p.Dying == 0 {
 			p.Lives--
 			if p.Lives > 0 {
+				p.entryKeepsShip = false
 				// Original $530A/$5344 resets Nova and halves the weapon level.
 				p.Level /= 2
 				p.Nova, p.Invulnerable, p.Respawn = 3, 300, 145
@@ -488,9 +496,13 @@ func (e *Engine) Spawn(spawn Spawn) bool {
 	if delay == 0 {
 		delay = e.Options.EnemyFireDelay
 	}
+	health := spawn.Definition.Health
+	if spawn.Definition.FlyingPool {
+		health = OriginalFlyingArmor(health, e.Players[0].Active && e.Players[1].Active)
+	}
 	e.Enemies = append(e.Enemies, Enemy{
 		ID: e.nextID, PoolSlot: slot, X: spawn.X, Y: spawn.Y, VX: spawn.VX, VY: spawn.VY,
-		Frame: spawn.Definition.Frame, Health: spawn.Definition.Health, Definition: spawn.Definition,
+		Frame: spawn.Definition.Frame, Health: health, Definition: spawn.Definition,
 		Script: spawn.Script, FireTimer: delay, fixedX: spawn.X << 16, fixedY: spawn.Y << 16,
 		scriptLoop: spawn.ScriptLoop, repeatScript: spawn.RepeatScript,
 	})

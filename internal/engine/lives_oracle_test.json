@@ -1,0 +1,562 @@
+[
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "2a6b81ed9fb16528dc34212f78d30b656e205313e6786c55640a84d1c749d834"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "2b2ca720d139a6289ed1cc7b5e65870d6d5506e1817320894b44feb77c6febe0"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "a6e780315a5e7c8f58cacdeca7533c7c343f86503e682a2ac564017f7dd2d089"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "54b2c52abf27406d96f5c2a84e7ab25357e57bbbfde5490641d15729c64a7070"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "1f99dcfaa3f771cfcdd96b0abb2f99b5cfede76f198af522c60f0804d0231184"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "fab2a4759162ab09d6c98729519a767d330dcb93819b91ab18fcc056de94fc89"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "e1739610c95e6e64fa70386bdc393d2853aefc0d668f8b0569bae88ccee4fdb0"
+  },
+  {
+    "Previous": 0,
+    "Current": 0,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "f65599a7140706e7804a2714aff01bdcd861772d31d9e8259a84f692505303b5"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "294b842bd07e811595bc9386a2d8131905f8939c1b9a73b064eab9d004167ea4"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "04d2ac7d4dc5fc452c9425d1c2db0602f8afc72e329ab8b6a93c09a0b4b7de6e"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "76c02c1ea6425f1ee53eaa8bfe75e2c180876777cf420e84887d5b376258fabb"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "71c2e625ceed9407142f71ad0aa79af2c6c12b3d316bc07a4d20563707bb1b2f"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "7a294d2af1ff1f039200420d73e3bf833b8c48142d355093954df1f326a9b520"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "24cd8e605d796f078dd7c3354c65a0f7b68e5822a9e8aae241c18d3927d5fcaa"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "a9261094a78ec68dd5c7f4a94293d1b325fcd80e99489813174143dd110bcef0"
+  },
+  {
+    "Previous": 99999,
+    "Current": 100010,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "076c464a8770e02cc603522c717f80385362cae42b25cb54ee77bacce67fb92a"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "2bf9faa5e1003c6c58149b160cca0d3f3fc7d26ea912de17ded2819589f2b0e2"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "97d8ef12971becde355a8a65d2163fa75cb1d1623f2f1af7b337f7984ed330f4"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "2d0c9b691ec3cbe8c8a730ac5ffe2d6249533783e806dcf012fa24756ccd8982"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "f4702028291b8bbf47d7e96e4ce555211c5b013fe72b87e1b1d8611d9d04d0fb"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "5505b6c4725cbe6473bd476227a49d96f3e1c3d67cab399d248ca29b08367b12"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "0bc2a028754efca24271a3e044d4a465e98448ad009ebd9f3c4af14bef6b2c42"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "f2f82995ba474a04a17f1a0d1953b52626aef554972e7c77a54ba2a859c6431f"
+  },
+  {
+    "Previous": 199999,
+    "Current": 200005,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "759b145c6b9412cd28b0ac804dd163e6eb0e7057bea579a1ca7c39c892a5a952"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "a3373ad2ffe35bb11e7ebb78916171d16d670664d07c592fda2602dcecbb94c0"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "6bd2800bc3271d81b6ad94c5f5e6a06bcba02cdc94d583095733217ffe430c4a"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "65d5e79cf1321cd575cd5c751390b08a582adb57306d78bb447a0e9a822b2ffb"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "3b7ecd2edbc847d287f593a5eb77e4539d372f00e1dc0367feb343ff15ea7aa1"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "c69a20f4c755ccd086d8f32554cf5c8764207fdc1d70557ea78b67fa7519a13a"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "6cd37ee450a9d68e131102a0df2b32d20943a5a4538b9af9f3d14728008f00cc"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "a86a040f263d034482c5f6f23fade3985c733fce1835884d501e980a03219578"
+  },
+  {
+    "Previous": 299999,
+    "Current": 300001,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "10eaf3bc9173e920484c6ac82c1c1e02c8f3839650f17c2d3ca2aafaaaa2cbec"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "1a3dd8b2d6f2d2687024c8c0e15a9d7ffdbce9a01cf0d145b588afbd761554e2"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "c2f587dd345d207db2b74f82451c70a6a85b82dfaff14363f69a892935875ee7"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "b8c45d562bf22cd637f1a7ba0f5712f0d85625756f5f4a285111bffb9b535f5c"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "3e3986d49e6c7858b46acb9d7924234f5a83804211725454974632f45ed1bac7"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "bc0f731e5c4272fe8306811561469461e66bd81c41aff1ecf72f2d2a736398af"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "700db93aff511a59a935425aea252978767309f8e2364e605396f513859e7b39"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "fd0d2be5e3dadba63bd8f0e2203f7c14eaff4f083ca6ca44f3f4b3b91d7d02d6"
+  },
+  {
+    "Previous": 599999,
+    "Current": 600020,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "66441742a207f9cc821ffe5ee5fa47ceee2984a87d8e1ec65d3024b7c1c2a963"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "bfe9a6cbb85ac7ba578fbcbba71f9641158f8e458a31c78494575e0596a7f6b8"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "3ce2feb476d76e648a461f67ffa7a14dd5b71ed126c756cdff484d46a4927315"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "371d4900ed9bfd5cde1c6520c790f2d5d01e11d5ff3ce1aea09fc880ed69fabb"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "3a7911edb082415648b25d9b2659b74aeee8e95f6dbdd8cac4595fcfeca1959b"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "99e2d5a5d87e51bf975efeba0703eca39dec292d7bd9a004ca7a65fabd77c4f6"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "38c81b32e4fdeb70dffdcffc5ee205821d891c2e79b355fb2c373bdc4c7ee5c3"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "dd9182354f3f132d76fc89c4b94ef65d82b1cb4f68c02496daeb35eb9cc96a71"
+  },
+  {
+    "Previous": 90000,
+    "Current": 310000,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "d0d3ad679284acbd3059e8aa314a36c8e6e48ccc8bd54b3ee4c07e5f90fbd10e"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "e6ba4cfedea39db86a70c95526b88e5527af590b8664132f9868c8eaa2eac132"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "b3c96119bec6f9b6e80c7889beb11e5d638f6f7199eb8351bf2c1246276affe5"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "29a4f05c4deccd057f095b1b10e130590c03af6272d657403dff8a7255298744"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "51054ded698a8c23e6363bc2f9662321f6718941013fc86f3cc669391e236b36"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "ad1f214ae98836c45e83cac95845bb31d7701ef2e5b0985d9d5a69991ecd6379"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "85a788b33d9b2c53fa20a2e107dcdcc08b2de2a2f65648a09bd36303703935f9"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "4003620fbc09ac2a83e616034f2e668c1e234e56e4e9ee2b303f60aaa4ed2112"
+  },
+  {
+    "Previous": 999999,
+    "Current": 1000000,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "76efccd1479ef4462fe09c3be1885e485bf41afac7f186ac089d057e7128c0f0"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "e87e07a2f7c9d74e8245568aa9acca69cab9fa2a811fc32e8e8e06d756d76982"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "2329e8216f9ea4c8c476e21ceffffef1fa15d1dedd6623b5b96ffa76b464fc15"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "030d1140ed6288f2d26cffcbbc38be063bca8c737809caa683737bade8123583"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "abb26cf899fcf5b1edd377eb6c7acde521ba09468009a19962e918f37cc34c86"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "9ea2364220c0b0a1adbfa8cc8489b00de37a33cb8e2f853471be7b1188bc96f4"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "84f4eedb7b2cfb0bc9d602dbc866f48cd305fc05d68b62146ed27e5d59f65717"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "66b590f1adcf5b095bf14f2bb206a5d703865545b842ce1d11464e8074821b75"
+  },
+  {
+    "Previous": 1999999,
+    "Current": 2000020,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "a8f0650415e468a91380f473dd3082fc3ea24215483ce4de2822eac2cca7aefa"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "455565683dc89b70efc08777377ccc59cde02263dddf45e2585100b3be52620c"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "89c153493dade2dabf397408c1ce8ef29b3f0a86ce75204cca26a0637e5252a3"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "fdefac27c60c20c79aa6c195a1e5714a3ad6aaac338b2f81a83e6ec82b5baebe"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "9e4a1f92907829149836b5c6289c97e7c0fdd24caea178d40c24b2c9598fa2e3"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "d8635a8f34bbe6aa4d3ad6957bdef176f3f093a0c298a73a6adb83f21c6c23e5"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "e00805651476fb9335ca65b9e91e190a7762e3ff9d4b7e174267f82836714ebb"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "2d572f2b399754b94101baeaa81525a83a394fbb1928d1643d3eae1e9613f044"
+  },
+  {
+    "Previous": 9999999,
+    "Current": 10000000,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "7011106c0e7ae0ce4054c5e02a76aaeebc5647c9705e6cd1352770a5a9e02f33"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 0,
+    "Clock": 1,
+    "Hash": "2a6b81ed9fb16528dc34212f78d30b656e205313e6786c55640a84d1c749d834"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 0,
+    "Clock": 5,
+    "Hash": "2b2ca720d139a6289ed1cc7b5e65870d6d5506e1817320894b44feb77c6febe0"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 3,
+    "Clock": 1,
+    "Hash": "a6e780315a5e7c8f58cacdeca7533c7c343f86503e682a2ac564017f7dd2d089"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 3,
+    "Clock": 5,
+    "Hash": "54b2c52abf27406d96f5c2a84e7ab25357e57bbbfde5490641d15729c64a7070"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 4,
+    "Clock": 1,
+    "Hash": "1f99dcfaa3f771cfcdd96b0abb2f99b5cfede76f198af522c60f0804d0231184"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 4,
+    "Clock": 5,
+    "Hash": "fab2a4759162ab09d6c98729519a767d330dcb93819b91ab18fcc056de94fc89"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 5,
+    "Clock": 1,
+    "Hash": "e1739610c95e6e64fa70386bdc393d2853aefc0d668f8b0569bae88ccee4fdb0"
+  },
+  {
+    "Previous": 99999999,
+    "Current": 0,
+    "Spare": 5,
+    "Clock": 5,
+    "Hash": "f65599a7140706e7804a2714aff01bdcd861772d31d9e8259a84f692505303b5"
+  }
+]

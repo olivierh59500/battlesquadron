@@ -2,8 +2,8 @@ package game
 
 import (
 	"fmt"
-	"image"
 	"image/color"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -12,6 +12,7 @@ import (
 
 // Draw composites original decoded artwork; gameplay is never advanced here.
 func (g *Game) Draw(screen *ebiten.Image) {
+	g.preparePresentation(time.Now())
 	screen.Fill(color.Black)
 	x := (g.windowWidth() - 320) / 2
 	if g.Core.Mode == engine.Title {
@@ -32,8 +33,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	} else {
 		g.drawPlayfield()
 		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Scale(1/float64(g.art.density), 1/float64(g.art.density))
 		op.GeoM.Translate(float64(x+16), 24)
 		screen.DrawImage(g.view, op)
+		g.art.density = 1
 		if g.Core.Mode == engine.GameOver {
 			g.panel(screen, "GAME OVER", "PRESS FIRE TO CONTINUE")
 		}
@@ -62,18 +65,30 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) drawPlayfield() {
+	density := 1
+	if g.presentation.smooth {
+		density = g.presentation.density
+	}
+	if g.view.Bounds().Dx() != 288*density {
+		g.view.Dispose()
+		g.view = ebiten.NewImage(288*density, 208*density)
+	}
+	g.art.density = density
 	g.view.Fill(color.Black)
 	if g.Core.FinalBattle() {
 		if backdrop, ok := g.art.sprites["final_backdrop"]; ok {
-			start := max(0, 240-g.Core.Scroll)
+			start := max(0, 240-g.presentation.scroll)
 			end := min(240, start+208)
 			if end > start {
-				x := max(0, min(96, g.Core.CameraX))
-				g.view.DrawImage(backdrop.image.SubImage(image.Rect(x, start, x+288, end)).(*ebiten.Image), nil)
+				x := max(0, min(96, g.presentation.camera))
+				op := &ebiten.DrawImageOptions{}
+				op.GeoM.Scale(float64(density), float64(density))
+				op.GeoM.Translate(-x*float64(density), -start*float64(density))
+				g.view.DrawImage(backdrop.image, op)
 			}
 		}
 	} else {
-		g.art.drawTerrain(g.view, g.Core.Stage, g.Core.Scroll, g.Core.CameraX)
+		g.art.drawTerrainAt(g.view, g.Core.Stage, g.presentation.scroll, g.presentation.camera)
 	}
 	if g.Core.Stage == 0 {
 		if gate, active := g.Core.Campaign.GateAtScroll(g.Core.Scroll); active {
@@ -82,23 +97,24 @@ func (g *Game) drawPlayfield() {
 				frame = 0
 			}
 			id := g.art.objects[objectKey{0, gate.Definition.Address, frame}]
-			g.art.drawSprite(g.view, id, gate.WorldX-g.Core.CameraX, gate.NativeY(g.Core.Scroll), 0)
+			g.art.drawSpriteAt(g.view, id, float64(gate.WorldX)-g.presentation.camera, float64(gate.NativeY(g.Core.Scroll))+g.presentation.scroll-float64(g.Core.Scroll), 0)
 		}
 	}
 	for _, enemy := range g.Core.Enemies {
 		if !g.Core.GroundVisible(enemy) {
 			continue
 		}
+		x, y := g.presentation.enemy(enemy)
 		if enemy.Definition.FlyingPool && enemy.Definition.NativeKind == 7 {
 			if enemy.Frame >= 3 {
-				g.art.drawSprite(g.view, fmt.Sprintf("flying_10_%d_stage_%d", enemy.Frame-3, g.Core.Stage), enemy.X, enemy.Y, 0)
+				g.art.drawSpriteAt(g.view, g.art.flying[flyingKey{g.Core.Stage, 10, enemy.Frame - 3}], x, y, 0)
 			} else {
-				g.art.drawGrowingSprite(g.view, fmt.Sprintf("flying_7_%d_stage_%d", enemy.Frame, g.Core.Stage), enemy.X, enemy.Y, 0, enemy.Definition.Height)
+				g.art.drawGrowingSpriteAt(g.view, g.art.flying[flyingKey{g.Core.Stage, 7, enemy.Frame}], x, y, 0, enemy.Definition.Height)
 			}
 			continue
 		}
 		if enemy.Definition.NativeKind == 2 && g.Core.FinalBattle() || enemy.Definition.NativeKind == 9 {
-			g.art.drawIndexedSprite(g.view, enemy.Definition.Sprite, enemy.X, enemy.Y, enemy.Frame)
+			g.art.drawIndexedSpriteAt(g.view, enemy.Definition.Sprite, x, y, enemy.Frame)
 			continue
 		}
 		id := g.art.objects[objectKey{g.Core.Stage, enemy.Definition.Address, enemy.Frame}]
@@ -111,7 +127,7 @@ func (g *Game) drawPlayfield() {
 		if id == "" {
 			id = fmt.Sprintf("object_%d", enemy.Definition.Graphic)
 		}
-		g.art.drawSprite(g.view, id, enemy.X, enemy.Y, 0)
+		g.art.drawSpriteAt(g.view, id, x, y, 0)
 	}
 	for _, shot := range g.Core.EnemyShots {
 		g.drawProjectile(shot, false)
@@ -122,8 +138,9 @@ func (g *Game) drawPlayfield() {
 		}
 	}
 	for _, pickup := range g.Core.Pickups {
-		id := fmt.Sprintf("flying_5_%d_stage_%d", pickup.Frame, g.Core.Stage)
-		g.art.drawSprite(g.view, id, pickup.X, pickup.Y, 0)
+		id := g.art.flying[flyingKey{g.Core.Stage, 5, pickup.Frame}]
+		x, y := g.presentation.pickup(pickup, g.Core.Frame)
+		g.art.drawSpriteAt(g.view, id, x, y, 0)
 	}
 	for _, explosion := range g.Core.Explosions {
 		frame := min(8, explosion.Age/4)
@@ -134,11 +151,12 @@ func (g *Game) drawPlayfield() {
 		if explosion.Native {
 			kind = explosion.SpriteKind
 		}
-		id := fmt.Sprintf("flying_%d_%d_stage_%d", kind, frame, g.Core.Stage)
+		id := g.art.flying[flyingKey{g.Core.Stage, kind, frame}]
 		if explosion.Player {
-			id = fmt.Sprintf("player_explosion_%d", min(9, explosion.Age/7))
+			id = g.art.explosions[min(9, explosion.Age/7)]
 		}
-		g.art.drawSprite(g.view, id, explosion.X, explosion.Y, 0)
+		x, y := g.presentation.explosion(explosion, g.Core.Frame)
+		g.art.drawSpriteAt(g.view, id, x, y, 0)
 	}
 	for index, player := range g.Core.Players {
 		if !player.Active || player.Lives == 0 || player.Dying > 0 {
@@ -147,10 +165,12 @@ func (g *Game) drawPlayfield() {
 		if player.Invulnerable > 0 && g.Core.Frame%4 < 2 {
 			continue
 		}
-		g.art.drawSprite(g.view, fmt.Sprintf("player_%d_%d", index+1, min(6, max(0, player.Tilt))), player.X, player.Y, 0)
+		x, y := g.presentation.player(index, player)
+		g.art.drawSpriteAt(g.view, g.art.players[index][min(6, max(0, player.Tilt))], x, y, 0)
 	}
-	for _, ray := range g.Core.NovaRays {
-		g.art.drawSprite(g.view, fmt.Sprintf("bullet_%d_0", ray.Graphic), ray.X, ray.Y, 0)
+	for index, ray := range g.Core.NovaRays {
+		x, y := g.presentation.ray(index, ray)
+		g.art.drawSpriteAt(g.view, g.art.bullets[int(ray.Graphic)], x, y, 0)
 	}
 	if g.Core.Players[0].Respawn >= 45 && g.Core.Frame < 130 {
 		g.art.text(g.view, "GET READY", 108, 103, white)
@@ -167,14 +187,15 @@ func (g *Game) drawPlayfield() {
 			x = 240
 		}
 		for charge := 0; charge < min(8, player.Nova); charge++ {
-			g.art.drawSprite(g.view, fmt.Sprintf("hud_nova_%d", index+1), x+charge*16, 194, 0)
+			g.art.drawSprite(g.view, g.art.hudNova[index], x+charge*16, 194, 0)
 		}
 	}
 }
 
 func (g *Game) drawProjectile(shot engine.Bullet, primary bool) {
-	id := fmt.Sprintf("bullet_%d_0", shot.Graphic)
-	g.art.drawSprite(g.view, id, shot.X, shot.Y, 0)
+	id := g.art.bullets[int(shot.Graphic)]
+	x, y := g.presentation.shot(shot, primary, g.Core.Frame)
+	g.art.drawSpriteAt(g.view, id, x, y, 0)
 }
 
 func (g *Game) panel(screen *ebiten.Image, title, subtitle string) {
@@ -202,25 +223,43 @@ func (g *Game) drawOptions(screen *ebiten.Image) {
 }
 
 func (g *Game) drawTouch(screen *ebiten.Image) {
+	if g.art.touchButtons == nil {
+		g.cacheTouchArtwork()
+	}
+	screen.DrawImage(g.art.touchButtons, nil)
+	center, stick, active := g.touch.Stick()
+	cx, cy := float64(40), float64(181)
+	if active {
+		cx, cy = center.X, center.Y
+	}
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(cx-32, cy-32)
+	screen.DrawImage(g.art.touchStick, op)
+	if active {
+		dx, dy := max(-25, min(25, stick.X-center.X)), max(-25, min(25, stick.Y-center.Y))
+		op.GeoM.Reset()
+		op.GeoM.Translate(cx+dx-9, cy+dy-9)
+		screen.DrawImage(g.art.touchKnob, op)
+	}
+}
+
+// Invariant touch geometry is drawn once at the original logical resolution.
+// This only caches existing UI pixels; it adds no game resource or artwork.
+func (g *Game) cacheTouchArtwork() {
+	g.art.touchButtons = ebiten.NewImage(480, 256)
+	g.art.touchStick = ebiten.NewImage(64, 64)
+	g.art.touchKnob = ebiten.NewImage(18, 18)
 	ink := color.RGBA{119, 136, 170, 255}
 	for _, button := range []struct {
 		label   string
 		x, y, r float32
 	}{{"PAUSE", 440, 23, 16}, {"SOUND", 440, 51, 12}, {"MENU", 440, 74, 9}, {"NOVA", 440, 131, 25}, {"FIRE", 440, 213, 30}} {
-		vector.StrokeCircle(screen, button.x, button.y, button.r, 1.5, ink, true)
-		g.art.text(screen, button.label, int(button.x)-len(button.label)*4, int(button.y)-5, white)
+		vector.StrokeCircle(g.art.touchButtons, button.x, button.y, button.r, 1.5, ink, true)
+		g.art.text(g.art.touchButtons, button.label, int(button.x)-len(button.label)*4, int(button.y)-5, white)
 	}
-	center, stick, active := g.touch.Stick()
-	cx, cy := float32(40), float32(181)
-	if active {
-		cx, cy = float32(center.X), float32(center.Y)
-	}
-	vector.StrokeCircle(screen, cx, cy, 28, 1.5, ink, true)
-	vector.StrokeLine(screen, cx-12, cy, cx+12, cy, 1, ink, true)
-	vector.StrokeLine(screen, cx, cy-12, cx, cy+12, 1, ink, true)
-	if active {
-		dx, dy := max(-25, min(25, stick.X-center.X)), max(-25, min(25, stick.Y-center.Y))
-		vector.DrawFilledCircle(screen, cx+float32(dx), cy+float32(dy), 8, ink, true)
-	}
-	g.art.text(screen, "MOVE", 24, 224, white)
+	vector.StrokeCircle(g.art.touchStick, 32, 32, 28, 1.5, ink, true)
+	vector.StrokeLine(g.art.touchStick, 20, 32, 44, 32, 1, ink, true)
+	vector.StrokeLine(g.art.touchStick, 32, 20, 32, 44, 1, ink, true)
+	vector.DrawFilledCircle(g.art.touchKnob, 9, 9, 8, ink, true)
+	g.art.text(g.art.touchButtons, "MOVE", 24, 224, white)
 }
