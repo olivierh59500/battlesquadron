@@ -1,0 +1,74 @@
+[
+  {
+    "Kind": 8,
+    "Stage": 0,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "616294e4098f05d8a9e9b96480cce94d81cdda21d7b7cde33af0dac02c5aff4d",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 0,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "5f7f99d7be13ab61a4998f65ef09725fb77865403bb30f853a8593deba95f89f",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 0,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "1bb98741c7b9bb25811e8f91896f6a2e906488ba0d68586c4e7d33fc97be08e3",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 0,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 240,
+    "Hash": "fa1621272a60487fb331b3117db3fb633138c9520b9e16a7db5c45916f75009b",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 1,
+    "X": 40,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "616294e4098f05d8a9e9b96480cce94d81cdda21d7b7cde33af0dac02c5aff4d",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 1,
+    "X": 160,
+    "Y": -32,
+    "Ticks": 240,
+    "Hash": "5f7f99d7be13ab61a4998f65ef09725fb77865403bb30f853a8593deba95f89f",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 1,
+    "X": 100,
+    "Y": 0,
+    "Ticks": 240,
+    "Hash": "1bb98741c7b9bb25811e8f91896f6a2e906488ba0d68586c4e7d33fc97be08e3",
+    "Damage": false
+  },
+  {
+    "Kind": 8,
+    "Stage": 1,
+    "X": 200,
+    "Y": 120,
+    "Ticks": 240,
+    "Hash": "fa1621272a60487fb331b3117db3fb633138c9520b9e16a7db5c45916f75009b",
+    "Damage": false
+  }
+]

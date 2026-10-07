@@ -1,0 +1,142 @@
+[
+  {
+    "X": 50,
+    "Y": 20,
+    "Subtype": 0,
+    "Ticks": 501,
+    "Hash": "24b70158d649d2d9ef3faee87d9a4cc64e917e65516d9967615b33c4d4904ff3"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "Subtype": 2,
+    "Ticks": 501,
+    "Hash": "a503d860af851d11cf6837134794e06569d793283f44fbf67dc84399894d01bd"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "Subtype": 4,
+    "Ticks": 501,
+    "Hash": "cefd4da4a477d777847fa6ce5bb2050b40a45a26f84a6045406f0e5b66cd3879"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "Subtype": 6,
+    "Ticks": 501,
+    "Hash": "3af93ae77f99e6c139c5ab17527c4dcd78c13c8c7121c567c0916f3bf671c800"
+  },
+  {
+    "X": 50,
+    "Y": 20,
+    "Subtype": 10,
+    "Ticks": 501,
+    "Hash": "04aebb4c4184aa953fab7e029f38de0bc0ea0a03f52a0a265cfc67e07804d066"
+  },
+  {
+    "X": 135,
+    "Y": 20,
+    "Subtype": 0,
+    "Ticks": 501,
+    "Hash": "817a287a29a2425e4af214db18ba82ebc900600f5aa9cf225e8095c3b58ec263"
+  },
+  {
+    "X": 135,
+    "Y": 20,
+    "Subtype": 2,
+    "Ticks": 501,
+    "Hash": "ca878e23e7aee0355af90375cfe292cf09c67b990f275cdc296872d95976c2f0"
+  },
+  {
+    "X": 135,
+    "Y": 20,
+    "Subtype": 4,
+    "Ticks": 501,
+    "Hash": "53c972fe3e138f09f6598de0dae9db799e0a97cebe57f8be93208ae2dc5ce0f5"
+  },
+  {
+    "X": 135,
+    "Y": 20,
+    "Subtype": 6,
+    "Ticks": 501,
+    "Hash": "de8b7cc77862222981ab1303b118423ba7f9a4a58a12e8436694ec0e9bc436db"
+  },
+  {
+    "X": 135,
+    "Y": 20,
+    "Subtype": 10,
+    "Ticks": 501,
+    "Hash": "f88ffde121503613f2193bb612fdd4b817d93f02d9fe43d17c2488d7752f9f0c"
+  },
+  {
+    "X": 136,
+    "Y": 20,
+    "Subtype": 0,
+    "Ticks": 501,
+    "Hash": "0bc838153fa09f949864a9a90cda0295fbc82d9310a81940d188433319f3e604"
+  },
+  {
+    "X": 136,
+    "Y": 20,
+    "Subtype": 2,
+    "Ticks": 501,
+    "Hash": "2bda97b91ee243c917cbc8216f555df0b271bc3b653d6eac06b4846ce1223865"
+  },
+  {
+    "X": 136,
+    "Y": 20,
+    "Subtype": 4,
+    "Ticks": 501,
+    "Hash": "434a6b7565f597ef90422f04252febcec09a4339c09a32db8bf8f1b09e0cab22"
+  },
+  {
+    "X": 136,
+    "Y": 20,
+    "Subtype": 6,
+    "Ticks": 501,
+    "Hash": "86c2c90ae894e141527de46066fa519e5720814f4127531a05983b6168bff648"
+  },
+  {
+    "X": 136,
+    "Y": 20,
+    "Subtype": 10,
+    "Ticks": 501,
+    "Hash": "8bade02182cc066ddb23c496681066f8f84227b54e243091ac5e13b09ca0c817"
+  },
+  {
+    "X": 210,
+    "Y": 20,
+    "Subtype": 0,
+    "Ticks": 501,
+    "Hash": "e9678e50dcd35765ee7b6263ded8c96cf80e02b6b5ee88941efa075bf51de3ab"
+  },
+  {
+    "X": 210,
+    "Y": 20,
+    "Subtype": 2,
+    "Ticks": 501,
+    "Hash": "c272ff9edffa32364586a0f61159c252bfe0016eefc85e799acf5aee1b17acf7"
+  },
+  {
+    "X": 210,
+    "Y": 20,
+    "Subtype": 4,
+    "Ticks": 501,
+    "Hash": "b0eeae7a3380caac4b584f5435b10334b5d229f46f64b06d6c6c738895ac7b15"
+  },
+  {
+    "X": 210,
+    "Y": 20,
+    "Subtype": 6,
+    "Ticks": 501,
+    "Hash": "3f725e4348b4cae825c820f70d327a06fe11f1789ea2c63b7ff74875430e08fe"
+  },
+  {
+    "X": 210,
+    "Y": 20,
+    "Subtype": 10,
+    "Ticks": 501,
+    "Hash": "3bcb20f893a39157d955d014e1d58e312c3ed071cf349626693d9ba0cdea0270"
+  }
+]

@@ -1,0 +1,22 @@
+# Original media and every asset derived from it remain local.
+/previous/
+/assets/*
+!/assets/*.go
+/captures/
+/.cache/
+/bin/
+/dist/
+/android/generated/
+/android/.gradle/
+/android/local.properties
+*.adf
+*.ADF
+*.rom
+*.aar
+*.apk
+*.aab
+*.hprof
+*.log
+.DS_Store
+AGENT.md
+AGENTS.md
