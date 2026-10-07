@@ -75,6 +75,10 @@ gutters around the original 320 × 256 playfield. Losing focus cancels unfinishe
 touch gestures. Android suspension pauses gameplay and suspends the Ebitengine
 surface; resuming leaves gameplay paused until the player continues. System
 Back is routed to the Go game's navigation and closes the Activity at the title.
+After 15 seconds without menu input, the expert demonstration starts through
+ordinary recorded joystick commands. Any touch, key, controller action or Back
+returns to the menu; the waking input must be released before a new action can
+start a session. Suspension stops the demonstration and restarts the idle delay.
 
 Install and launch on a connected device only when requested:
 
@@ -94,8 +98,8 @@ movement and firing against snapshots published by the Go update thread, then
 checks HOME suspension, input cancellation, the paused return to the app and
 touch continuation. It also checks Nova charge consumption and captures the
 original cave and final-battle artwork through diagnostics-only scene fixtures.
-The checker requires an `emulator-*` transport and refuses
-physical device serials:
+The default checker requires an `emulator-*` transport and refuses physical
+device serials:
 
 ```sh
 GOCACHE="$PWD/.cache/go-build" go run ./cmd/android \
@@ -108,6 +112,92 @@ only for this option. Evidence is written to the ignored `captures/` directory:
 `android-cave.png`, `android-final.png` and `android-check.json`. A fresh
 emulator's one-time fullscreen hint is dismissed
 before injected touches so that the check measures application input.
+
+The checker also waits for the real menu idle delay, observes autonomous expert
+gameplay, measures ten seconds of its actual Update/Draw path, and holds a touch
+over the menu's start button while dismissing the demonstration. It verifies
+that the held wake touch cannot start a session, then releases it and starts
+through a fresh touch. This adds `android-demo.png`, `android-demo-wake.png` and
+`android-demo-performance.json` to the local evidence.
+
+## Authorized physical-device checks
+
+Use the separate `-physical-check` option only after the device owner has
+authorized installation and runtime checks. An explicit physical serial is
+required; this option never selects a device implicitly:
+
+```sh
+GOCACHE="$PWD/.cache/go-build" go run ./cmd/android \
+  -offline -physical-check -serial 67081JEA300033
+```
+
+Physical checks install or update only `com.olivierh.battlesquadron` and its
+instrumentation package with `adb install -r`. They preserve application data
+and leave global device settings, other packages and their data alone. Unlike
+emulator checks, they do not modify fullscreen-hint settings. Optional
+`-performance` and `-nova-performance` measurements also work with this explicit
+opt-in. Each run has a separate ignored directory beneath `captures/pixel-10a/`,
+named with the APK checksum prefix and UTC timestamp. Its `device.json` records
+the full tested APK checksum, serial, Android version and page size; failed
+runs cannot inherit screenshots or measurements from an earlier success.
+
+The foreground test window is limited to four minutes. A cooperative lease at
+`$TMPDIR/codex-android-device-DEVICE_SERIAL.lock/owner.txt` identifies the owner
+process and expiry; the checker refuses an existing lease and never removes a
+foreign owner record. Other agents can use the same lease convention. Before
+installation, an unavailable foreground causes the checker to stop. Before
+each injected gesture, state assertion and screenshot, instrumentation checks
+that Battle Squadron still owns the foreground. If another app takes over, it
+stops injecting input and reports the interruption. The checker does not clear
+logcat, force-stop unrelated apps, uninstall packages or change display refresh
+settings.
+
+## Pixel 10a validation
+
+On October 8, 2026, the shared USB Pixel 10a ran the attract-mode checks on
+Android 17 / API 37, with a 1080 × 2424 display at its existing 60 Hz setting
+and 4096-byte memory pages. The complete hardware-checked APK SHA-256 was:
+
+```text
+3ff1cbf3686c1ea56b814a3f0166193620c8a79fce40a85a6599133e858b9588
+```
+
+The actual menu waited fifteen seconds, entered the recorded expert run, and
+advanced through ordinary native inputs. HOME and resume restored the human
+menu and restarted its idle delay. After the next demonstration began, holding
+a touch over Start returned to the menu without starting a session; releasing
+it and touching again started human gameplay. Simultaneous movement and fire,
+paused HOME/resume, cancelled gestures and Nova consumption also passed. Cave
+and final-encounter rendering were exercised through the explicit diagnostic
+fixtures.
+
+The real demonstration measured 59.93 FPS, 50.01 native updates per second and
+59.83 terrain motion changes per second. Six scene samples measured
+59.93–59.97 FPS; original-cadence terrain changed at 25.11 Hz while smooth
+surface terrain changed at 59.83 Hz. Each steady sample lasted ten seconds
+after warmup. Frame-interval p99 values were approximately 24–25.3 ms, with a
+maximum of 27.3 ms. These are average 60 Hz results, not a guarantee that every
+frame meets a 16.67 ms deadline. The device's 4 KiB runtime does not independently
+exercise the APK's separately verified 16 KiB alignment.
+
+The exact-build reports and screenshots are local under
+`captures/pixel-10a/3ff1cbf3686c-20261007T230822.740344000Z/`. A separate retry
+also demonstrated that foreground takeover stops input injection. Unrelated
+packages and their data were preserved, as were the device settings.
+
+The final local APK adds only a staff-card footer presentation fix after that
+complete hardware run: the human Start prompt is hidden while the demonstration
+caption is visible. Its package, signature, ABI and alignment checks passed,
+with SHA-256:
+
+```text
+6d08bbf48bea5b17cbb571f094b06bb08915472b0913d00ce7630a44963b1599
+```
+
+The shared phone became busy again, so this caption-only build was not
+reinstalled there. The hardware results above refer specifically to the
+`3ff1cbf3686c…` build; the latest installable artifact is
+`bin/battlesquadron-debug.apk`.
 
 Add `-performance` to the emulator check command to measure actual frame rates,
 CPU work, allocation, native update rates and intervening terrain movement in

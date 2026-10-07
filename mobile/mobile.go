@@ -156,8 +156,9 @@ func (h *host) Update() error {
 		h.game.Back()
 	}
 	if scene := h.scene.Swap(0); scene != 0 && h.verify.Load() {
+		h.game.StopDemo()
+		h.game.Start(1, 0)
 		core := h.game.Core
-		core.Start(1)
 		core.Options.Invulnerable = true
 		core.Players[0].X, core.Players[0].Y, core.Players[0].Respawn = 128, 176, 0
 		core.Frame = 1024
@@ -229,7 +230,10 @@ func (h *host) Update() error {
 		}
 		data, err := json.Marshal(struct {
 			Frame, Stage, Scroll, X, Y, Shots, Fired, Mode, Respawn, NovaFrames, Nova int
-		}{core.Frame, core.Stage, core.Scroll, core.Players[0].X, core.Players[0].Y, len(core.PlayerShots), h.fired, int(core.Mode), core.Players[0].Respawn, core.NovaFrames, core.Players[0].Nova})
+			Demo, DemoInputBlocked                                                    bool
+			MenuIdleTicks                                                             int
+		}{core.Frame, core.Stage, core.Scroll, core.Players[0].X, core.Players[0].Y, len(core.PlayerShots), h.fired, int(core.Mode), core.Players[0].Respawn, core.NovaFrames, core.Players[0].Nova,
+			h.game.DemoActive(), h.game.DemoInputBlocked(), h.game.MenuIdleTicks()})
 		if err != nil {
 			return err
 		}

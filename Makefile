@@ -1,10 +1,14 @@
 # All application and extraction tools are implemented in Go.
 export GOCACHE := $(CURDIR)/.cache/go-build
 
-.PHONY: assets run build test vet benchmark android android-run reverse clean
+.PHONY: assets demo run build test vet benchmark android android-run reverse clean
 
 assets:
 	go run ./cmd/extract
+	go run ./cmd/demo
+
+demo:
+	go run ./cmd/demo
 
 run:
 	go run .

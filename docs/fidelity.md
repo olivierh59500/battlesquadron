@@ -53,6 +53,12 @@ disables this presentation change. Neither mode establishes complete original
 framebuffer parity. See [performance and smooth presentation](performance.md)
 for measurements and the comparison video's capture limitations.
 
+The remake also adds a fifteen-second idle title demonstration using the
+verified native expert input recording. Waking gestures return to the human
+menu and are consumed until release; demo scores and settings stay isolated.
+This is an intentional new feature rather than original attract-mode parity.
+See [idle demonstration](attract.md) and [physical Android checks](android.md).
+
 Tests cover independent two-player movement, two-pixel axis steps and full
 diagonal speed, banking and bounds, decoded fire cooldowns and projectile
 bank ownership, delayed shots, fixed pool limits, death/respawn, weapon-level

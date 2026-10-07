@@ -1,4 +1,4 @@
-// Package replay stores only physical joystick inputs for deterministic checks.
+// Package replay stores physical joystick inputs for deterministic playback.
 package replay
 
 import (

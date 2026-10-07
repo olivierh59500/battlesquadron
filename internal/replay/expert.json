@@ -1,0 +1,19 @@
+{
+  "SourceSHA256": "de335a312577f757ea699bd9a19162df9f5e89d83b7ca8a8deeac7ff0116609f",
+  "ProgramSHA256": "8d47738b722e304d7a07810d0bab6785fb3446bab4ca604643c3945221139f10",
+  "RecordingSHA256": "5c539330adb517ded9bc69a95676c555366afae8432c0dad9772b33709a16e54",
+  "TerminalSHA256": "467af6b438b0b2a5681233d3490923d11e066ebf5140e9a26db4cb46e627223b",
+  "Fields": 68401,
+  "Players": 1,
+  "Deaths": 0,
+  "Score": 2473920,
+  "ClearedMask": 14,
+  "Options": {
+    "Lives": 3,
+    "StartWeapon": 0,
+    "EnemyProjectileCap": 12,
+    "EnemyProjectileSpeed": 2,
+    "EnemyFireDelay": 50,
+    "Invulnerable": false
+  }
+}

@@ -89,7 +89,7 @@ func (g *Game) SetDataDir(directory string) {
 
 // Atomic replacement preserves the last complete save if the application stops.
 func (g *Game) saveSettings() {
-	if g.dataDir == "" || g.SmokeFrames > 0 {
+	if g.dataDir == "" || g.SmokeFrames > 0 || g.DemoActive() {
 		return
 	}
 	p := preferences{Music: g.musicEnabled, Effects: g.effectsEnabled, Players: g.players, Options: g.Core.Options, Scores: g.scores}
@@ -124,6 +124,9 @@ func (g *Game) saveSettings() {
 }
 
 func (g *Game) queueScores() {
+	if g.DemoActive() {
+		return
+	}
 	g.scorePlayers = nil
 	for index, p := range g.Core.Players {
 		if p.Active && len(g.scores) > 0 && p.Score > g.scores[len(g.scores)-1].Score {

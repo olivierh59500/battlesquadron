@@ -31,6 +31,7 @@ type configuration struct {
 	root, project, cache, sdk, ndk, java, gradle    string
 	target, serial, seed                            string
 	prepare, skipBind, aarOnly, run, offline, check bool
+	physicalCheck                                   bool
 	performance                                     bool
 	novaPerformance                                 bool
 	environment                                     []string
@@ -44,15 +45,16 @@ func main() {
 	flag.StringVar(&cfg.java, "java-home", "", "Java 17 or 21 home directory")
 	flag.StringVar(&cfg.gradle, "gradle", "", "Gradle 8.13 executable; PATH and local caches are searched")
 	flag.StringVar(&cfg.seed, "seed-cache", "", "Copy Go module and Gradle dependency caches from an existing Android cache")
-	flag.StringVar(&cfg.serial, "serial", "", "ADB device serial used with -run")
+	flag.StringVar(&cfg.serial, "serial", "", "ADB device serial used with -run, -check or -physical-check")
 	flag.BoolVar(&cfg.prepare, "prepare", false, "Generate the Android host project without compiling")
 	flag.BoolVar(&cfg.skipBind, "skip-bind", false, "Reuse an already generated Go AAR")
 	flag.BoolVar(&cfg.aarOnly, "aar-only", false, "Build the Go AAR without assembling an APK")
 	flag.BoolVar(&cfg.run, "run", false, "Install and launch the successfully verified debug APK")
 	flag.BoolVar(&cfg.offline, "offline", false, "Disable dependency downloads after seeding existing caches")
 	flag.BoolVar(&cfg.check, "check", false, "Run generated simultaneous-touch and lifecycle checks on an emulator selected by -serial")
-	flag.BoolVar(&cfg.performance, "performance", false, "Include real frame-time and smooth-motion measurements with -check")
-	flag.BoolVar(&cfg.novaPerformance, "nova-performance", false, "Include a short restored-Nova rendering measurement with -check")
+	flag.BoolVar(&cfg.physicalCheck, "physical-check", false, "Run package-specific checks on an explicitly authorized physical device selected by -serial")
+	flag.BoolVar(&cfg.performance, "performance", false, "Include real frame-time and smooth-motion measurements with -check or -physical-check")
+	flag.BoolVar(&cfg.novaPerformance, "nova-performance", false, "Include a short restored-Nova rendering measurement with -check or -physical-check")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		flag.Usage()
@@ -72,14 +74,8 @@ func (c *configuration) build() error {
 	}
 	c.project = filepath.Join(c.root, "android", "generated")
 	c.cache = filepath.Join(c.root, ".cache", "android")
-	if c.check && !strings.HasPrefix(c.serial, "emulator-") {
-		return errors.New("-check requires -serial emulator-NNNN and never installs on physical devices")
-	}
-	if c.performance && !c.check {
-		return errors.New("-performance requires -check")
-	}
-	if c.novaPerformance && !c.check {
-		return errors.New("-nova-performance requires -check")
+	if err := c.validateChecks(); err != nil {
+		return err
 	}
 	if err := c.discover(); err != nil {
 		return err
@@ -146,8 +142,8 @@ func (c *configuration) build() error {
 		return err
 	}
 	fmt.Println("Verified Android APK:", output)
-	if c.check {
-		return c.checkEmulator(output)
+	if c.check || c.physicalCheck {
+		return c.checkDevice(output)
 	}
 	if c.run {
 		adb := filepath.Join(c.sdk, "platform-tools", "adb")
@@ -159,6 +155,29 @@ func (c *configuration) build() error {
 			return err
 		}
 		return c.command(c.root, adb, append(device, "shell", "am", "start", "-n", applicationID+"/.MainActivity")...)
+	}
+	return nil
+}
+
+// validateChecks keeps physical-device access separate from emulator automation.
+func (c *configuration) validateChecks() error {
+	if c.check && c.physicalCheck {
+		return errors.New("choose either -check or -physical-check")
+	}
+	if c.check && !strings.HasPrefix(c.serial, "emulator-") {
+		return errors.New("-check requires -serial emulator-NNNN and never installs on physical devices")
+	}
+	if c.physicalCheck && (c.serial == "" || strings.HasPrefix(c.serial, "emulator-")) {
+		return errors.New("-physical-check requires the explicit serial of an authorized physical device")
+	}
+	if c.physicalCheck && strings.ContainsAny(c.serial, "/\\\x00\n\r\t ") {
+		return errors.New("-physical-check requires a single ADB serial")
+	}
+	if c.performance && !c.check && !c.physicalCheck {
+		return errors.New("-performance requires -check or -physical-check")
+	}
+	if c.novaPerformance && !c.check && !c.physicalCheck {
+		return errors.New("-nova-performance requires -check or -physical-check")
 	}
 	return nil
 }

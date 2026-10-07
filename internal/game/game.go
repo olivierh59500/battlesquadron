@@ -18,6 +18,7 @@ import (
 	"github.com/olivierh59500/battlesquadron/internal/controls"
 	"github.com/olivierh59500/battlesquadron/internal/engine"
 	"github.com/olivierh59500/battlesquadron/internal/original"
+	"github.com/olivierh59500/battlesquadron/internal/replay"
 	"github.com/olivierh59500/battlesquadron/internal/sound"
 )
 
@@ -52,6 +53,8 @@ type Game struct {
 	storageErr                              error
 	lastFire                                [2]bool
 	endingTicks                             int
+	attract                                 *attractState
+	activity                                activityMonitor
 }
 
 // New requires every asset to have been reproduced from the original disk.
@@ -68,11 +71,19 @@ func New() (*Game, error) {
 	if err != nil {
 		return nil, err
 	}
+	if err := replay.CheckExpertData(data); err != nil {
+		return nil, err
+	}
+	cursor, err := replay.LoadExpert(assets.Files)
+	if err != nil {
+		return nil, err
+	}
 	scores, err := originalScores()
 	if err != nil {
 		return nil, err
 	}
 	g := &Game{Core: core, presentation: newPresentation(), art: a, view: ebiten.NewImage(288, 208), touch: controls.New(480, 256), players: 1, musicEnabled: true, effectsEnabled: true, scores: scores}
+	g.attract = &attractState{data: data, cursor: cursor}
 	return g, nil
 }
 
@@ -96,6 +107,7 @@ func (g *Game) AtTitle() bool { return g.Core.Mode == engine.Title && !g.options
 
 // Pause preserves a running session when the application loses focus.
 func (g *Game) Pause() {
+	g.StopDemo()
 	if g.Core.Mode == engine.Playing {
 		g.paused = true
 	}
@@ -107,6 +119,11 @@ func (g *Game) Pause() {
 
 // Back closes options, pauses gameplay, or returns a paused session to the title.
 func (g *Game) Back() {
+	if g.DemoActive() {
+		g.StopDemo()
+		return
+	}
+	g.resetMenuIdle()
 	if g.optionsOpen {
 		g.optionsOpen = false
 		g.saveSettings()
@@ -132,7 +149,14 @@ func (g *Game) Back() {
 }
 
 // CancelInput releases touch ownership and waits for held pointers to end.
-func (g *Game) CancelInput() { g.touch.Cancel(); g.previousPointers = nil; g.pointerSuppressed = true }
+func (g *Game) CancelInput() {
+	if g.touch != nil {
+		g.touch.Cancel()
+	}
+	g.previousPointers = nil
+	g.pointerSuppressed = true
+	g.resetMenuIdle()
+}
 
 func (g *Game) initializeAudio() error {
 	if g.mute || g.sound != nil {
@@ -195,7 +219,13 @@ func (g *Game) Update() error {
 	if err := g.initializeAudio(); err != nil {
 		return err
 	}
+	if !g.paused && !g.mute && g.audioPlayer != nil && !g.audioPlayer.IsPlaying() {
+		g.audioPlayer.Play()
+	}
 	g.updates++
+	if handled, err := g.updateAttract(g.activity.poll()); handled || err != nil {
+		return err
+	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyF11) {
 		ebiten.SetFullscreen(!ebiten.IsFullscreen())
 	}
@@ -287,6 +317,11 @@ func (g *Game) Update() error {
 	if g.Core.Mode == engine.GameOver {
 		g.queueScores()
 	}
+	g.playEvents()
+	return nil
+}
+
+func (g *Game) playEvents() {
 	if g.sound != nil {
 		for _, event := range g.Core.Events {
 			switch event.Kind {
@@ -312,10 +347,13 @@ func (g *Game) Update() error {
 			}
 		}
 	}
-	return nil
 }
 
 func (g *Game) start() {
+	g.StopDemo()
+	if g.attract != nil {
+		g.attract.blocked = false
+	}
 	g.endingTicks = 0
 	g.Core.Start(g.players)
 	g.paused = false

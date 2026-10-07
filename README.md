@@ -24,6 +24,7 @@ needs the supplied ADF before extraction and compilation.
 
 ```sh
 GOCACHE="$PWD/.cache/go-build" go run ./cmd/extract -adf '/path/to/original.adf'
+GOCACHE="$PWD/.cache/go-build" go run ./cmd/demo
 ./bin/battlesquadron -play -players 2
 ./bin/battlesquadron -touch
 ```
@@ -59,6 +60,21 @@ Touch controls support simultaneous movement, fire and Nova. The separate
 Pause, Sound and Menu controls remain accessible. Losing focus pauses gameplay
 and releases unfinished gestures. The second player can use an external
 keyboard or gamepad on Android.
+
+After fifteen foreground seconds without input on the title screen, the expert
+demo starts automatically on desktop and Android. Any keyboard, mouse, gamepad
+or touch action returns to the menu; release that gesture before starting a
+human game. Options, high-score entry, paused sessions and running human games
+are not interrupted. Backgrounding the application dismisses the demo and
+resets the idle interval.
+
+The demo replays the verified complete expert campaign through ordinary native
+inputs, loops after the ending, and never saves its scores or changes selected
+players or difficulty. Forecasting runs only in the Go resource-generation
+tool, so watching the demo adds no search workload to the frame loop.
+`make assets` reconstructs the original artwork/sound and regenerates the ignored
+expert input file; the full forecast currently takes about five minutes.
+See [attract-mode generation and verification](docs/attract.md).
 
 Settings and high scores are saved atomically in the OS configuration directory
 under `battlesquadron`, or the directory selected by `-data-dir`. The twelve

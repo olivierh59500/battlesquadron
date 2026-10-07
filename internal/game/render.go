@@ -29,7 +29,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			op.GeoM.Translate(float64(x), 24)
 			screen.DrawImage(staff.image, op)
 		}
-		g.art.text(screen, "PRESS FIRE TO CONTINUE", x+72, 239, white)
+		if !g.DemoActive() {
+			g.art.text(screen, "PRESS FIRE TO CONTINUE", x+72, 239, white)
+		}
 	} else {
 		g.drawPlayfield()
 		op := &ebiten.DrawImageOptions{}
@@ -57,6 +59,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.panel(screen, fmt.Sprintf("PLAYER %d - HIGH SCORE", g.scorePlayers[0]+1), g.initials)
 		g.art.text(screen, "TYPE OR TAP INITIALS", g.windowWidth()/2-80, 157, white)
 		g.art.text(screen, "ENTER OR TAP TO SAVE", g.windowWidth()/2-80, 177, gold)
+	}
+	if g.DemoActive() {
+		g.art.text(screen, "DEMO - PRESS ANY CONTROL", g.windowWidth()/2-92, 239, gold)
 	}
 	if g.touchEnabled {
 		g.drawTouch(screen)
