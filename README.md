@@ -76,6 +76,11 @@ tool, so watching the demo adds no search workload to the frame loop.
 expert input file; the full forecast currently takes about five minutes.
 See [attract-mode generation and verification](docs/attract.md).
 
+To reproduce the four-minute presentation with English captions and original
+audio, run `GOCACHE="$PWD/.cache/go-build" go run ./cmd/showcase`. The MP4 and
+subtitle sidecar are generated under ignored `captures/`. See
+[presentation recording](docs/showcase.md) for the edited timeline and checks.
+
 Settings and high scores are saved atomically in the OS configuration directory
 under `battlesquadron`, or the directory selected by `-data-dir`. The twelve
 original high-score entries provide the initial table. Qualifying scores accept

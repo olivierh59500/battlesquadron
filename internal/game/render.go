@@ -12,7 +12,11 @@ import (
 
 // Draw composites original decoded artwork; gameplay is never advanced here.
 func (g *Game) Draw(screen *ebiten.Image) {
-	g.preparePresentation(time.Now())
+	g.drawAt(screen, time.Now())
+}
+
+func (g *Game) drawAt(screen *ebiten.Image, now time.Time) {
+	g.preparePresentation(now)
 	screen.Fill(color.Black)
 	x := (g.windowWidth() - 320) / 2
 	if g.Core.Mode == engine.Title {

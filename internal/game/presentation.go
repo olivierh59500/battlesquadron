@@ -58,6 +58,10 @@ func (g *Game) RenderingMotion() (frames, changes, density int) {
 }
 
 func (g *Game) observePresentation() {
+	g.observePresentationAt(time.Now())
+}
+
+func (g *Game) observePresentationAt(now time.Time) {
 	p, c := g.presentation, g.Core
 	if p == nil {
 		return
@@ -85,7 +89,6 @@ func (g *Game) observePresentation() {
 	s.explosions = append(s.explosions[:0], c.Explosions...)
 	s.rays = append(s.rays[:0], c.NovaRays...)
 	p.count = min(len(p.history), p.count+1)
-	now := time.Now()
 	if consecutive && absDuration(now.Sub(p.tickTime)-palField) < 2*palField {
 		// Keep the presentation clock periodic instead of inheriting the VSync
 		// quantization of when Ebitengine dispatches each 50 Hz Update.
@@ -97,7 +100,7 @@ func (g *Game) observePresentation() {
 
 func (g *Game) preparePresentation(now time.Time) {
 	p, c := g.presentation, g.Core
-	g.observePresentation()
+	g.observePresentationAt(now)
 	p.drawFrame = float64(c.Frame)
 	p.scroll, p.camera = float64(c.Scroll), float64(c.CameraX)
 	if p.smooth && p.count == len(p.history) && !g.paused && c.Mode == engine.Playing {

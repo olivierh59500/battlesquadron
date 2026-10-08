@@ -22,6 +22,28 @@ func presentationFixture() *Game {
 	return g
 }
 
+func TestRecordingClockKeepsIntermediatePositionsIndependentOfWallTime(t *testing.T) {
+	g := &Game{Core: &engine.Engine{Mode: engine.Playing}, presentation: newPresentation()}
+	base := time.Unix(100, 0)
+	for frame := 1; frame <= 5; frame++ {
+		g.Core.Frame, g.Core.Scroll = frame, (frame+1)/2
+		g.Core.Players[0] = engine.Player{X: frame * 2, Y: 100, Active: true, Lives: 3}
+		g.observePresentationAt(base.Add(time.Duration(frame) * palField))
+	}
+	g.Core.Frame, g.Core.Scroll = 6, 3
+	g.Core.Players[0].X = 12
+	before := g.Core.Digest()
+	stamp := base.Add(6*palField + palField/2)
+	g.preparePresentation(stamp)
+	if g.presentation.tickTime != base.Add(6*palField) || g.presentation.scroll != 2.75 {
+		t.Fatal("offline recording inherited wall time instead of its PAL timestamp")
+	}
+	x, _ := g.presentation.player(0, g.Core.Players[0])
+	if x != 9 || g.Core.Digest() != before {
+		t.Fatal("virtual presentation clock changed simulation or lost intermediate motion")
+	}
+}
+
 func TestPresentationSmoothsBothNativeCadencesWithoutMutatingEngine(t *testing.T) {
 	g := presentationFixture()
 	originalPlayers := g.Core.Players
