@@ -1,43 +1,76 @@
-# Battle Squadron — Go / Ebitengine
+# Battle Squadron
 
-A native Go remake of the original 1989 Amiga shoot 'em up. Desktop and Android share the same game, original artwork and native Ron Klaren sound sequencer.
+A remake of the original 1989 Amiga shoot 'em up, built in Go with Ebitengine
+for desktop and Android. Fly solo or with a second pilot, upgrade your weapons,
+and battle across the surface and three underground zones.
 
-**This is not yet a verified perfect conversion.** Original resources, native
-rules and independently verified behavior are distinguished in
-[the fidelity report](docs/fidelity.md). Complete matched-input campaigns and
-framebuffer comparisons against the Amiga remain outstanding.
+## Screenshots
 
-## Reproduce and run
+| Title screen | Surface combat | Underground combat |
+| --- | --- | --- |
+| [![Battle Squadron title screen](https://www.malakhsoftware.com/img/projects/battlesquadron-title.png)](https://www.malakhsoftware.com/img/projects/battlesquadron-title.png) | [![Battle Squadron surface combat](https://www.malakhsoftware.com/img/projects/battlesquadron.png)](https://www.malakhsoftware.com/img/projects/battlesquadron.png) | [![Battle Squadron underground combat](https://www.malakhsoftware.com/img/projects/battlesquadron-cave.png)](https://www.malakhsoftware.com/img/projects/battlesquadron-cave.png) |
+
+## Presentation
+
+Watch the [4 minute 44 second presentation on Malakh Software](https://www.malakhsoftware.com/games.html#battlesquadron),
+with English subtitles, original music and expert gameplay through the final
+encounter.
+
+## Features
+
+- One or two simultaneous players, with keyboard and gamepad controls.
+- Android touch controls for movement, fire and Nova at the same time.
+- Four weapon families, six power levels, collectible capsules and building wrecks.
+- Surface combat, three underground zones and multipart bosses.
+- Original artwork, music and sound reconstructed from the Amiga game data.
+- Smooth movement at the display refresh rate, with the original gameplay timing.
+- An expert demonstration after 15 seconds of inactivity on the title screen.
+- Difficulty settings, saved preferences and a local high-score table.
+
+## Original game data
+
+You need an Amiga ADF disk image of Battle Squadron to reconstruct the game
+resources. The disk image and extracted graphics, maps and audio are not
+included in the repository.
+
+The [Planet Emulation Amiga ADF catalogue, letter B](https://www.planetemu.net/roms/commodore-amiga-games-adf?page=B)
+can help you find Battle Squadron. The extractor currently supports the verified
+disk revision with this SHA-256 checksum:
+
+```text
+de335a312577f757ea699bd9a19162df9f5e89d83b7ca8a8deeac7ff0116609f
+```
+
+Other disk revisions may differ. Extract the `.adf` first if it comes in an
+archive, then supply its path when preparing the resources. The file can remain
+anywhere on your machine.
+
+## Build and run
 
 Requires Go 1.26 or newer and a desktop graphics environment.
 
 ```sh
-make assets
+GOCACHE="$PWD/.cache/go-build" go run ./cmd/extract -adf '/path/to/Battle Squadron.adf'
+GOCACHE="$PWD/.cache/go-build" go run ./cmd/demo
 make run
-make build
-./bin/battlesquadron
 ```
 
-The Go extractor reads the original disk filesystem and reconstructs the game's artwork, sound and data tables from an external ADF file. It uses Go's standard library. No original disk, graphics, samples,
-executable bytes or generated asset manifest is committed. A fresh checkout
-needs the supplied ADF before extraction and compilation.
+The second command generates the verified expert demonstration and takes about
+five minutes on the development machine. Both commands are required before the
+first build. Subsequent builds reuse the generated resources.
 
 ```sh
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/extract -adf '/path/to/original.adf'
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/demo
+make build
+./bin/battlesquadron
 ./bin/battlesquadron -play -players 2
 ./bin/battlesquadron -touch
 ```
 
-Player movement and timers run at 50 updates per second; the original terrain
-and NPC loop runs at 25 Hz. The default renderer interpolates positions at the
-display refresh rate, with a 40 ms visual delay, to make movement smoother at
-60 Hz and above. Original textures use nearest-neighbor sampling into a denser
-viewport and linear final sampling to retain fractional movement. Use
-`-original-cadence` for discrete source timing and nearest-neighbor presentation.
-See [performance and smooth rendering](docs/performance.md) for measurements
-and exact limits. The desktop canvas is 320 × 256; Android adds touch gutters
-to a 480 × 256 canvas without stretching the original picture.
+The desktop picture keeps the original 320 × 256 layout. Android adds separate
+touch gutters without stretching the playfield. Use `-original-cadence` to
+compare discrete movement with the default smooth rendering.
+
+## Controls
 
 | Input | Action |
 | --- | --- |
@@ -47,100 +80,53 @@ to a 480 × 256 canvas without stretching the original picture.
 | X / Right Shift | Player one Nova |
 | WASD + C / Left Ctrl | Player two movement and fire |
 | V / Left Shift | Player two Nova |
-| Gamepad stick / D-pad + primary / secondary button | Corresponding player's movement, fire and Nova |
+| Gamepad stick / D-pad + primary / secondary button | Movement, fire and Nova |
 | P / Pause / gamepad Start | Pause or resume |
 | Escape / Android Back | Close options, pause, then return to the title |
-| F3 / F4 | Toggle original effects / music |
+| F3 / F4 | Toggle sound effects / music |
 | F5 on the title | Difficulty options |
-| H on the title | Original high-score table |
+| H on the title | High-score table |
 | M | Toggle all audio |
 | F11 | Fullscreen |
 
-Touch controls support simultaneous movement, fire and Nova. The separate
-Pause, Sound and Menu controls remain accessible. Losing focus pauses gameplay
-and releases unfinished gestures. The second player can use an external
-keyboard or gamepad on Android.
+Touch controls allow simultaneous movement, fire and Nova. Pause, Sound and
+Menu buttons remain accessible. A second Android player can use an external
+keyboard or gamepad. Leaving the application pauses a human game and releases
+unfinished gestures.
 
-After fifteen foreground seconds without input on the title screen, the expert
-demo starts automatically on desktop and Android. Any keyboard, mouse, gamepad
-or touch action returns to the menu; release that gesture before starting a
-human game. Options, high-score entry, paused sessions and running human games
-are not interrupted. Backgrounding the application dismisses the demo and
-resets the idle interval.
+## Expert demonstration
 
-The demo replays the verified complete expert campaign through ordinary native
-inputs, loops after the ending, and never saves its scores or changes selected
-players or difficulty. Forecasting runs only in the Go resource-generation
-tool, so watching the demo adds no search workload to the frame loop.
-`make assets` reconstructs the original artwork/sound and regenerates the ignored
-expert input file; the full forecast currently takes about five minutes.
-See [attract-mode generation and verification](docs/attract.md).
+Leave the title screen idle for 15 seconds to watch the expert play. Any
+keyboard, mouse, gamepad or touch action returns to the menu. Release that
+control before starting a human game.
 
-To reproduce the four-minute presentation with English captions and original
-audio, run `GOCACHE="$PWD/.cache/go-build" go run ./cmd/showcase`. The MP4 and
-subtitle sidecar are generated under ignored `captures/`. See
-[presentation recording](docs/showcase.md) for the edited timeline and checks.
+The demonstration follows a complete campaign, collects bonuses, attacks
+buildings and reaches the final encounter without losing a ship. It loops after
+the ending and never submits its score or changes your selected difficulty.
+Options, high-score entry and running games are not interrupted.
 
-Settings and high scores are saved atomically in the OS configuration directory
-under `battlesquadron`, or the directory selected by `-data-dir`. The twelve
-original high-score entries provide the initial table. Qualifying scores accept
-three initials using the keyboard or by tapping the letters and Save prompt.
-
-The original four weapon families and their six levels are decoded from the
-game's actual loader. Initial weapon, lives, projectile count, bullet speed
-and firing delay can be changed in the options screen.
-
-## Android and verification
+## Android
 
 ```sh
 make android
-# Reuse this machine's existing downloaded Android dependencies.
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/android -seed-cache ../kickoff2/.cache/android -offline
 ```
 
-The generated APK is `bin/battlesquadron-debug.apk`. The maintained build tool
-is Go; it generates the small Android Activity and Gradle project required by
-Ebitengine inside an ignored directory. See [Android setup](docs/android.md).
+The APK is generated at `bin/battlesquadron-debug.apk`. See
+[Android setup and Pixel 10a validation](docs/android.md) for SDK requirements,
+touch controls and device checks.
+
+## Development
 
 ```sh
 make test
 make vet
-./bin/battlesquadron -mute -smoke 260 -capture captures/native-surface.png
-./bin/battlesquadron -mute -touch -smoke 260 -capture captures/native-touch.png
-./bin/battlesquadron -mute -screen title -smoke 20 -capture captures/native-title.png
 ```
 
-The capture option saves the actual Ebitengine framebuffer before exiting.
+The remake is playable; complete behavioral and pixel parity with the original
+remains under evaluation. See the [fidelity report](docs/fidelity.md),
+[performance measurements](docs/performance.md) and
+[expert campaign validation](docs/autoplay.md) for the current checks and limits.
 
-```sh
-# Play the entire ordinary campaign through joystick input only.
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/verify -mode expert
-# Replay its recording through a fresh engine without planning.
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/verify -mode replay \
-  -input .cache/validation/expert.bsinput -report .cache/validation/replay.json
-# Inspect the final encounter using explicit diagnostic starting resources.
-GOCACHE="$PWD/.cache/go-build" go run ./cmd/verify -mode inspect -final
-```
-
-The expert player starts with the normal weapon, three ships and three Nova
-charges. It forecasts private copies and supplies ordinary input, then checks
-a fresh replay against complete mutable-state fingerprints. It collects
-capsules and wrecks, attacks flying enemies and buildings, enters all three
-caves and fights the final encounter. Planning is a development workload,
-separate from runtime performance. See [expert validation](docs/autoplay.md).
-The explicitly named `inspect` mode enables invulnerability and a maximum-level
-weapon; its reports cannot establish ordinary progression. Native input replay
-does not establish original Amiga behavior or pixel parity.
-[Sound verification](docs/sound.md) compares the native sequencer with the
-original sound routines using a separate development oracle. That CPU core
-is never linked into the application.
-
-`cmd/reverse` runs the installed Ghidra against the extracted original loader.
-Its generated projects, bridge scripts and decompiler output remain local.
-See [reverse engineering](docs/reverse.md).
-
-`cmd/reference` reads exact FS-UAE input recordings and compressed USS states
-for bounded original/native comparisons. The opening comparison matches 29
-selected scalars over 36 PAL fields; it does not establish complete campaign or
-pixel parity. See [original reference checkpoints](docs/reference.md).
-
+The [presentation tool](docs/showcase.md) recreates the subtitled video from
+native gameplay and original audio. Implementation details and reference tooling
+are documented in [reverse engineering](docs/reverse.md).

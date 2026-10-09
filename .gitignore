@@ -18,5 +18,7 @@
 *.hprof
 *.log
 .DS_Store
+
+# Local agent instructions are never part of the project history.
 AGENT.md
 AGENTS.md
